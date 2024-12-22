@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "C:/Users/Beyond/CLionProjects/GateServer/bin/GateServer.exe"
+			"path" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer/bin/GateServer.exe"
 		},
 		{
-			"path" : "C:/Users/Beyond/CLionProjects/GateServer/bin/GateServer.pdb"
+			"path" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer/bin/GateServer.pdb"
 		}
 	],
 	"backtrace" : 2,
@@ -585,11 +585,6 @@
 			},
 			{
 				"backtrace" : 38,
-				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\debug\\lib\\abseil_dll.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 38,
 				"fragment" : "-ignore:4221",
 				"role" : "libraries"
 			},
@@ -611,6 +606,11 @@
 			{
 				"backtrace" : 25,
 				"fragment" : "crypt32.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 38,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\debug\\lib\\abseil_dll.lib",
 				"role" : "libraries"
 			},
 			{
@@ -709,7 +709,7 @@
 		},
 		{
 			"backtrace" : 2,
-			"path" : "Singleton.hpp",
+			"path" : "singleton.hpp",
 			"sourceGroupIndex" : 1
 		},
 		{

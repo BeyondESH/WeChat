@@ -5,10 +5,10 @@
 	"compiler-simulate-id" : "",
 	"config" : "Debug",
 	"cxx-modules" : {},
-	"dir-cur-bld" : "C:/Users/Beyond/CLionProjects/GateServer/cmake-build-debug",
-	"dir-cur-src" : "C:/Users/Beyond/CLionProjects/GateServer",
-	"dir-top-bld" : "C:/Users/Beyond/CLionProjects/GateServer/cmake-build-debug",
-	"dir-top-src" : "C:/Users/Beyond/CLionProjects/GateServer",
+	"dir-cur-bld" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer/cmake-build-debug",
+	"dir-cur-src" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer",
+	"dir-top-bld" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer/cmake-build-debug",
+	"dir-top-src" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer",
 	"exports" : [],
 	"forward-modules-from-target-dirs" : [],
 	"include-dirs" : 
@@ -17,5 +17,5 @@
 	],
 	"language" : "CXX",
 	"linked-target-dirs" : [],
-	"module-dir" : "C:/Users/Beyond/CLionProjects/GateServer/cmake-build-debug/CMakeFiles/GateServer.dir"
+	"module-dir" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer/cmake-build-debug/CMakeFiles/GateServer.dir"
 }

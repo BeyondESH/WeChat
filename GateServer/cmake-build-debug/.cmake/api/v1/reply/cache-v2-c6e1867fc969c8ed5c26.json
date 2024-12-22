@@ -139,7 +139,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Beyond/CLionProjects/GateServer/cmake-build-debug"
+			"value" : "c:/Users/Beyond/Documents/GitHub/WeChat/GateServer/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -579,7 +579,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Beyond/CLionProjects/GateServer/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -675,7 +675,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Beyond/CLionProjects/GateServer"
+			"value" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -715,7 +715,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/ninja/win/x64/ninja.exe"
+			"value" : "C:/Program Files/JetBrains/CLion 2024.1/bin/ninja/win/x64/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -1207,11 +1207,11 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "The CMake toolchain file"
 				}
 			],
-			"type" : "UNINITIALIZED",
-			"value" : "D:\\C++library\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake"
+			"type" : "FILEPATH",
+			"value" : "D:/C++library/vcpkg/scripts/buildsystems/vcpkg.cmake"
 		},
 		{
 			"name" : "CMAKE_VERBOSE_MAKEFILE",
@@ -1323,7 +1323,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Beyond/CLionProjects/GateServer/cmake-build-debug"
+			"value" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer/cmake-build-debug"
 		},
 		{
 			"name" : "GateServer_IS_TOP_LEVEL",
@@ -1347,7 +1347,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Beyond/CLionProjects/GateServer"
+			"value" : "C:/Users/Beyond/Documents/GitHub/WeChat/GateServer"
 		},
 		{
 			"name" : "LIB_EAY_DEBUG",
