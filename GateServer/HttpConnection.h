@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Beyond on 2024/11/3.
 //
 
@@ -13,8 +13,9 @@ class LogicSystem;
 class HttpConnection:public std::enable_shared_from_this<HttpConnection>{
     friend class LogicSystem;
 public:
-    HttpConnection(boost::asio::ip::tcp::socket socket);
+    HttpConnection(boost::asio::io_context &ioc);
     void start();
+    boost::asio::ip::tcp::socket& getSocket();
 private:
     boost::asio::ip::tcp::socket _socket;
     boost::beast::flat_buffer _buffer{8192};

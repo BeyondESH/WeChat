@@ -1,0 +1,62 @@
+[
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\main.cpp.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\main.cpp",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/main.cpp",
+  "output": "CMakeFiles/GateServer.dir/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\CServer.cpp.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\CServer.cpp",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/CServer.cpp",
+  "output": "CMakeFiles/GateServer.dir/CServer.cpp.obj"
+},
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\HttpConnection.cpp.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\HttpConnection.cpp",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/HttpConnection.cpp",
+  "output": "CMakeFiles/GateServer.dir/HttpConnection.cpp.obj"
+},
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\LogicSystem.cpp.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\LogicSystem.cpp",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/LogicSystem.cpp",
+  "output": "CMakeFiles/GateServer.dir/LogicSystem.cpp.obj"
+},
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\VerifyGrpcClient.cpp.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\VerifyGrpcClient.cpp",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/VerifyGrpcClient.cpp",
+  "output": "CMakeFiles/GateServer.dir/VerifyGrpcClient.cpp.obj"
+},
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\AsioIOcontextPool.cpp.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\AsioIOcontextPool.cpp",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/AsioIOcontextPool.cpp",
+  "output": "CMakeFiles/GateServer.dir/AsioIOcontextPool.cpp.obj"
+},
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\RedisMgr.cpp.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\RedisMgr.cpp",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/RedisMgr.cpp",
+  "output": "CMakeFiles/GateServer.dir/RedisMgr.cpp.obj"
+},
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\MySQLMgr.cpp.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\MySQLMgr.cpp",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/MySQLMgr.cpp",
+  "output": "CMakeFiles/GateServer.dir/MySQLMgr.cpp.obj"
+},
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\message.grpc.pb.cc.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\message.grpc.pb.cc",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/message.grpc.pb.cc",
+  "output": "CMakeFiles/GateServer.dir/message.grpc.pb.cc.obj"
+},
+{
+  "directory": "C:/Users/Beyond/CLionProjects/GateServer/build",
+  "command": "D:\\C++library\\msys2\\mingw64\\bin\\g++.exe -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS @CMakeFiles/GateServer.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\GateServer.dir\\message.pb.cc.obj -c C:\\Users\\Beyond\\CLionProjects\\GateServer\\message.pb.cc",
+  "file": "C:/Users/Beyond/CLionProjects/GateServer/message.pb.cc",
+  "output": "CMakeFiles/GateServer.dir/message.pb.cc.obj"
+}
+]

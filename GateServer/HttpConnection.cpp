@@ -1,11 +1,10 @@
-//
+﻿//
 // Created by Beyond on 2024/11/3.
 //
 #include "LogicSystem.h"
 #include "HttpConnection.h"
 
-HttpConnection::HttpConnection(boost::asio::ip::tcp::socket socket) : _socket(std::move(socket)) {
-
+HttpConnection::HttpConnection(boost::asio::io_context &ioc) : _socket(ioc) {
 }
 
 void HttpConnection::start() {
@@ -70,9 +69,27 @@ void HttpConnection::handleRequest() {
             response();//发送
             return;
         }
-        case boost::beast::http::verb::post:
+        case boost::beast::http::verb::post:{
+            bool result = LogicSystem::getInstance()->handlePost(_request.target(), shared_from_this());
+            //处理失败
+            if (result==false) {
+                _response.result(boost::beast::http::status::not_found);//404
+                _response.set(boost::beast::http::field::content_type, "text/plain");
+                boost::beast::ostream(_response.body()) << "url nor found\r\n";
+                response();//发送
+                return;
+            }
+            //处理成功
+            _response.result(boost::beast::http::status::ok);
+            _response.set(boost::beast::http::field::server, "GateServer");
+            response();//发送
             return;
+        }
         default:
             return;
     }
+}
+
+boost::asio::ip::tcp::socket & HttpConnection::getSocket() {
+    return this->_socket;
 }

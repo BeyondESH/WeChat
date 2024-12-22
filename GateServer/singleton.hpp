@@ -1,20 +1,23 @@
-//
+﻿//
 // Created by Beyond on 2024/11/10.
 //
 
 #ifndef GATESERVER_SINGLETON_CPP
 #define GATESERVER_SINGLETON_CPP
 
+#include <iostream>
+
 template<class T>
-class Singleton{
+class Singleton {
 public:
-    static std::shared_ptr<T> getInstance(){
+    static std::shared_ptr<T> getInstance() {
         static std::once_flag flag;
-        std::call_once(flag,[&](){
-            _instance=std::shared_ptr<T>(new T);
+        std::call_once(flag, [&]() {
+            _instance = std::shared_ptr<T>(new T);
         });
         return _instance;
     }
+
     void printAddress() {
         std::cout << _instance.get() << std::endl;
     }
@@ -24,9 +27,9 @@ public:
     }
 
 protected:
-    Singleton()=default;
-    Singleton(const Singleton<T>&)=delete;
-    Singleton&operator=(const Singleton<T>&)=delete;
+    Singleton() = default;
+    Singleton(const Singleton<T>&) = delete;
+    Singleton& operator=(const Singleton<T>&) = delete;
     static std::shared_ptr<T> _instance;
 };
 

@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "GateServer.dir\\Debug\\AsioIOcontextPool.obj",
+            "outputs": [
+                "C:\\Users\\Beyond\\CLionProjects\\GateServer\\build\\GateServer.dir\\Debug\\vc143.pdb",
+                "GateServer.dir\\Debug\\"
+            ],
+            "requires": []
+        }
+    ]
+}

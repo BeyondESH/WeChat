@@ -1,0 +1,10 @@
+^C:\USERS\BEYOND\CLIONPROJECTS\GATESERVER\BUILD\CMAKEFILES\CE80A882711228C5EA84CACFB99F02C7\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Beyond/CLionProjects/GateServer -BC:/Users/Beyond/CLionProjects/GateServer/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Beyond/CLionProjects/GateServer/build/GateServer.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package message;
+
+service VerifyService {
+    rpc GetVerifyCode (GetVerifyReq) returns (GetVerifyRsp) {}
+}
+
+message GetVerifyReq {
+    string email = 1;
+}
+
+message GetVerifyRsp {
+    int32 error = 1;
+    string email = 2;
+    string code = 3;
+}

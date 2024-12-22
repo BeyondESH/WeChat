@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Beyond on 2024/11/3.
 //
 
@@ -17,7 +17,6 @@ public:
 private:
     boost::asio::ip::tcp::acceptor _acceptor;//接收器
     boost::asio::io_context& _ioc;//io上下文
-    boost::asio::ip::tcp::socket  _socket;//套接字
 };
 
 
