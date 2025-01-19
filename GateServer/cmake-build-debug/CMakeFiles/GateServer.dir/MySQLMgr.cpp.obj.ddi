@@ -5,7 +5,7 @@
         {
             "primary-output": "CMakeFiles\\GateServer.dir\\MySQLMgr.cpp.obj",
             "outputs": [
-                "D:\\GitHub\\WeChat\\GateServer\\cmake-build-debug\\vc140.pdb",
+                "D:\\Gitee\\wechat\\GateServer\\cmake-build-debug\\vc140.pdb",
                 "CMakeFiles\\GateServer.dir\\MySQLMgr.cpp.obj.ddi"
             ],
             "requires": []

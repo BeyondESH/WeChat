@@ -5,10 +5,10 @@
 	"compiler-simulate-id" : "",
 	"config" : "Debug",
 	"cxx-modules" : {},
-	"dir-cur-bld" : "D:/GitHub/WeChat/GateServer/cmake-build-debug",
-	"dir-cur-src" : "D:/GitHub/WeChat/GateServer",
-	"dir-top-bld" : "D:/GitHub/WeChat/GateServer/cmake-build-debug",
-	"dir-top-src" : "D:/GitHub/WeChat/GateServer",
+	"dir-cur-bld" : "D:/Gitee/wechat/GateServer/cmake-build-debug",
+	"dir-cur-src" : "D:/Gitee/wechat/GateServer",
+	"dir-top-bld" : "D:/Gitee/wechat/GateServer/cmake-build-debug",
+	"dir-top-src" : "D:/Gitee/wechat/GateServer",
 	"exports" : [],
 	"forward-modules-from-target-dirs" : [],
 	"include-dirs" : 
@@ -17,5 +17,5 @@
 	],
 	"language" : "CXX",
 	"linked-target-dirs" : [],
-	"module-dir" : "D:/GitHub/WeChat/GateServer/cmake-build-debug/CMakeFiles/GateServer.dir"
+	"module-dir" : "D:/Gitee/wechat/GateServer/cmake-build-debug/CMakeFiles/GateServer.dir"
 }

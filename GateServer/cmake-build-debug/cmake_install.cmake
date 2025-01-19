@@ -1,4 +1,4 @@
-# Install script for directory: D:/GitHub/WeChat/GateServer
+# Install script for directory: D:/Gitee/wechat/GateServer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -47,6 +47,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "D:/GitHub/WeChat/GateServer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "D:/Gitee/wechat/GateServer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

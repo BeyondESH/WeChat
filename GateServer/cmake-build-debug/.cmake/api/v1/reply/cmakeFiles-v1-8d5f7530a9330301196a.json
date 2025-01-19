@@ -1297,8 +1297,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "D:/GitHub/WeChat/GateServer/cmake-build-debug",
-		"source" : "D:/GitHub/WeChat/GateServer"
+		"build" : "D:/Gitee/wechat/GateServer/cmake-build-debug",
+		"source" : "D:/Gitee/wechat/GateServer"
 	},
 	"version" : 
 	{

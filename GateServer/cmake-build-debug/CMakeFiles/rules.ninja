@@ -76,7 +76,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = "C:\Program Files\JetBrains\CLion 2024.1\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SD:\GitHub\WeChat\GateServer -BD:\GitHub\WeChat\GateServer\cmake-build-debug
+  command = "C:\Program Files\JetBrains\CLion 2024.1\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SD:\Gitee\wechat\GateServer -BD:\Gitee\wechat\GateServer\cmake-build-debug
   description = Re-running CMake...
   generator = 1
 

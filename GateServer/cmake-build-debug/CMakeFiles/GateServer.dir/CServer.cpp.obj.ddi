@@ -5,7 +5,7 @@
         {
             "primary-output": "CMakeFiles\\GateServer.dir\\CServer.cpp.obj",
             "outputs": [
-                "D:\\GitHub\\WeChat\\GateServer\\cmake-build-debug\\vc140.pdb",
+                "D:\\Gitee\\wechat\\GateServer\\cmake-build-debug\\vc140.pdb",
                 "CMakeFiles\\GateServer.dir\\CServer.cpp.obj.ddi"
             ],
             "requires": []
