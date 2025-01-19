@@ -5,16 +5,12 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , _loginDialog(new LoginDialog(this))  // 登录页面，作为MainWindow的子对象
-    , _registerDialog(new RegisterDialog(this))  // 注册页面，作为MainWindow的子对象
 {
     ui->setupUi(this);
-    setCentralWidget(_loginDialog);
+    _loginDialog=new LoginDialog(this);
     _loginDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
-    _registerDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
-    _registerDialog->hide();
+    setCentralWidget(_loginDialog);
     connect(_loginDialog, &LoginDialog::registerPBClicked, this, &MainWindow::openRegisterDialog);
-    connect(_registerDialog, &RegisterDialog::backPBClicked, this, &MainWindow::openLoginDialog);
 }
 
 MainWindow::~MainWindow()
@@ -25,10 +21,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::openLoginDialog()
 {
+    qDebug()<<1;
+    _loginDialog=new LoginDialog(this);
+    _loginDialog->hide();
+    _loginDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
     setCentralWidget(_loginDialog);
+    connect(_loginDialog, &LoginDialog::registerPBClicked, this, &MainWindow::openRegisterDialog);
 }
 
 void MainWindow::openRegisterDialog()
 {
+    _registerDialog=new RegisterDialog(this);
+    _registerDialog->hide();
+    _registerDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
     setCentralWidget(_registerDialog);
+    connect(_registerDialog, &RegisterDialog::backPBClicked, this, &MainWindow::openLoginDialog);
 }

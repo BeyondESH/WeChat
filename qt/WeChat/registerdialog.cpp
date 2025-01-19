@@ -108,9 +108,21 @@ void RegisterDialog::initHttpHandlers()
             break;
         }
         showTip("用户注册成功",true);
-        return;
+        remainTime=6;
+        QTimer *timer=new QTimer(this);
+        connect(timer,&QTimer::timeout,[this,timer](){
+            QString str=QString::number(remainTime)+"秒后返回登录界面";
+            showTip(str,true);
+            if(remainTime==0){
+                timer->stop();
+                timer->deleteLater();
+                emit backPBClicked();
+                return;
+            }
+            remainTime--;
+        });
+        timer->start(1000);
     });
-
 }
 
 void RegisterDialog::on_backPushButton_clicked()
