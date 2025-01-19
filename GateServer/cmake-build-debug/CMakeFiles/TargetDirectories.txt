@@ -1,0 +1,3 @@
+D:/GitHub/WeChat/GateServer/cmake-build-debug/CMakeFiles/GateServer.dir
+D:/GitHub/WeChat/GateServer/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/GitHub/WeChat/GateServer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

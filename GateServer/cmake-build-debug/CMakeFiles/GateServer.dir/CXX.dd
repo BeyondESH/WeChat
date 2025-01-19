@@ -1,0 +1,21 @@
+ninja_dyndep_version = 1.0
+build CMakeFiles\GateServer.dir\main.cpp.obj: dyndep
+
+build CMakeFiles\GateServer.dir\CServer.cpp.obj: dyndep
+
+build CMakeFiles\GateServer.dir\HttpConnection.cpp.obj: dyndep
+
+build CMakeFiles\GateServer.dir\LogicSystem.cpp.obj: dyndep
+
+build CMakeFiles\GateServer.dir\VerifyGrpcClient.cpp.obj: dyndep
+
+build CMakeFiles\GateServer.dir\AsioIOcontextPool.cpp.obj: dyndep
+
+build CMakeFiles\GateServer.dir\RedisMgr.cpp.obj: dyndep
+
+build CMakeFiles\GateServer.dir\MySQLMgr.cpp.obj: dyndep
+
+build CMakeFiles\GateServer.dir\message.grpc.pb.cc.obj: dyndep
+
+build CMakeFiles\GateServer.dir\message.pb.cc.obj: dyndep
+

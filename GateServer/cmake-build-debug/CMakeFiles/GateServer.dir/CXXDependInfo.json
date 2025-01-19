@@ -1,0 +1,21 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "MSVC",
+	"compiler-id" : "MSVC",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "D:/GitHub/WeChat/GateServer/cmake-build-debug",
+	"dir-cur-src" : "D:/GitHub/WeChat/GateServer",
+	"dir-top-bld" : "D:/GitHub/WeChat/GateServer/cmake-build-debug",
+	"dir-top-src" : "D:/GitHub/WeChat/GateServer",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"D:\\C++library\\vcpkg\\installed\\x64-windows\\include"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "D:/GitHub/WeChat/GateServer/cmake-build-debug/CMakeFiles/GateServer.dir"
+}

@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/img/loginDialog">
+        <file>C:/Users/Beyond/Pictures/7e4373cd5c03a49ab7512d666468410.jpg</file>
+        <file>img/7e4373cd5c03a49ab7512d666468410.jpg</file>
+        <file>img/wechat.png</file>
+        <file>img/wechat.svg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>style/stylesheet.qss</file>
+    </qresource>
+</RCC>

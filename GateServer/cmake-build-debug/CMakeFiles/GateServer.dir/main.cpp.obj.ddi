@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "CMakeFiles\\GateServer.dir\\main.cpp.obj",
+            "outputs": [
+                "D:\\GitHub\\WeChat\\GateServer\\cmake-build-debug\\vc140.pdb",
+                "CMakeFiles\\GateServer.dir\\main.cpp.obj.ddi"
+            ],
+            "requires": []
+        }
+    ]
+}

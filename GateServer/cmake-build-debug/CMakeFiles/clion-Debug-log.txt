@@ -1,0 +1,15 @@
+"C:\Program Files\JetBrains\CLion 2024.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2024.1/bin/ninja/win/x64/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=D:\C++library\vcpkg\scripts\buildsystems\vcpkg.cmake -G Ninja -S D:\GitHub\WeChat\GateServer -B D:\GitHub\WeChat\GateServer\cmake-build-debug
+-- Found RE2 via CMake.
+CMake Warning (dev) at D:/C++library/vcpkg/installed/x64-windows/share/boost/vcpkg-cmake-wrapper.cmake:3 (_find_package):
+  Policy CMP0167 is not set: The FindBoost module is removed.  Run "cmake
+  --help-policy CMP0167" for policy details.  Use the cmake_policy command to
+  set the policy and suppress this warning.
+
+Call Stack (most recent call first):
+  D:/C++library/vcpkg/scripts/buildsystems/vcpkg.cmake:813 (include)
+  CMakeLists.txt:59 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Configuring done (0.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: D:/GitHub/WeChat/GateServer/cmake-build-debug
