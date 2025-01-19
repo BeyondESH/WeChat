@@ -5,8 +5,8 @@
 #ifndef GATESERVER_VERIFYGRPCCLIENT_H
 #define GATESERVER_VERIFYGRPCCLIENT_H
 
-#include <queue>
 #include <grpcpp/grpcpp.h>
+#include <queue>
 #include "message.grpc.pb.h"
 #include "const.h"
 #include "singleton.hpp"

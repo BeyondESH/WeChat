@@ -88,9 +88,24 @@ void RegisterDialog::initHttpHandlers()
     //注册账号注册回包的逻辑
     _handlers.insert(ReqId::ID_REG_USER,[this](const QJsonObject &jsonObj){
         int error=jsonObj["error"].toInt();
-        if(error!=ErrorCodes::SUCCESS){
-            showTip(tr("注册失败"),false);
+        switch(error){
+        case ErrorCodes::UserExist:
+            showTip("用户已存在",false);
             return;
+        case ErrorCodes::EmailExist:
+            showTip("邮箱已存在",false);
+            return;
+        case ErrorCodes::ERR_NETWORK:
+            showTip("网络连接错误",false);
+            return;
+        case ErrorCodes::VerifyCodeError:
+            showTip("验证码错误",false);
+            return;
+        case ErrorCodes::VerifyCodeExpired:
+            showTip("验证码过期或不存在",false);
+            return;
+        default:
+            break;
         }
         showTip("用户注册成功",true);
         return;
@@ -163,9 +178,7 @@ void RegisterDialog::slot_mod_register_finished(ReqId req_id, QString res, Error
             repolish(ui->codeNodeLabel);
             ui->codeNodeLabel->setText("网路连接错误");
         }else if(req_id==ReqId::ID_REG_USER){
-            if(ec==ErrorCodes::ERR_NETWORK){
-                showTip(tr("网络连接错误"),false);
-            }
+            showTip(tr("网络连接错误"),false);
         }
         return;
     }

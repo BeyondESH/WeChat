@@ -3,7 +3,6 @@
 //
 
 #include "MySQLMgr.h"
-
 #include "ConfigMgr.hpp"
 
 MySQLConnectPool::MySQLConnectPool(const mysqlx::SessionSettings &settings, const int &poolSize): _settings(settings),
@@ -130,29 +129,60 @@ void MySQLConnectPool::reconnect() {
     }).detach();
 }
 
+//检查连接(死锁处理后)
 void MySQLConnectPool::checkConnection() {
     if (_isStop == true) {
         return;
     }
     std::thread([this]() {
         while (1) {
-            std::lock_guard<std::mutex> lcok(_mutex);
-            auto session = _sessions.begin();
-            while (session != _sessions.end()) {
-                try {
-                    (*session)->sql("SELECT 1").execute();
-                    ++session;
-                } catch (const mysqlx::Error &error) {
-                    std::cerr << "Failed to check MysqlServer:" << error.what() << std::endl;
-                    session = _sessions.erase(session);
-                    //重连
-                    reconnect();
+            std::vector<std::shared_ptr<mysqlx::Session>> sessionsToReconnect;
+            {
+                std::lock_guard<std::mutex> lock(_mutex);
+                auto session = _sessions.begin();
+                while (session != _sessions.end()) {
+                    try {
+                        (*session)->sql("SELECT 1").execute();
+                        ++session;
+                    } catch (const mysqlx::Error &error) {
+                        std::cerr << "Failed to check MysqlServer:" << error.what() << std::endl;
+                        sessionsToReconnect.push_back(*session);
+                        session = _sessions.erase(session);
+                    }
                 }
+            }
+            // 在锁外调用reconnect
+            for (auto& session : sessionsToReconnect) {
+                reconnect();
             }
             std::this_thread::sleep_for(std::chrono::seconds(60));
         }
     }).detach();
 }
+//存在死锁问题:
+// void MySQLConnectPool::checkConnection() {
+//     if (_isStop == true) {
+//         return;
+//     }
+//     std::thread([this]() {
+//         while (1) {
+//             std::lock_guard<std::mutex> lock(_mutex);
+//             auto session = _sessions.begin();
+//             while (session != _sessions.end()) {
+//                 try {
+//                     (*session)->sql("SELECT 1").execute();
+//                     ++session;
+//                 } catch (const mysqlx::Error &error) {
+//                     std::cerr << "Failed to check MysqlServer:" << error.what() << std::endl;
+//                     reconnect(); // 在持有锁的情况下调用reconnect
+//                     session = _sessions.erase(session);
+//                 }
+//             }
+//             std::this_thread::sleep_for(std::chrono::seconds(60));
+//         }
+//     }).detach();
+// }
+
 
 MySQLMgr::~MySQLMgr() {
     close();
@@ -160,19 +190,27 @@ MySQLMgr::~MySQLMgr() {
 }
 
 int MySQLMgr::regUser(const std::string &name, const std::string &password, const std::string &email) {
+    std::cout << "Starting regUser..." << std::endl;
     auto session=_pool->getSession();
+    std::cout << "Got database session" << std::endl;
     if (session==nullptr) {
+        std::cout << "Failed to get database session" << std::endl;
         return -1;
     }
     try {
+        std::cout << "Executing reg_user procedure..." << std::endl;
         auto result = session->sql("CALL reg_user(?,?,?,@result)").bind(name).bind(email).bind(password).execute();
+        std::cout << "Getting procedure result..." << std::endl;
         auto output =session->sql("SELECT @result").execute();
         auto row=output.fetchOne();
         _pool->returnSession(session);
         if (!row) {
+            std::cout << "No result returned from procedure" << std::endl;
             return -1;
         }
-        return row[0].get<int>();//返回注册结果
+        int ret = row[0].get<int>();
+        std::cout << "RegUser completed with result: " << ret << std::endl;
+        return ret;//返回注册结果
     } catch (const mysqlx::Error &error) {
         std::cerr << "Failed to execute command:" << error.what() << std::endl;
         _pool->returnSession(session);

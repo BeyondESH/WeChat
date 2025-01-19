@@ -55,6 +55,7 @@ enum ErrorCodes{
     EmailExist=1008,//邮箱已存在，mysql错误返回-3
     EmailNotExist=1009,//邮箱不存在
     PasswordUpFailed=1010,//密码修改失败
+    ERR_MYSQL=1011,//mysql连接错误
 };
 
 

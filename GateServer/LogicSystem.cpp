@@ -1,9 +1,10 @@
 ﻿//
 // Created by Beyond on 2024/11/10.
 //
+#include "VerifyGrpcClient.h"
 #include "LogicSystem.h"
 #include "HttpConnection.h"
-#include "VerifyGrpcClient.h"
+#include "MySQLMgr.h"
 #include "RedisMgr.h"
 using json=nlohmann::json;
 bool LogicSystem::handleGet(std::string path, std::shared_ptr<HttpConnection> connection) {
@@ -81,6 +82,7 @@ LogicSystem::LogicSystem() {
             std::cout << "Failed to parse JSON data" << std::endl;
             root["error"] = ErrorCodes::ERROR_JSON;
             std::string json_str = root.dump(4);
+            std::cout<<"sent json is:"<<json_str<<std::endl;
             boost::beast::ostream(connection->_response.body()) << json_str;
             return true;
         }
@@ -95,6 +97,7 @@ LogicSystem::LogicSystem() {
             std::cout<<"verifycode is nonexistent"<<std::endl;
             root["error"]=ErrorCodes::VerifyCodeExpired;
             auto json_str=root.dump(4);
+            std::cout<<"sent json is"<<json_str<<std::endl;
             boost::beast::ostream(connection->_response.body())<<json_str;
             return true;
         }
@@ -104,18 +107,35 @@ LogicSystem::LogicSystem() {
             std::cout<<"verifycode is error"<<std::endl;
             root["error"]=ErrorCodes::VerifyCodeError;
             auto json_str=root.dump(4);
+            std::cout<<"sent json is:"<<json_str<<std::endl;
             boost::beast::ostream(connection->_response.body())<<json_str;
             return true;
         }
-
+        std::cout<<"verifycode is right"<<std::endl;
         //查找MySQL数据库
-
-        root["error"]=ErrorCodes::SUCCESS;
+        const std::string name=src_root["user"];
+        const std::string password=src_root["password"];
+        auto result=MySQLMgr::getInstance()->regUser(name,password,email);
+        std::cout<<"regUser result is:"<<result<<std::endl;
+        switch (result) {
+            case -1:
+                root["error"]=ErrorCodes::ERR_NETWORK;//mysql连接错误
+                break;
+            case -2:
+                root["error"]=ErrorCodes::UserExist;//用户已存在
+                break;
+            case -3:
+                root["error"]=ErrorCodes::EmailExist;//邮箱已存在
+                break;
+            default:
+                root["error"]=ErrorCodes::SUCCESS;
+        }
         root["email"]=email;
         root["verifyCode"]=verifyCode;
         root["user"]=src_root["user"];
         root["password"]=src_root["password"];
         auto json_str=root.dump(4);
+        std::cout<<"sent json is:"<<json_str<<std::endl;
         boost::beast::ostream(connection->_response.body())<<json_str;
         return true;
     });
