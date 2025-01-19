@@ -257,9 +257,10 @@ void RegisterDialog::on_submitPushButton_clicked()
     //发送注册请求
     QJsonObject infoJson;
     infoJson["user"]=ui->accountLineEdit->text();
-    infoJson["password"]=ui->passwordLineEdit->text();
+    infoJson["password"]=stringToSha256(ui->passwordLineEdit->text());
     infoJson["email"]=ui->emailLineEdit->text();
     infoJson["verifyCode"]=ui->codeLineEdit->text();
+    qDebug()<<infoJson["password"];
     HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/user_register"),infoJson,ReqId::ID_REG_USER,Modules::REGISTERMOD);
 }
 

@@ -25,10 +25,12 @@
 #include <QJsonValue>
 #include <QDir>
 #include <QSettings>
+#include <QCryptographicHash>
 /**
  * @brief repolish 用来刷新qss
  */
 extern std::function<void(QWidget*)> repolish;
+extern std::function<QString(QString str)> stringToSha256;
 
 //请求类型id
 enum ReqId{

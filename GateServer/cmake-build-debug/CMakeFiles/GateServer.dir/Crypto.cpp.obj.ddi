@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "CMakeFiles\\GateServer.dir\\Crypto.cpp.obj",
+            "outputs": [
+                "D:\\Gitee\\wechat\\GateServer\\cmake-build-debug\\vc140.pdb",
+                "CMakeFiles\\GateServer.dir\\Crypto.cpp.obj.ddi"
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -36,6 +36,8 @@ add_executable(GateServer main.cpp
         message.grpc.pb.h
         message.pb.cc
         message.pb.h
+        Crypto.cpp
+        Crypto.h
 )
 
 # absl库

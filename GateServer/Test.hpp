@@ -6,17 +6,15 @@
 #define TEST_H
 #include "const.h"
 #include "RedisMgr.h"
-
-class Test : public Singleton<Test> {
-    friend class Singleton<Test>;
-
+#include "Crypto.h"
+class Test{
 public:
-    void testRedisMgr() {
-        assert(RedisMgr::getInstance()->set("blogwebsite","llfc.club"));
+    static void testRedisMgr() {
+        assert(RedisMgr::getInstance()->set("blogwebsite","beyondesh.top"));
         std::string value = "";
         assert(RedisMgr::getInstance()->get("blogwebsite", value));
         assert(RedisMgr::getInstance()->get("nonekey", value) == false);
-        assert(RedisMgr::getInstance()->hSet("bloginfo","blogwebsite", "llfc.club"));
+        assert(RedisMgr::getInstance()->hSet("bloginfo","blogwebsite", "beyondesh.top"));
         assert(RedisMgr::getInstance()->existsKey("bloginfo"));
         assert(RedisMgr::getInstance()->del("bloginfo"));
         //assert(RedisMgr::getInstance()->del("bloginfo"));
@@ -30,8 +28,8 @@ public:
         assert(RedisMgr::getInstance()->lPop("lPushkey2", value)==false);
     }
 
-    void RedisConnectPool_reconnect() {
-        while (!(RedisMgr::getInstance()->set("blogwebsite", "llfc.club"))) {
+    static void RedisConnectPool_reconnect() {
+        while (!(RedisMgr::getInstance()->set("blogwebsite", "beyondesh.top"))) {
             std::cout << "failed to set" << std::endl;
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
@@ -40,13 +38,10 @@ public:
         std::this_thread::sleep_for(std::chrono::seconds(5));
         std::cout<<RedisMgr::getInstance()->connectCount()<<std::endl;
     }
-
-private:
-    Test(){};
-
-    Test(const Test &) = delete;
-
-    Test &operator=(const Test &) = delete;
+    static void testCrypto(std::string str){
+        std::string sha256=Crypto::stringToSha256(str);
+        std::cout<<sha256<<std::endl;
+    }
 };
 
 

@@ -6,6 +6,7 @@
 #include "HttpConnection.h"
 #include "MySQLMgr.h"
 #include "RedisMgr.h"
+#include "Crypto.h"
 using json=nlohmann::json;
 bool LogicSystem::handleGet(std::string path, std::shared_ptr<HttpConnection> connection) {
     //未找到path

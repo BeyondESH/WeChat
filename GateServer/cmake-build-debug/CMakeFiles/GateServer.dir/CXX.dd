@@ -19,3 +19,5 @@ build CMakeFiles\GateServer.dir\message.grpc.pb.cc.obj: dyndep
 
 build CMakeFiles\GateServer.dir\message.pb.cc.obj: dyndep
 
+build CMakeFiles\GateServer.dir\Crypto.cpp.obj: dyndep
+
