@@ -36,11 +36,15 @@ extern std::function<QString(QString str)> stringToSha256;
 enum ReqId{
     ID_GET_VARIFY_CODE=1001,//获取验证码
     ID_REG_USER=1002,//注册用户
+    ID_RESET_PASSWORD=1003,//重置密码
+    ID_LOGIN=1004,//登录
 };
 
 //功能模块id
 enum Modules {
     REGISTERMOD=0,//注册模块
+    LOGINMOD=1,//登录模块
+    RESETMOD=2,//重置密码模块
 };
 
 //错误码
@@ -58,6 +62,7 @@ enum ErrorCodes{
     EmailNotExist=1009,//邮箱不存在
     PasswordUpFailed=1010,//密码修改失败
     ERR_MYSQL=1011,//mysql连接错误
+    PasswordSame=1012,//新旧密码相同
 };
 
 

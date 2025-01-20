@@ -475,7 +475,7 @@ QPushButton#loginButton:pressed {
         <number>4</number>
        </property>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="resetPasswordPB">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -492,7 +492,7 @@ QPushButton#loginButton:pressed {
           <string notr="true">color: rgb(97, 101, 154);</string>
          </property>
          <property name="text">
-          <string>找回密码</string>
+          <string>忘记密码</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -500,7 +500,7 @@ QPushButton#loginButton:pressed {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="morePB">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
            <horstretch>0</horstretch>

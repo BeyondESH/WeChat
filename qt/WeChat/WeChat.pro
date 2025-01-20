@@ -15,6 +15,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     registerdialog.cpp \
+    resetdialog.cpp \
     testwindow.cpp
 
 HEADERS += \
@@ -23,13 +24,15 @@ HEADERS += \
     logindialog.h \
     mainwindow.h \
     registerdialog.h \
+    resetdialog.h \
     singleton.hpp \
     testwindow.h
 
 FORMS += \
     logindialog.ui \
     mainwindow.ui \
-    registerdialog.ui
+    registerdialog.ui \
+    resetdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

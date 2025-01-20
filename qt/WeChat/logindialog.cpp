@@ -64,3 +64,9 @@ void LoginDialog::on_loginButton_clicked()
     }
 }
 
+
+void LoginDialog::on_resetPasswordPB_clicked()
+{
+    emit resetPasswordPBClicked();
+}
+

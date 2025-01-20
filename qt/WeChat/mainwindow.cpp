@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     _loginDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
     setCentralWidget(_loginDialog);
     connect(_loginDialog, &LoginDialog::registerPBClicked, this, &MainWindow::openRegisterDialog);
+    connect(_loginDialog,&LoginDialog::resetPasswordPBClicked,this,&MainWindow::openResetDialog);
 }
 
 MainWindow::~MainWindow()
@@ -27,6 +28,7 @@ void MainWindow::openLoginDialog()
     _loginDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
     setCentralWidget(_loginDialog);
     connect(_loginDialog, &LoginDialog::registerPBClicked, this, &MainWindow::openRegisterDialog);
+    connect(_loginDialog,&LoginDialog::resetPasswordPBClicked,this,&MainWindow::openResetDialog);
 }
 
 void MainWindow::openRegisterDialog()
@@ -36,4 +38,14 @@ void MainWindow::openRegisterDialog()
     _registerDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
     setCentralWidget(_registerDialog);
     connect(_registerDialog, &RegisterDialog::backPBClicked, this, &MainWindow::openLoginDialog);
+}
+
+void MainWindow::openResetDialog()
+{
+    qDebug()<<12;
+    _resetDialog=new ResetDialog(this);
+    _resetDialog->hide();
+    _resetDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);
+    setCentralWidget(_resetDialog);
+    connect(_resetDialog, &ResetDialog::backPBClicked, this, &MainWindow::openLoginDialog);
 }

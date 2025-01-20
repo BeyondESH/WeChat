@@ -50,5 +50,8 @@ void HttpMgr::slot_http_finished(ReqId req_id, Modules mod, QString res, ErrorCo
     if(mod==Modules::REGISTERMOD){
         //发送注册模块完成信号
         emit signal_mod_register_finished(req_id,res,ec);
+    }else if(mod==Modules::RESETMOD){
+        //发送重置密码模块完成信号
+        emit signal_mod_reset_finished(req_id,res,ec);
     }
 }

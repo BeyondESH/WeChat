@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>RegisterDialog</class>
- <widget class="QDialog" name="RegisterDialog">
+ <class>resetDialog</class>
+ <widget class="QDialog" name="resetDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,22 +16,12 @@
     <height>500</height>
    </size>
   </property>
-  <property name="maximumSize">
-   <size>
-    <width>16777215</width>
-    <height>16777215</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>注册</string>
+   <string>Dialog</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="rc.qrc">
-    <normaloff>:/img/loginDialog/img/wechat.svg</normaloff>:/img/loginDialog/img/wechat.svg</iconset>
-  </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
-   <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
        <property name="currentIndex">
@@ -69,7 +59,7 @@
               </font>
              </property>
              <property name="text">
-              <string>账号注册</string>
+              <string>重置密码</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -368,7 +358,7 @@
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>20</width>
+               <width>7</width>
                <height>20</height>
               </size>
              </property>
@@ -394,7 +384,7 @@
               </font>
              </property>
              <property name="text">
-              <string>密码</string>
+              <string>新密码</string>
              </property>
             </widget>
            </item>
@@ -427,18 +417,6 @@
            </item>
            <item>
             <widget class="QCheckBox" name="checkBox">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>15</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
              <property name="text">
               <string/>
              </property>
@@ -580,18 +558,6 @@
            </item>
            <item>
             <widget class="QCheckBox" name="checkBox_2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>15</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
              <property name="text">
               <string/>
              </property>
@@ -674,7 +640,7 @@
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>5</width>
+               <width>7</width>
                <height>20</height>
               </size>
              </property>
@@ -708,9 +674,15 @@
             <widget class="QPushButton" name="getCodepushButton">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-               <horstretch>35</horstretch>
+               <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
              </property>
              <property name="maximumSize">
               <size>
@@ -946,8 +918,6 @@ QPushButton#submitPushButton:pressed {
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="rc.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

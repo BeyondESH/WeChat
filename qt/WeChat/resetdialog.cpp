@@ -1,28 +1,28 @@
-#include "registerdialog.h"
-#include "ui_registerdialog.h"
+#include "resetdialog.h"
+#include "ui_resetdialog.h"
 #include "global.h"
 #include "httpmgr.h"
 #include <QTimer>
-RegisterDialog::RegisterDialog(QWidget *parent)
+ResetDialog::ResetDialog(QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::RegisterDialog)
+    , ui(new Ui::resetDialog)
     ,_isCorrect(true)
 {
     ui->setupUi(this);
     polish();//刷新qss
     //处理注册完成信号
-    connect(HttpMgr::getInstance().get(),&HttpMgr::signal_mod_register_finished,this,&RegisterDialog::slot_mod_register_finished);
+    connect(HttpMgr::getInstance().get(),&HttpMgr::signal_mod_reset_finished,this,&ResetDialog::slot_mod_register_finished);
     //初始化http请求处理函数
     initHttpHandlers();
 }
 
-RegisterDialog::~RegisterDialog()
+ResetDialog::~ResetDialog()
 {
-    qDebug()<<"RegisterDialog调用了析构函数";
+    qDebug()<<"ResetDialog调用了析构函数";
     delete ui;
 }
 
-void RegisterDialog::polish()
+void ResetDialog::polish()
 {
     ui->accountNotelabel->setProperty("state","normal");
     ui->passwordNotelabel->setProperty("state","normal");
@@ -38,7 +38,7 @@ void RegisterDialog::polish()
     repolish(ui->errorlabel);
 }
 
-void RegisterDialog::showTip(QString tip, bool isOK)
+void ResetDialog::showTip(QString tip, bool isOK)
 {
     ui->errorlabel->clear();
     if(isOK==true){
@@ -50,7 +50,7 @@ void RegisterDialog::showTip(QString tip, bool isOK)
     ui->errorlabel->setText(tip);
 }
 
-void RegisterDialog::initHttpHandlers()
+void ResetDialog::initHttpHandlers()
 {
     //注册获取验证码回包的逻辑
     _handlers.insert(ReqId::ID_GET_VARIFY_CODE,[this](const QJsonObject& jsonObj){
@@ -85,13 +85,13 @@ void RegisterDialog::initHttpHandlers()
     });
 
     //注册账号注册回包的逻辑
-    _handlers.insert(ReqId::ID_REG_USER,[this](const QJsonObject &jsonObj){
+    _handlers.insert(ReqId::ID_RESET_PASSWORD,[this](const QJsonObject &jsonObj){
         int error=jsonObj["error"].toInt();
         switch(error){
-        case ErrorCodes::UserExist:
-            showTip("用户已存在",false);
+        case ErrorCodes::UserNotExist:
+            showTip("用户不存在",false);
             return;
-        case ErrorCodes::EmailExist:
+        case ErrorCodes::EmailNotExist:
             showTip("邮箱已存在",false);
             return;
         case ErrorCodes::ERR_NETWORK:
@@ -103,10 +103,13 @@ void RegisterDialog::initHttpHandlers()
         case ErrorCodes::VerifyCodeExpired:
             showTip("验证码过期或不存在",false);
             return;
+        case ErrorCodes::PasswordSame:
+            showTip("新旧密码相同",false);
+            return;
         default:
             break;
         }
-        showTip("用户注册成功",true);
+        showTip("密码重置成功",true);
         remainTime=6;
         QTimer *timer=new QTimer(this);
         connect(timer,&QTimer::timeout,[this,timer](){
@@ -124,13 +127,13 @@ void RegisterDialog::initHttpHandlers()
     });
 }
 
-void RegisterDialog::on_backPushButton_clicked()
+void ResetDialog::on_backPushButton_clicked()
 {
     emit backPBClicked();
 }
 
 
-void RegisterDialog::on_checkBox_checkStateChanged(const Qt::CheckState &arg1)
+void ResetDialog::on_checkBox_checkStateChanged(const Qt::CheckState &arg1)
 {
     if(arg1==Qt::Checked){
         ui->passwordLineEdit->setEchoMode(QLineEdit::Normal);
@@ -140,7 +143,7 @@ void RegisterDialog::on_checkBox_checkStateChanged(const Qt::CheckState &arg1)
 }
 
 
-void RegisterDialog::on_checkBox_2_checkStateChanged(const Qt::CheckState &arg1)
+void ResetDialog::on_checkBox_2_checkStateChanged(const Qt::CheckState &arg1)
 {
     if(arg1==Qt::Checked){
         ui->verifylineEdit->setEchoMode(QLineEdit::Normal);
@@ -150,7 +153,7 @@ void RegisterDialog::on_checkBox_2_checkStateChanged(const Qt::CheckState &arg1)
 }
 
 
-void RegisterDialog::on_getCodepushButton_clicked()
+void ResetDialog::on_getCodepushButton_clicked()
 {
     ui->errorlabel->clear();
     ui->emailNotelabel->clear();
@@ -180,7 +183,7 @@ void RegisterDialog::on_getCodepushButton_clicked()
 }
 
 //处理注册完成信号的槽函数
-void RegisterDialog::slot_mod_register_finished(ReqId req_id, QString res, ErrorCodes ec)
+void ResetDialog::slot_mod_register_finished(ReqId req_id, QString res, ErrorCodes ec)
 {
     //错误处理
     if(ec!=ErrorCodes::SUCCESS){
@@ -188,7 +191,7 @@ void RegisterDialog::slot_mod_register_finished(ReqId req_id, QString res, Error
             ui->codeNodeLabel->setProperty("state","error");
             repolish(ui->codeNodeLabel);
             ui->codeNodeLabel->setText("网路连接错误");
-        }else if(req_id==ReqId::ID_REG_USER){
+        }else if(req_id==ReqId::ID_RESET_PASSWORD){
             showTip(tr("网络连接错误"),false);
         }
         return;
@@ -213,7 +216,7 @@ void RegisterDialog::slot_mod_register_finished(ReqId req_id, QString res, Error
     return;
 }
 
-void RegisterDialog::on_submitPushButton_clicked()
+void ResetDialog::on_submitPushButton_clicked()
 {
     //qDebug()<<_isCorrect;
     ui->errorlabel->clear();
@@ -272,11 +275,11 @@ void RegisterDialog::on_submitPushButton_clicked()
     infoJson["email"]=ui->emailLineEdit->text();
     infoJson["verifyCode"]=ui->codeLineEdit->text();
     qDebug()<<infoJson["password"];
-    HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/user_register"),infoJson,ReqId::ID_REG_USER,Modules::REGISTERMOD);
+    HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/reset_password"),infoJson,ReqId::ID_RESET_PASSWORD,Modules::RESETMOD);
 }
 
 
-void RegisterDialog::on_accountLineEdit_textEdited(const QString &arg1)
+void ResetDialog::on_accountLineEdit_textEdited(const QString &arg1)
 {
     ui->accountNotelabel->clear();
     ui->accountNotelabel->setProperty("state","normal");
@@ -285,7 +288,7 @@ void RegisterDialog::on_accountLineEdit_textEdited(const QString &arg1)
 }
 
 
-void RegisterDialog::on_accountLineEdit_editingFinished()
+void ResetDialog::on_accountLineEdit_editingFinished()
 {
     _isCorrect=true;
     ui->accountNotelabel->clear();
@@ -305,7 +308,7 @@ void RegisterDialog::on_accountLineEdit_editingFinished()
 }
 
 
-void RegisterDialog::on_emailLineEdit_editingFinished()
+void ResetDialog::on_emailLineEdit_editingFinished()
 {
     _isCorrect=true;
     ui->emailNotelabel->clear();
@@ -330,13 +333,13 @@ void RegisterDialog::on_emailLineEdit_editingFinished()
 }
 
 
-void RegisterDialog::on_emailLineEdit_textEdited(const QString &arg1)
+void ResetDialog::on_emailLineEdit_textEdited(const QString &arg1)
 {
 
 }
 
 
-void RegisterDialog::on_passwordLineEdit_textEdited(const QString &arg1)
+void ResetDialog::on_passwordLineEdit_textEdited(const QString &arg1)
 {
     ui->passwordNotelabel->clear();
     ui->passwordNotelabel->setProperty("state","normal");
@@ -345,7 +348,7 @@ void RegisterDialog::on_passwordLineEdit_textEdited(const QString &arg1)
 }
 
 
-void RegisterDialog::on_verifylineEdit_textEdited(const QString &arg1)
+void ResetDialog::on_verifylineEdit_textEdited(const QString &arg1)
 {
     ui->verifyNodeLabel->clear();
     ui->verifyNodeLabel->setProperty("state","normal");
@@ -354,7 +357,7 @@ void RegisterDialog::on_verifylineEdit_textEdited(const QString &arg1)
 }
 
 
-void RegisterDialog::on_verifylineEdit_editingFinished()
+void ResetDialog::on_verifylineEdit_editingFinished()
 {
     _isCorrect=true;
     ui->verifyNodeLabel->clear();
@@ -370,7 +373,7 @@ void RegisterDialog::on_verifylineEdit_editingFinished()
 }
 
 
-void RegisterDialog::on_passwordLineEdit_editingFinished()
+void ResetDialog::on_passwordLineEdit_editingFinished()
 {
     _isCorrect=true;
     ui->passwordNotelabel->clear();
@@ -392,10 +395,9 @@ void RegisterDialog::on_passwordLineEdit_editingFinished()
 }
 
 
-void RegisterDialog::on_codeLineEdit_editingFinished()
+void ResetDialog::on_codeLineEdit_editingFinished()
 {
     ui->codeNodeLabel->clear();
     ui->codeNodeLabel->setProperty("state","normal");
     repolish(ui->codeNodeLabel);
 }
-

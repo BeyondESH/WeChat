@@ -13,7 +13,7 @@
 #include <QMainWindow>
 #include "logindialog.h"//登录页面
 #include "registerdialog.h"//注册页面
-
+#include "resetdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -33,9 +33,11 @@ private:
     Ui::MainWindow *ui;
     LoginDialog *_loginDialog;
     RegisterDialog *_registerDialog;
+    ResetDialog *_resetDialog;
 
 public slots:
     void openLoginDialog();
     void openRegisterDialog();
+    void openResetDialog();
 };
 #endif // MAINWINDOW_H
