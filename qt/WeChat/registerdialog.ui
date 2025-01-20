@@ -814,8 +814,22 @@
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(5, 193, 96);
-color: rgb(255, 255, 255);</string>
+                <string notr="true">QPushButton#submitPushButton {
+    background-color: rgb(5, 193, 96);
+    color: rgb(255, 255, 255);
+    border: none; /* 移除边框 */
+    border-radius: 4px; /* 可选：添加圆角 */
+}
+
+QPushButton#submitPushButton:hover {
+    background-color: rgb(4, 170, 85); /* 悬浮时稍微深一点的绿色 */
+    color: rgb(255, 255, 255);
+}
+
+QPushButton#submitPushButton:pressed {
+    background-color: rgb(3, 150, 75); /* 按下时更深的绿色 */
+    color: rgb(255, 255, 255);
+}</string>
                </property>
                <property name="text">
                 <string>确认</string>
