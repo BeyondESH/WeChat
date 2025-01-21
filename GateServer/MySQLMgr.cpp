@@ -213,6 +213,25 @@ bool MySQLMgr::queryUser(const std::string &user) {
 }
 
 bool MySQLMgr::queryEmail(const std::string &email) {
+    try {
+        std::cout<<"Starting queryEmail..."<<std::endl;
+        auto session=_pool->getSession();
+        if (session==nullptr) {
+            std::cout<<"Failed to get database session"<<std::endl;
+            return false;
+        }
+        auto result=session->sql("SELECT `email` from wechat.user where `email`=\'"+email+"\'").execute();  //查询邮箱是否存在
+        std::cout<<"Getting query result..."<<std::endl;
+        if (result.count()==0) {
+            std::cout<<"No result returned from query"<<std::endl;
+            return false;
+        }
+        _pool->returnSession(session);
+        return true;    //返回查询结果
+    } catch (const mysqlx::Error &error) {
+        std::cerr<<"Failed to execute command:"<<error.what()<<std::endl;
+        return false;
+    }
     return true;
 }
 

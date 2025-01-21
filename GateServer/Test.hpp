@@ -52,6 +52,15 @@ public:
             std::cout<<"user is nonexistent"<<std::endl;
         }
     }
+
+    static void testQueryEmail(const std::string &email){
+        bool result=MySQLMgr::getInstance()->queryEmail(email);
+        if (result==true) {
+            std::cout<<"email is exist"<<std::endl;
+        }else {
+            std::cout<<"email is nonexistent"<<std::endl;
+        }
+    }
 };
 
 

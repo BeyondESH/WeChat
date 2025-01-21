@@ -12,7 +12,8 @@ int main() {
     //     std::cout<<e.what()<<std::endl;
     // }
     //Test::testCrypto();
-    Test::testQueryUser("1989601704");
+    // Test::testQueryUser("19896017045");
+    // Test::testQueryEmail("1989601704@qq.com");
     auto configMgr=ConfigMgr::getInstance();
     std::string gate_port_str=configMgr["GateServer"]["port"];
     unsigned short gate_port=static_cast<unsigned short>(std::stoi(gate_port_str));
