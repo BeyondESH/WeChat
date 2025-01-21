@@ -7,6 +7,7 @@
 #include "const.h"
 #include "RedisMgr.h"
 #include "Crypto.h"
+#include "MySQLMgr.h"
 class Test{
 public:
     static void testRedisMgr() {
@@ -41,6 +42,15 @@ public:
     static void testCrypto(std::string str){
         std::string sha256=Crypto::stringToSha256(str);
         std::cout<<sha256<<std::endl;
+    }
+
+    static void testQueryUser(const std::string &user){
+        bool result=MySQLMgr::getInstance()->queryUser(user);
+        if (result==true) {
+            std::cout<<"user is exist"<<std::endl;
+        }else {
+            std::cout<<"user is nonexistent"<<std::endl;
+        }
     }
 };
 

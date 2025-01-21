@@ -189,6 +189,33 @@ MySQLMgr::~MySQLMgr() {
     std::cout << "MySQLMgr is destructed" << std::endl;
 }
 
+bool MySQLMgr::queryUser(const std::string &user) {
+    try {
+        std::cout<<"Starting queryUser..."<<std::endl;
+        auto session=_pool->getSession();
+        std::cout<<"Got database session"<<std::endl;
+        if (session==nullptr) {
+            std::cout<<"Failed to get database session"<<std::endl;
+            return false;
+        }
+        auto result=session->sql("SELECT `name` from wechat.user where `name`=\'"+user+"\'").execute();
+        std::cout<<"Getting query result..."<<std::endl;
+        if (result.count()==0) {
+            std::cout<<"No result returned from query"<<std::endl;
+            return false;
+        }
+        _pool->returnSession(session);
+        return true;    //返回查询结果
+    } catch (const mysqlx::Error &error) {
+        std::cerr << "Failed to execute command:" << error.what() << std::endl;
+        return false;
+    }
+}
+
+bool MySQLMgr::queryEmail(const std::string &email) {
+    return true;
+}
+
 int MySQLMgr::regUser(const std::string &name, const std::string &password, const std::string &email) {
     std::cout << "Starting regUser..." << std::endl;
     auto session=_pool->getSession();

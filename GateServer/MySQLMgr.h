@@ -38,7 +38,10 @@ public:
     // 基本的数据库操作接口
     bool execute(const std::string& sql);
     bool query(const std::string& sql, std::vector<std::map<std::string, std::string>>& result);
-    int regUser(const std::string& name,const std::string& password,const std::string &email);
+    bool queryUser(const std::string& user);
+    bool queryEmail(const std::string& email);
+    int  regUser(const std::string& name,const std::string& password,const std::string &email);
+
     void close();
 private:
     MySQLMgr();
