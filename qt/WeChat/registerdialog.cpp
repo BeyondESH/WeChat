@@ -59,22 +59,6 @@ void RegisterDialog::initHttpHandlers()
             showTip(tr("参数错误"),false);
             return;
         }
-        //倒计时60s
-        QTimer *updateTimer =new QTimer(this);
-        remainTime=60;//60秒
-        connect(updateTimer,&QTimer::timeout,[this,updateTimer](){
-            if(remainTime>0){
-                ui->getCodepushButton->setEnabled(false);
-                ui->getCodepushButton->setText(QString::number(remainTime));
-                remainTime--;
-            }else{
-                ui->getCodepushButton->setText("获取");
-                ui->getCodepushButton->setEnabled(true);
-                updateTimer->stop();
-                updateTimer->deleteLater();
-            }
-        });
-        updateTimer->start(1000);//每秒更新一次
         ui->codeNodeLabel->setProperty("state","normal");
         repolish(ui->codeNodeLabel);
         ui->codeNodeLabel->setText("验证码已发送至邮箱，注意查收");
@@ -170,6 +154,22 @@ void RegisterDialog::on_getCodepushButton_clicked()
             QJsonObject jsonObj;
             jsonObj["email"]=email;
             HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/get_varifycode"),jsonObj,ReqId::ID_GET_VARIFY_CODE,Modules::REGISTERMOD);
+            //倒计时60s
+            QTimer *updateTimer =new QTimer(this);
+            remainTime=60;//60秒
+            connect(updateTimer,&QTimer::timeout,[this,updateTimer](){
+                if(remainTime>0){
+                    ui->getCodepushButton->setEnabled(false);
+                    ui->getCodepushButton->setText(QString::number(remainTime));
+                    remainTime--;
+                }else{
+                    ui->getCodepushButton->setText("获取");
+                    ui->getCodepushButton->setEnabled(true);
+                    updateTimer->stop();
+                    updateTimer->deleteLater();
+                }
+            });
+            updateTimer->start(1000);//每秒更新一次
         }else{
             //格式不匹配
             ui->emailNotelabel->setProperty("state","error");

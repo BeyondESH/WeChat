@@ -61,6 +61,24 @@ public:
             std::cout<<"email is nonexistent"<<std::endl;
         }
     }
+
+    static void testResetPassword(const std::string &email,const std::string &password) {
+        int result=MySQLMgr::getInstance()->resetPassword(email,password);
+        std::cout<<"result is:"<<result<<std::endl;
+        if (result==-1) {
+            std::cerr<<"mysql connection error"<<std::endl;
+            return;
+        }else if (result==-2) {
+            std::cerr<<"email is nonexistent"<<std::endl;
+            return;
+        }else if (result==-3) {
+            std::cerr<<"password is same"<<std::endl;
+            return;
+        }else {
+            std::cout<<"reset password succeed,the new password is:"<<password<<std::endl;
+            return;
+        }
+    }
 };
 
 

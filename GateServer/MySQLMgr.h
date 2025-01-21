@@ -1,4 +1,4 @@
-//
+﻿//
 // Created by Beyond on 2024/12/14.
 //
 
@@ -41,6 +41,7 @@ public:
     bool queryUser(const std::string& user);
     bool queryEmail(const std::string& email);
     int  regUser(const std::string& name,const std::string& password,const std::string &email);
+    int  resetPassword(const std::string &email,const std::string &password);//重置密码 -1连接错误 -2邮箱不存在 -3其他错误
 
     void close();
 private:

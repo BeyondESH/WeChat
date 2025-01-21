@@ -22,8 +22,6 @@ private slots:
     void on_getCodepushButton_clicked();
     void slot_mod_register_finished(ReqId req_id,QString res,ErrorCodes ec);
     void on_submitPushButton_clicked();
-    void on_accountLineEdit_textEdited(const QString &arg1);
-    void on_accountLineEdit_editingFinished();
     void on_emailLineEdit_editingFinished();
     void on_emailLineEdit_textEdited(const QString &arg1);
     void on_passwordLineEdit_textEdited(const QString &arg1);

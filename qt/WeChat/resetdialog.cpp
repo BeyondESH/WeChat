@@ -24,7 +24,6 @@ ResetDialog::~ResetDialog()
 
 void ResetDialog::polish()
 {
-    ui->accountNotelabel->setProperty("state","normal");
     ui->passwordNotelabel->setProperty("state","normal");
     ui->verifyNodeLabel->setProperty("state","normal");
     ui->emailNotelabel->setProperty("state","normal");
@@ -34,7 +33,6 @@ void ResetDialog::polish()
     repolish(ui->emailNotelabel);
     repolish(ui->verifyNodeLabel);
     repolish(ui->passwordNotelabel);
-    repolish(ui->accountNotelabel);
     repolish(ui->errorlabel);
 }
 
@@ -54,31 +52,15 @@ void ResetDialog::initHttpHandlers()
 {
     //注册获取验证码回包的逻辑
     _handlers.insert(ReqId::ID_GET_VARIFY_CODE,[this](const QJsonObject& jsonObj){
+        qDebug()<<"获取验证码回包";
         int error=jsonObj["error"].toInt();
         if(error!=ErrorCodes::SUCCESS){
             showTip(tr("参数错误"),false);
             return;
         }
-        //倒计时60s
-        QTimer *updateTimer =new QTimer(this);
-        remainTime=60;//60秒
-        connect(updateTimer,&QTimer::timeout,[this,updateTimer](){
-            if(remainTime>0){
-                ui->getCodepushButton->setEnabled(false);
-                ui->getCodepushButton->setText(QString::number(remainTime));
-                remainTime--;
-            }else{
-                ui->getCodepushButton->setText("获取");
-                ui->getCodepushButton->setEnabled(true);
-                updateTimer->stop();
-                updateTimer->deleteLater();
-            }
-        });
-        updateTimer->start(1000);//每秒更新一次
         ui->codeNodeLabel->setProperty("state","normal");
         repolish(ui->codeNodeLabel);
         ui->codeNodeLabel->setText("验证码已发送至邮箱，注意查收");
-
         //调试
         auto email=jsonObj["email"].toString();
         qDebug()<<"邮箱为："<<email;
@@ -92,7 +74,7 @@ void ResetDialog::initHttpHandlers()
             showTip("用户不存在",false);
             return;
         case ErrorCodes::EmailNotExist:
-            showTip("邮箱已存在",false);
+            showTip("邮箱不存在",false);
             return;
         case ErrorCodes::ERR_NETWORK:
             showTip("网络连接错误",false);
@@ -172,7 +154,23 @@ void ResetDialog::on_getCodepushButton_clicked()
             //发送验证码
             QJsonObject jsonObj;
             jsonObj["email"]=email;
-            HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/get_varifycode"),jsonObj,ReqId::ID_GET_VARIFY_CODE,Modules::REGISTERMOD);
+            HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/get_varifycode"),jsonObj,ReqId::ID_GET_VARIFY_CODE,Modules::RESETMOD);
+            //倒计时60s
+            QTimer *updateTimer =new QTimer(this);
+            remainTime=60;//60秒
+            connect(updateTimer,&QTimer::timeout,[this,updateTimer](){
+                if(remainTime>0){
+                    ui->getCodepushButton->setEnabled(false);
+                    ui->getCodepushButton->setText(QString::number(remainTime));
+                    remainTime--;
+                }else{
+                    ui->getCodepushButton->setText("获取");
+                    ui->getCodepushButton->setEnabled(true);
+                    updateTimer->stop();
+                    updateTimer->deleteLater();
+                }
+            });
+            updateTimer->start(1000);//每秒更新一次
         }else{
             //格式不匹配
             ui->emailNotelabel->setProperty("state","error");
@@ -218,14 +216,8 @@ void ResetDialog::slot_mod_register_finished(ReqId req_id, QString res, ErrorCod
 
 void ResetDialog::on_submitPushButton_clicked()
 {
-    //qDebug()<<_isCorrect;
+    qDebug()<<"submit"<<_isCorrect;
     ui->errorlabel->clear();
-    if(ui->accountLineEdit->text()==nullptr){
-        ui->accountNotelabel->setProperty("state","error");
-        repolish(ui->accountNotelabel);
-        ui->accountNotelabel->setText(tr("账号不能为空"));
-        return;
-    }
     if(ui->emailLineEdit->text()==nullptr){
         ui->emailNotelabel->setProperty("state","error");
         repolish(ui->emailNotelabel);
@@ -270,43 +262,12 @@ void ResetDialog::on_submitPushButton_clicked()
     }
     //发送注册请求
     QJsonObject infoJson;
-    infoJson["user"]=ui->accountLineEdit->text();
     infoJson["password"]=stringToSha256(ui->passwordLineEdit->text());
     infoJson["email"]=ui->emailLineEdit->text();
     infoJson["verifyCode"]=ui->codeLineEdit->text();
     qDebug()<<infoJson["password"];
     HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/reset_password"),infoJson,ReqId::ID_RESET_PASSWORD,Modules::RESETMOD);
 }
-
-
-void ResetDialog::on_accountLineEdit_textEdited(const QString &arg1)
-{
-    ui->accountNotelabel->clear();
-    ui->accountNotelabel->setProperty("state","normal");
-    repolish(ui->accountNotelabel);
-    ui->accountNotelabel->setText(tr("账号由8~16个数字或字母组成"));
-}
-
-
-void ResetDialog::on_accountLineEdit_editingFinished()
-{
-    _isCorrect=true;
-    ui->accountNotelabel->clear();
-    //判断账号格式是否正确
-    if(ui->accountLineEdit->text()!=nullptr){
-        QString account=ui->accountLineEdit->text();
-        QRegularExpression re("^[a-zA-Z0-9]{8,16}$");//账号由8~16个数字或字母组成
-        bool match=re.match(account).hasMatch();
-        if(!match){
-            //格式不匹配
-            ui->accountNotelabel->setProperty("state","error");
-            repolish(ui->accountNotelabel);
-            ui->accountNotelabel->setText("账号格式错误");
-            _isCorrect=false;
-        }
-    }
-}
-
 
 void ResetDialog::on_emailLineEdit_editingFinished()
 {

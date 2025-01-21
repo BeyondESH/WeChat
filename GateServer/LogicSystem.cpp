@@ -182,26 +182,24 @@ LogicSystem::LogicSystem() {
         }
         std::cout<<"verifycode is right"<<std::endl;
         //查找MySQL数据库
-        const std::string name=src_root["user"];
         const std::string password=src_root["password"];
-        auto result=MySQLMgr::getInstance()->regUser(name,password,email);
-        std::cout<<"regUser result is:"<<result<<std::endl;
+        auto result=MySQLMgr::getInstance()->resetPassword(email,password);
+        std::cout<<"resetPassword result is:"<<result<<std::endl;
         switch (result) {
             case -1:
                 root["error"]=ErrorCodes::ERR_NETWORK;//mysql连接错误
                 break;
             case -2:
-                root["error"]=ErrorCodes::UserExist;//用户已存在
+                root["error"]=ErrorCodes::EmailNotExist;//邮箱不存在
                 break;
             case -3:
-                root["error"]=ErrorCodes::EmailExist;//邮箱已存在
+                root["error"]=ErrorCodes::PasswordSame;//新旧密码相同
                 break;
             default:
                 root["error"]=ErrorCodes::SUCCESS;
         }
         root["email"]=email;
         root["verifyCode"]=verifyCode;
-        root["user"]=src_root["user"];
         root["password"]=src_root["password"];
         auto json_str=root.dump(4);
         std::cout<<"sent json is:"<<json_str<<std::endl;
