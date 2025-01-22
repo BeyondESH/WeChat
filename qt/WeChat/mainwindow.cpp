@@ -42,7 +42,7 @@ void MainWindow::openRegisterDialog()
 
 void MainWindow::openResetDialog()
 {
-    qDebug()<<12;
+    //qDebug()<<12;
     _resetDialog=new ResetDialog(this);
     _resetDialog->hide();
     _resetDialog->setWindowFlags(Qt::CustomizeWindowHint|Qt::FramelessWindowHint);

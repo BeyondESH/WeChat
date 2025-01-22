@@ -49,7 +49,7 @@ private:
     void initHttpHandlers();//初始化http请求处理函数
     QMap<ReqId,std::function<void(const QJsonObject& jsonObj)>> _handlers;
     int remainTime;//验证码倒计时
-    bool _isCorrect;
+    std::vector<int> _corrects;
 };
 
 #endif // REGISTERDIALOG_H

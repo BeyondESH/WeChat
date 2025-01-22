@@ -6,7 +6,7 @@
 RegisterDialog::RegisterDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::RegisterDialog)
-    ,_isCorrect(true)
+    ,_corrects(std::vector<int>(4,0))
 {
     ui->setupUi(this);
     polish();//刷新qss
@@ -262,8 +262,10 @@ void RegisterDialog::on_submitPushButton_clicked()
         return;
     }
 
-    if(_isCorrect==false){
-        return;
+    for(auto &i:_corrects){
+        if(i==0){
+            return;
+        }
     }
     //发送注册请求
     QJsonObject infoJson;
@@ -287,7 +289,7 @@ void RegisterDialog::on_accountLineEdit_textEdited(const QString &arg1)
 
 void RegisterDialog::on_accountLineEdit_editingFinished()
 {
-    _isCorrect=true;
+    _corrects[0]=1;
     ui->accountNotelabel->clear();
     //判断账号格式是否正确
     if(ui->accountLineEdit->text()!=nullptr){
@@ -299,7 +301,7 @@ void RegisterDialog::on_accountLineEdit_editingFinished()
             ui->accountNotelabel->setProperty("state","error");
             repolish(ui->accountNotelabel);
             ui->accountNotelabel->setText("账号格式错误");
-            _isCorrect=false;
+            _corrects[0]=0;
         }
     }
 }
@@ -307,7 +309,8 @@ void RegisterDialog::on_accountLineEdit_editingFinished()
 
 void RegisterDialog::on_emailLineEdit_editingFinished()
 {
-    _isCorrect=true;
+    _corrects[1]=1;
+    //_isCorrect=true;
     ui->emailNotelabel->clear();
     //判断邮箱是否为空
     auto email=ui->emailLineEdit->text();
@@ -324,7 +327,7 @@ void RegisterDialog::on_emailLineEdit_editingFinished()
             ui->emailNotelabel->setProperty("state","error");
             repolish(ui->emailNotelabel);
             ui->emailNotelabel->setText("邮箱格式错误");
-            _isCorrect=false;
+            _corrects[1]=0;
         }
     }
 }
@@ -356,7 +359,7 @@ void RegisterDialog::on_verifylineEdit_textEdited(const QString &arg1)
 
 void RegisterDialog::on_verifylineEdit_editingFinished()
 {
-    _isCorrect=true;
+    _corrects[3]=1;
     ui->verifyNodeLabel->clear();
     ui->verifyNodeLabel->setProperty("state","normal");
     repolish(ui->verifyNodeLabel);
@@ -365,14 +368,14 @@ void RegisterDialog::on_verifylineEdit_editingFinished()
         ui->verifyNodeLabel->setProperty("state","error");
         repolish(ui->verifyNodeLabel);
         ui->verifyNodeLabel->setText(tr("两次密码不相同"));
-        _isCorrect=false;
+        _corrects[3]=0;
     }
 }
 
 
 void RegisterDialog::on_passwordLineEdit_editingFinished()
 {
-    _isCorrect=true;
+    _corrects[2]=1;
     ui->passwordNotelabel->clear();
     ui->passwordNotelabel->setProperty("state","normal");
     repolish(ui->passwordNotelabel);
@@ -386,7 +389,7 @@ void RegisterDialog::on_passwordLineEdit_editingFinished()
             ui->passwordNotelabel->setProperty("state","error");
             repolish(ui->passwordNotelabel);
             ui->passwordNotelabel->setText("密码格式错误");
-            _isCorrect=false;
+            _corrects[2]=0;
         }
     }
 }

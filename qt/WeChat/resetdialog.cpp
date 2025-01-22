@@ -6,7 +6,7 @@
 ResetDialog::ResetDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::resetDialog)
-    ,_isCorrect(true)
+    ,_corrects(std::vector<int>(3,0))
 {
     ui->setupUi(this);
     polish();//刷新qss
@@ -216,7 +216,6 @@ void ResetDialog::slot_mod_register_finished(ReqId req_id, QString res, ErrorCod
 
 void ResetDialog::on_submitPushButton_clicked()
 {
-    qDebug()<<"submit"<<_isCorrect;
     ui->errorlabel->clear();
     if(ui->emailLineEdit->text()==nullptr){
         ui->emailNotelabel->setProperty("state","error");
@@ -257,8 +256,10 @@ void ResetDialog::on_submitPushButton_clicked()
         return;
     }
 
-    if(_isCorrect==false){
-        return;
+    for(auto &i:_corrects){
+        if(i==0){
+            return;
+        }
     }
     //发送注册请求
     QJsonObject infoJson;
@@ -271,7 +272,7 @@ void ResetDialog::on_submitPushButton_clicked()
 
 void ResetDialog::on_emailLineEdit_editingFinished()
 {
-    _isCorrect=true;
+    _corrects[0]=1;
     ui->emailNotelabel->clear();
     //判断邮箱是否为空
     auto email=ui->emailLineEdit->text();
@@ -288,7 +289,7 @@ void ResetDialog::on_emailLineEdit_editingFinished()
             ui->emailNotelabel->setProperty("state","error");
             repolish(ui->emailNotelabel);
             ui->emailNotelabel->setText("邮箱格式错误");
-            _isCorrect=false;
+             _corrects[0]=0;
         }
     }
 }
@@ -320,7 +321,7 @@ void ResetDialog::on_verifylineEdit_textEdited(const QString &arg1)
 
 void ResetDialog::on_verifylineEdit_editingFinished()
 {
-    _isCorrect=true;
+     _corrects[2]=1;
     ui->verifyNodeLabel->clear();
     ui->verifyNodeLabel->setProperty("state","normal");
     repolish(ui->verifyNodeLabel);
@@ -329,14 +330,14 @@ void ResetDialog::on_verifylineEdit_editingFinished()
         ui->verifyNodeLabel->setProperty("state","error");
         repolish(ui->verifyNodeLabel);
         ui->verifyNodeLabel->setText(tr("两次密码不相同"));
-        _isCorrect=false;
+         _corrects[2]=0;
     }
 }
 
 
 void ResetDialog::on_passwordLineEdit_editingFinished()
 {
-    _isCorrect=true;
+     _corrects[1]=1;
     ui->passwordNotelabel->clear();
     ui->passwordNotelabel->setProperty("state","normal");
     repolish(ui->passwordNotelabel);
@@ -350,7 +351,7 @@ void ResetDialog::on_passwordLineEdit_editingFinished()
             ui->passwordNotelabel->setProperty("state","error");
             repolish(ui->passwordNotelabel);
             ui->passwordNotelabel->setText("密码格式错误");
-            _isCorrect=false;
+             _corrects[1]=0;
         }
     }
 }
