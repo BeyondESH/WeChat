@@ -36,6 +36,7 @@ signals:
     void signal_http_finished(ReqId id,Modules mod,QString res,ErrorCodes ec);//http请求完成信号
     void signal_mod_register_finished(ReqId req_id,QString res,ErrorCodes ec);//注册模块完成信号
     void signal_mod_reset_finished(ReqId req_id,QString res,ErrorCodes ec);//重置密码模块完成信号
+    void signal_mod_login_finished(ReqId req_id,QString res,ErrorCodes ec);//登录模块完成信号
 };
 
 #endif // HTTPMGR_H

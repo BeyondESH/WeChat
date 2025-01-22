@@ -34,7 +34,6 @@ private slots:
     void on_loginButton_clicked();
 
     void on_resetPasswordPB_clicked();
-
 signals:
     void registerPBClicked();//注册按钮
     void resetPasswordPBClicked();//忘记密码

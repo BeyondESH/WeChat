@@ -72,6 +72,10 @@ std::shared_ptr<mysqlx::Session> MySQLConnectPool::getSession()
     }
 }
 
+SessionGuard MySQLConnectPool::getSessionGuard() {
+    return SessionGuard(getSession());
+}
+
 void MySQLConnectPool::returnSession(std::shared_ptr<mysqlx::Session> session)
 {
     if (_isStop == true)
@@ -225,9 +229,9 @@ bool MySQLMgr::queryUser(const std::string &user)
     try
     {
         std::cout << "Starting queryUser..." << std::endl;
-        auto session = _pool->getSession();
+        auto session = _pool->getSessionGuard();
         std::cout << "Got database session" << std::endl;
-        if (session == nullptr)
+        if (!session)
         {
             std::cout << "Failed to get database session" << std::endl;
             return false;
@@ -239,7 +243,6 @@ bool MySQLMgr::queryUser(const std::string &user)
             std::cout << "No result returned from query" << std::endl;
             return false;
         }
-        _pool->returnSession(session);
         return true; // 返回查询结果
     }
     catch (const mysqlx::Error &error)
@@ -254,8 +257,8 @@ bool MySQLMgr::queryEmail(const std::string &email)
     try
     {
         std::cout << "Starting queryEmail..." << std::endl;
-        auto session = _pool->getSession();
-        if (session == nullptr)
+        auto session = _pool->getSessionGuard();
+        if (!session)
         {
             std::cout << "Failed to get database session" << std::endl;
             return false;
@@ -267,7 +270,6 @@ bool MySQLMgr::queryEmail(const std::string &email)
             std::cout << "No result returned from query" << std::endl;
             return false;
         }
-        _pool->returnSession(session);
         return true; // 返回查询结果
     }
     catch (const mysqlx::Error &error)
@@ -280,22 +282,21 @@ bool MySQLMgr::queryEmail(const std::string &email)
 
 int MySQLMgr::regUser(const std::string &name, const std::string &password, const std::string &email)
 {
-    std::cout << "Starting regUser..." << std::endl;
-    auto session = _pool->getSession();
-    std::cout << "Got database session" << std::endl;
-    if (session == nullptr)
-    {
-        std::cout << "Failed to get database session" << std::endl;
-        return -1;
-    }
     try
     {
+        std::cout << "Starting regUser..." << std::endl;
+        auto session = _pool->getSessionGuard();
+        std::cout << "Got database session" << std::endl;
+        if (!session)
+        {
+            std::cout << "Failed to get database session" << std::endl;
+            return -1;
+        }
         std::cout << "Executing reg_user procedure..." << std::endl;
         auto result = session->sql("CALL reg_user(?,?,?,@result)").bind(name).bind(email).bind(password).execute();
         std::cout << "Getting procedure result..." << std::endl;
         auto output = session->sql("SELECT @result").execute();
         auto row = output.fetchOne();
-        _pool->returnSession(session);
         if (!row)
         {
             std::cout << "No result returned from procedure" << std::endl;
@@ -308,7 +309,6 @@ int MySQLMgr::regUser(const std::string &name, const std::string &password, cons
     catch (const mysqlx::Error &error)
     {
         std::cerr << "Failed to execute command:" << error.what() << std::endl;
-        _pool->returnSession(session);
         return -1;
     }
 }
@@ -319,8 +319,8 @@ int MySQLMgr::resetPassword(const std::string &email, const std::string &passwor
     try
     {
         std::cout << "Starting resetPassword..." << std::endl;
-        auto session = _pool->getSession();
-        if (session == nullptr)
+        auto session = _pool->getSessionGuard();
+        if (!session)
         {
             std::cerr << "Failed to get database session" << std::endl;
             return -1;
@@ -342,13 +342,66 @@ int MySQLMgr::resetPassword(const std::string &email, const std::string &passwor
         }
         // 更新密码
         auto result = session->sql("UPDATE wechat.user SET `password`=? where `email`=?").bind(password).bind(email).execute();
-        _pool->returnSession(session);
         return 0;
     }
     catch (const mysqlx::Error &error)
     {
         std::cerr << "Failed to execute command:" << error.what() << std::endl;
         return -1;
+    }
+}
+
+int MySQLMgr::loginAcconut(const std::string &user, const std::string &password) {
+    try {
+        auto session=_pool->getSessionGuard();
+        if (!session) {
+            return -1;
+        }
+        //查询用户是否存在
+        auto existAccount=MySQLMgr::getInstance()->queryUser(user);
+        if (existAccount==false) {
+            std::cerr<<"User is nonexistent"<<std::endl;
+            return -2;
+        }
+        //查询密码是否正确
+        auto result=session->sql("SELECT `password` from wechat.user where `name`=\'?\'").bind(user).execute();
+        auto row=result.fetchOne();
+        std::string reallyPassword=row[0].get<std::string>();
+        if (password!=reallyPassword) {
+            std::cerr<<"Password is error"<<std::endl;
+            return -3;
+        }else{
+            return 0;
+        }
+    } catch (const mysqlx::Error &error) {
+        std::cerr<<"Failed to login by account:"<<error.what()<<std::endl;
+    }
+}
+
+int MySQLMgr::loginEmail(const std::string &email, const std::string &password) {
+    try {
+        auto session=_pool->getSessionGuard();
+        if (!session) {
+            return -1;
+        }
+        //查询用户是否存在
+        auto existEmail=MySQLMgr::getInstance()->queryEmail(email);
+        if (existEmail==false) {
+            std::cerr<<"User is nonexistent"<<std::endl;
+            return -2;
+        }
+        //查询密码是否正确
+        auto result=session->sql("SELECT `password` from wechat.user where `email`=\'?\'").bind(email).execute();
+        auto row=result.fetchOne();
+        std::string reallyPassword=row[0].get<std::string>();
+        if (password!=reallyPassword) {
+            std::cerr<<"Password is error"<<std::endl;
+            return -3;
+        }else{
+            return 0;
+        }
+    } catch (const mysqlx::Error &error) {
+        std::cerr<<"Failed to login by email:"<<error.what()<<std::endl;
     }
 }
 
@@ -363,4 +416,26 @@ MySQLMgr::MySQLMgr()
     auto configMrg = ConfigMgr::getInstance();
     auto _settings = mysqlx::SessionSettings(configMrg["Mysql"]["host"], stoi(configMrg["Mysql"]["port"]), configMrg["Mysql"]["user"], configMrg["Mysql"]["password"], configMrg["Mysql"]["schema"]);
     _pool = std::make_unique<MySQLConnectPool>(_settings, std::thread::hardware_concurrency());
+}
+
+SessionGuard::SessionGuard(std::shared_ptr<mysqlx::Session> session):_session(session) {
+
+}
+
+SessionGuard::~SessionGuard() {
+    if (_session) {
+            MySQLMgr::getInstance()->_pool->returnSession(_session);
+    }
+}
+
+SessionGuard::operator bool() const {
+    return _session != nullptr;
+}
+
+std::shared_ptr<mysqlx::Session> SessionGuard::get() const {
+    return _session;
+}
+
+std::shared_ptr<mysqlx::Session> SessionGuard::operator->() const {
+    return _session;
 }
