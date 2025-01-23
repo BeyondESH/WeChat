@@ -239,6 +239,8 @@ LogicSystem::LogicSystem() {
                 std::cerr << "password is error" << std::endl;
                 root["error"] = ErrorCodes::PasswordError;
                 break;
+            default:
+                root["error"]=ErrorCodes::SUCCESS;
         }
         root["user"] = user;
         root["password"] = password;
@@ -280,6 +282,8 @@ LogicSystem::LogicSystem() {
                 std::cerr << "password is error" << std::endl;
                 root["error"] = ErrorCodes::PasswordError;
                 break;
+            default:
+                root["error"]=ErrorCodes::SUCCESS;
         }
         root["email"] = email;
         root["password"] = password;

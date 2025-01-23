@@ -14,9 +14,6 @@
 #include "QStyle"
 #include <QRegularExpression>//正则表达式
 #include <memory.h>
-#include <iostream>
-#include <mutex>
-#include <thread>
 #include <QByteArray>
 #include <QNetworkReply>
 #include <QMap>

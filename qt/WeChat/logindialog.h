@@ -28,13 +28,9 @@ public:
 
 private slots:
     void on_registerPushButton_clicked();
-
     void on_checkBox_checkStateChanged(const Qt::CheckState &arg1);
-
     void on_loginButton_clicked();
-
     void on_resetPasswordPB_clicked();
-
     void slot_mod_login_finished(ReqId req_id,QString res,ErrorCodes ec);
 signals:
     void registerPBClicked();//注册按钮
@@ -42,6 +38,9 @@ signals:
 
 private:
     Ui::LoginDialog *ui;
+    void showTip(QString tip,bool isOK);//显示提示
+    void initHttpHandlers();//初始化http请求处理函数
+    QMap<ReqId,std::function<void(const QJsonObject& jsonObj)>> _handlers;
 };
 
 #endif // LOGINDIALOG_H

@@ -9,6 +9,7 @@ LoginDialog::LoginDialog(QWidget *parent)
 {
     ui->setupUi(this);
     polish();//刷新qss
+    initHttpHandlers();
     connect(HttpMgr::getInstance().get(),&HttpMgr::signal_mod_login_finished,this,&LoginDialog::slot_mod_login_finished);
 }
 
@@ -102,5 +103,77 @@ void LoginDialog::on_resetPasswordPB_clicked()
 
 void LoginDialog::slot_mod_login_finished(ReqId req_id,QString res,ErrorCodes ec){
     qDebug()<<"login";
+    if(ec!=ErrorCodes::SUCCESS){
+        showTip(tr("网络连接错误"),false);
+        return;
+    }
+    //解析json字符串
+    QByteArray byte=res.toUtf8();
+    QJsonDocument jsonDoc=QJsonDocument::fromJson(byte);
+    //json解析为空
+    if(jsonDoc.isNull()){
+        this->showTip(tr("Json解析失败"),false);
+        return;
+    }
+    //json解析错误
+    if(!jsonDoc.isObject()){
+        this->showTip(tr("Json解析失败"),false);
+        return;
+    }
+    //json解析成功
+    QJsonObject jsonObj=jsonDoc.object();
+    _handlers[req_id](jsonObj);
+    return;
+}
+
+void LoginDialog::showTip(QString tip, bool isOK)
+{
+    ui->errorlabel->clear();
+    if(isOK==true){
+        ui->errorlabel->setProperty("state","normal");
+    }else{
+        ui->errorlabel->setProperty("state","error");
+    }
+    repolish(ui->errorlabel);
+    ui->errorlabel->setText(tip);
+}
+
+void LoginDialog::initHttpHandlers()
+{
+    _handlers.insert(ReqId::ID_LOGIN,[this](const QJsonObject& jsonObj){
+        const int error=jsonObj["error"].toInt();
+        switch(error){
+        case ErrorCodes::PasswordError:
+            qDebug()<<"密码错误";
+            showTip(tr("密码错误"),false);
+            return;
+            break;
+        case ErrorCodes::ERR_MYSQL:
+            qDebug()<<"mysql连接错误";
+            showTip(tr("服务器连接错误"),false);
+            return;
+            break;
+        case ErrorCodes::ERR_NETWORK:
+            qDebug()<<"网络错误";
+            showTip(tr("网络连接错误"),false);
+            return;
+            break;
+        case ErrorCodes::UserNotExist:
+            qDebug()<<"用户不存在";
+            showTip(tr("用户不存在"),false);
+            return;
+            break;
+        case ErrorCodes::EmailNotExist:
+            qDebug()<<"邮箱不存在";
+            showTip(tr("邮箱不存在"),false);
+            return;
+            break;
+        case ErrorCodes::SUCCESS:
+            qDebug()<<"登录成功";
+            showTip(tr("登录成功"),true);
+            return;
+            break;
+        }
+    });
 }
 
