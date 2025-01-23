@@ -9,6 +9,7 @@ LoginDialog::LoginDialog(QWidget *parent)
 {
     ui->setupUi(this);
     polish();//刷新qss
+    connect(HttpMgr::getInstance().get(),&HttpMgr::signal_mod_login_finished,this,&LoginDialog::slot_mod_login_finished);
 }
 
 LoginDialog::~LoginDialog()
@@ -83,6 +84,7 @@ void LoginDialog::on_loginButton_clicked()
     }else if(matchEmail){//邮箱登录
         jsonObj["email"]=user;
         //qDebug()<<"邮箱登录";
+        HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/email_login"),jsonObj,ReqId::ID_LOGIN,Modules::LOGINMOD);
     }else{
         ui->accountNodeLabel->setText("账号或邮箱格式错误");
         ui->accountNodeLabel->setProperty("state","error");
@@ -96,5 +98,9 @@ void LoginDialog::on_loginButton_clicked()
 void LoginDialog::on_resetPasswordPB_clicked()
 {
     emit resetPasswordPBClicked();
+}
+
+void LoginDialog::slot_mod_login_finished(ReqId req_id,QString res,ErrorCodes ec){
+    qDebug()<<"login";
 }
 

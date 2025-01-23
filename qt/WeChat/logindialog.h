@@ -10,7 +10,7 @@
  * @history
  *****************************************************************************/
 #include <QDialog>
-
+#include "global.h"
 namespace Ui {
 class LoginDialog;
 }
@@ -34,6 +34,8 @@ private slots:
     void on_loginButton_clicked();
 
     void on_resetPasswordPB_clicked();
+
+    void slot_mod_login_finished(ReqId req_id,QString res,ErrorCodes ec);
 signals:
     void registerPBClicked();//注册按钮
     void resetPasswordPBClicked();//忘记密码
