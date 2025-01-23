@@ -364,7 +364,7 @@ int MySQLMgr::loginAcconut(const std::string &user, const std::string &password)
             return -2;
         }
         //查询密码是否正确
-        auto result=session->sql("SELECT `password` from wechat.user where `name`=\'?\'").bind(user).execute();
+        auto result=session->sql("SELECT `password` from wechat.user where `name`=?").bind(user).execute();
         auto row=result.fetchOne();
         std::string reallyPassword=row[0].get<std::string>();
         if (password!=reallyPassword) {
@@ -391,7 +391,7 @@ int MySQLMgr::loginEmail(const std::string &email, const std::string &password) 
             return -2;
         }
         //查询密码是否正确
-        auto result=session->sql("SELECT `password` from wechat.user where `email`=\'?\'").bind(email).execute();
+        auto result=session->sql("SELECT `password` from wechat.user where `email`=?").bind(email).execute();
         auto row=result.fetchOne();
         std::string reallyPassword=row[0].get<std::string>();
         if (password!=reallyPassword) {
