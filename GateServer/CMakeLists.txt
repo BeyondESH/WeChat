@@ -32,12 +32,14 @@ add_executable(GateServer main.cpp
         Test.hpp
         MySQLMgr.h
         MySQLMgr.cpp
-        message.grpc.pb.cc
-        message.grpc.pb.h
-        message.pb.cc
-        message.pb.h
         Crypto.cpp
         Crypto.h
+        message.pb.h
+        message.pb.cc
+        message.grpc.pb.h
+        message.grpc.pb.cc
+        StatusGrpcClient.cpp
+        StatusGrpcClient.h
 )
 
 # absl库

@@ -62,6 +62,13 @@ enum ErrorCodes{
     PasswordSame=1012,//新旧密码相同
 };
 
+struct ServerInfo{
+    QString host;
+    QString port;
+    QString token;
+    int uid;
+};
+
 
 extern QString gate_url_prefix;//网关url前缀
 

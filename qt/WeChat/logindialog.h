@@ -35,12 +35,14 @@ private slots:
 signals:
     void registerPBClicked();//注册按钮
     void resetPasswordPBClicked();//忘记密码
-
+    void connect_tcp(ServerInfo info);//tcp连接
 private:
     Ui::LoginDialog *ui;
     void showTip(QString tip,bool isOK);//显示提示
     void initHttpHandlers();//初始化http请求处理函数
     QMap<ReqId,std::function<void(const QJsonObject& jsonObj)>> _handlers;
+    int _uid;
+    QString token;
 };
 
 #endif // LOGINDIALOG_H

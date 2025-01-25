@@ -171,9 +171,13 @@ void LoginDialog::initHttpHandlers()
         case ErrorCodes::SUCCESS:
             qDebug()<<"登录成功";
             showTip(tr("登录成功"),true);
-            return;
-            break;
         }
+
+        ServerInfo server;
+        server.host=jsonObj["host"].toString();
+        server.port=jsonObj["port"].toString();
+        server.token=jsonObj["token"].toString();
+        server.uid=jsonObj["uid"].toInt();
     });
 }
 
