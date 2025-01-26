@@ -40,6 +40,7 @@ add_executable(GateServer main.cpp
         message.grpc.pb.cc
         StatusGrpcClient.cpp
         StatusGrpcClient.h
+        Defer.hpp
 )
 
 # absl库

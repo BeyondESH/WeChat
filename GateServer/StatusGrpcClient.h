@@ -33,6 +33,11 @@ friend class Singleton<StatusGrpcClient>;
 public:
 
 private:
+    StatusGrpcClient();
+    StatusGrpcClient(const StatusGrpcClient&)=delete;
+    StatusGrpcClient&operator=(const StatusGrpcClient&)=delete;
+    std::unique_ptr<StatusConnectPool> _pool;
+    message::GetChatServerRsp GetChatServer(const int &uid);
 };
 
 

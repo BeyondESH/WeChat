@@ -52,3 +52,10 @@ void StatusConnectPool::close() {
     _isStop=true;
     _cv.notify_all();
 }
+
+StatusGrpcClient::StatusGrpcClient() {
+    auto &configMgr=ConfigMgr::getInstance();
+    std::string host=configMgr["VerifyServer"]["host"];
+    std::string port=configMgr["VerifyServer"]["port"];
+    _pool=std::make_unique<StatusConnectPool>(host,port,std::thread::hardware_concurrency());
+}
