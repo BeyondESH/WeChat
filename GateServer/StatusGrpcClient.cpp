@@ -3,7 +3,7 @@
 //
 
 #include "StatusGrpcClient.h"
-
+#include "Defer.hpp"
 #include <grpcpp/channel.h>
 #include <grpcpp/create_channel.h>
 
@@ -55,7 +55,34 @@ void StatusConnectPool::close() {
 
 StatusGrpcClient::StatusGrpcClient() {
     auto &configMgr=ConfigMgr::getInstance();
-    std::string host=configMgr["VerifyServer"]["host"];
-    std::string port=configMgr["VerifyServer"]["port"];
-    _pool=std::make_unique<StatusConnectPool>(host,port,std::thread::hardware_concurrency());
+    std::string host=configMgr["StatusServer"]["host"];
+    std::string port=configMgr["StatusServer"]["port"];
+    _pool=std::unique_ptr<StatusConnectPool>(new StatusConnectPool(host,port,std::thread::hardware_concurrency()));
+}
+
+message::GetChatServerRsp StatusGrpcClient::getChatServer(const int &uid) {
+    try {
+        grpc::ClientContext context;
+        message::GetChatServerRsp respond;
+        message::GetChatServerReq request;
+        auto stub=_pool->getStub();
+        if (stub==nullptr) {
+            return respond;
+        }
+        Defer defer([&]() {
+            _pool->returnStub(std::move(stub));
+        });
+        grpc::Status status=stub->GetChatServer(&context,request,&respond);
+        if (status.ok()) {
+            return respond;
+        }else {
+            respond.set_error(RPC_FAILED);
+            return respond;
+        }
+    } catch (const std::exception &e) {
+        std::cerr<<e.what()<<std::endl;
+        message::GetChatServerRsp respond;
+        respond.set_error(RPC_FAILED);
+        return respond;
+    }
 }

@@ -13,9 +13,10 @@ class StatusGrpcClient;
 
 class StatusConnectPool {
     friend class StatusGrpcClient;
+public:
+    ~StatusConnectPool();
 private:
     StatusConnectPool(std::string &host,std::string &port,int poolSize);
-    ~StatusConnectPool();
     std::atomic_bool _isStop;
     std::mutex _mutex;
     std::condition_variable _cv;
@@ -37,7 +38,7 @@ private:
     StatusGrpcClient(const StatusGrpcClient&)=delete;
     StatusGrpcClient&operator=(const StatusGrpcClient&)=delete;
     std::unique_ptr<StatusConnectPool> _pool;
-    message::GetChatServerRsp GetChatServer(const int &uid);
+    message::GetChatServerRsp getChatServer(const int &uid);
 };
 
 
