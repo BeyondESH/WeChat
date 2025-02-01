@@ -1,0 +1,3 @@
+D:/Gitee/wechat/StatusServer/cmake-build-debug/CMakeFiles/StatusServer.dir
+D:/Gitee/wechat/StatusServer/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Gitee/wechat/StatusServer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

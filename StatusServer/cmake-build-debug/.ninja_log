@@ -1,0 +1,8 @@
+# ninja log v6
+2	382	7601340295107032	build.ninja	b0da39c057c6c19c
+4	108	7601329188817356	CMakeFiles/StatusServer.dir/main.cpp.obj.ddi	44a9ed97f9614e87
+108	173	7601329189858192	CMakeFiles/StatusServer.dir/CXX.dd	a27d19a57a6be4b2
+174	645	7601329190515669	CMakeFiles/StatusServer.dir/main.cpp.obj	7b42ab62b4b46d3b
+645	1168	7601329195231408	D:/Gitee/wechat/StatusServer/bin/StatusServer.exe	897a046824a3e0d5
+108	173	7601329189858192	D:/Gitee/wechat/StatusServer/cmake-build-debug/CMakeFiles/StatusServer.dir/CXXModules.json	a27d19a57a6be4b2
+108	173	7601329189858192	CMakeFiles/StatusServer.dir/main.cpp.obj.modmap	a27d19a57a6be4b2
