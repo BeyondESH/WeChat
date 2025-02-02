@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "CMakeFiles\\StatusServer.dir\\message.grpc.pb.cc.obj",
+            "outputs": [
+                "D:\\Gitee\\wechat\\StatusServer\\cmake-build-debug\\vc140.pdb",
+                "CMakeFiles\\StatusServer.dir\\message.grpc.pb.cc.obj.ddi"
+            ],
+            "requires": []
+        }
+    ]
+}

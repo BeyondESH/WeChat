@@ -29,6 +29,8 @@ add_executable(StatusServer main.cpp
         RedisMgr.h
         RedisMgr.cpp
         singleton.hpp
+        StatusServiceImpl.cpp
+        StatusServiceImpl.h
 )
 # absl库
 find_package(absl CONFIG REQUIRED)

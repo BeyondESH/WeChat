@@ -375,6 +375,7 @@ int MySQLMgr::loginAcconut(const std::string &user, const std::string &password)
         }
     } catch (const mysqlx::Error &error) {
         std::cerr<<"Failed to login by account:"<<error.what()<<std::endl;
+        return -1;
     }
 }
 
@@ -402,6 +403,7 @@ int MySQLMgr::loginEmail(const std::string &email, const std::string &password) 
         }
     } catch (const mysqlx::Error &error) {
         std::cerr<<"Failed to login by email:"<<error.what()<<std::endl;
+        return -1;
     }
 }
 
