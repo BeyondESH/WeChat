@@ -28,13 +28,16 @@ StatusServiceImpl::StatusServiceImpl(){
 
 grpc::Status StatusServiceImpl::GetChatServer(grpc::ServerContext *context, const message::GetChatServerReq *request,
     message::GetChatServerRsp *response) {
+    std::cout<<"Run GetChatServer..."<<std::endl;
     auto chatServer=choseChatServer();
     response->set_host(chatServer.host);
     response->set_port(chatServer.port);
     response->set_error(ErrorCodes::SUCCESS);
+    std::cout<<"GetChatServer success"<<std::endl;
     response->set_token(generateUUID());
+    std::cout<<"Token is:"<<response->token()<<std::endl;
     insertToken(request->uid(),response->token());
-    return Service::GetChatServer(context, request, response);
+    return grpc::Status::OK;
 }
 
 ChatServer StatusServiceImpl::choseChatServer() {

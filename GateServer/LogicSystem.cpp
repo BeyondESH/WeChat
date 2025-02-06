@@ -7,6 +7,7 @@
 #include "MySQLMgr.h"
 #include "RedisMgr.h"
 #include "Crypto.h"
+#include "StatusGrpcClient.h"
 using json = nlohmann::json;
 
 bool LogicSystem::handleGet(std::string path, std::shared_ptr<HttpConnection> connection) {
@@ -240,8 +241,21 @@ LogicSystem::LogicSystem() {
                 root["error"] = ErrorCodes::PasswordError;
                 break;
             default:
-                root["error"]=ErrorCodes::SUCCESS;
+                root["error"] = ErrorCodes::SUCCESS;
         }
+
+        if (root["error"] == ErrorCodes::SUCCESS) {
+            const int uid = MySQLMgr::getInstance()->getUID(1, user); //获取uid
+            root["uid"] = uid;
+            //查询StatusServer找到合适的连接
+            auto respond = StatusGrpcClient::getInstance()->getChatServer(uid);
+            if (respond.error() != ErrorCodes::SUCCESS) {
+                root["error"] = respond.error();
+            } else {
+                root["token"] = respond.token();
+            }
+        }
+
         root["user"] = user;
         root["password"] = password;
         auto json_str = root.dump(4);
@@ -283,8 +297,21 @@ LogicSystem::LogicSystem() {
                 root["error"] = ErrorCodes::PasswordError;
                 break;
             default:
-                root["error"]=ErrorCodes::SUCCESS;
+                root["error"] = ErrorCodes::SUCCESS;
         }
+
+        if (root["error"] == ErrorCodes::SUCCESS) {
+            const int uid = MySQLMgr::getInstance()->getUID(0, email); //获取uid
+            root["uid"] = uid;
+            //查询StatusServer找到合适的连接
+            auto respond = StatusGrpcClient::getInstance()->getChatServer(uid);
+            if (respond.error() != ErrorCodes::SUCCESS) {
+                root["error"] = respond.error();
+            } else {
+                root["token"] = respond.token();
+            }
+        }
+
         root["email"] = email;
         root["password"] = password;
         auto json_str = root.dump(4);

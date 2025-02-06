@@ -47,6 +47,7 @@ void LoginDialog::on_checkBox_checkStateChanged(const Qt::CheckState &arg1)
 
 void LoginDialog::on_loginButton_clicked()
 {
+    ui->errorlabel->clear();
     ui->passwordNodeLabel->clear();
     ui->accountNodeLabel->clear();
     if(ui->accountLineEdit->text().isEmpty()){
@@ -168,6 +169,11 @@ void LoginDialog::initHttpHandlers()
             showTip(tr("邮箱不存在"),false);
             return;
             break;
+        case ErrorCodes::RPC_FAILED:
+            qDebug()<<"RPC调用失败";
+            showTip(tr("RPC调用失败"),false);
+            return;
+            break;
         case ErrorCodes::SUCCESS:
             qDebug()<<"登录成功";
             showTip(tr("登录成功"),true);
@@ -177,7 +183,9 @@ void LoginDialog::initHttpHandlers()
         server.host=jsonObj["host"].toString();
         server.port=jsonObj["port"].toString();
         server.token=jsonObj["token"].toString();
+        qDebug()<<"token:"<<server.token;
         server.uid=jsonObj["uid"].toInt();
+        qDebug()<<"uid:"<<server.uid;
     });
 }
 

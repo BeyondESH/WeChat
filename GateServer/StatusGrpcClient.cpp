@@ -68,6 +68,8 @@ message::GetChatServerRsp StatusGrpcClient::getChatServer(const int &uid) {
         request.set_uid(uid);
         auto stub=_pool->getStub();
         if (stub==nullptr) {
+            std::cout<<"Failed to get stub"<<std::endl;
+            respond.set_error(RPC_FAILED);
             return respond;
         }
         Defer defer([&]() {
@@ -77,6 +79,7 @@ message::GetChatServerRsp StatusGrpcClient::getChatServer(const int &uid) {
         if (status.ok()) {
             return respond;
         }else {
+            std::cout<<"Failed to get chat server:"<<status.error_message()<<std::endl;
             respond.set_error(RPC_FAILED);
             return respond;
         }
