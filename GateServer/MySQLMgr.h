@@ -51,7 +51,7 @@ public:
     int resetPassword(const std::string &email, const std::string &password); // 重置密码 -1连接错误 -2邮箱不存在 -3其他错误
     int loginAcconut(const std::string &user, const std::string &password);   // 账号登录 -1连接错误 -2用户不存在 -3密码错误
     int loginEmail(const std::string &email, const std::string &password);    // 邮箱登录 -1连接错误 -2用户不存在 -3密码错误
-
+    int getUID(const int mod,const std::string &str); // 获取用户ID -1连接错误 -2用户不存在, mod=0表示邮箱 mod=1表示用户名
     void close();
 
 private:

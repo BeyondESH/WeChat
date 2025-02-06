@@ -375,6 +375,7 @@ int MySQLMgr::loginAcconut(const std::string &user, const std::string &password)
         }
     } catch (const mysqlx::Error &error) {
         std::cerr<<"Failed to login by account:"<<error.what()<<std::endl;
+        return -1;
     }
 }
 
@@ -402,6 +403,36 @@ int MySQLMgr::loginEmail(const std::string &email, const std::string &password) 
         }
     } catch (const mysqlx::Error &error) {
         std::cerr<<"Failed to login by email:"<<error.what()<<std::endl;
+        return -1;
+    }
+}
+
+int MySQLMgr::getUID(const int mod,const std::string &str) {
+    try {
+        auto session=_pool->getSessionGuard();
+        if (!session) {
+            return -1;
+        }
+        if (mod==0) {
+            auto result=session->sql("SELECT `id` from wechat.user where `email`=?").bind(str).execute();
+            auto row=result.fetchOne();
+            if (!row) {
+                return -2;
+            }else {
+                return row[0].get<int>();
+            }
+        }else {
+            auto result=session->sql("SELECT `id` from wechat.user where `name`=?").bind(str).execute();
+            auto row=result.fetchOne();
+            if (!row) {
+                return -2;
+            }else {
+                return row[0].get<int>();
+            }
+        }
+    } catch (const mysqlx::Error &error) {
+        std::cerr<<"Failed to get UID:"<<error.what()<<std::endl;
+        return -1;
     }
 }
 

@@ -79,6 +79,22 @@ public:
             return;
         }
     }
+
+    static void testGetUID(const int mod,const std::string &str) {
+        auto mysqlMgr=MySQLMgr::getInstance();
+        int result=mysqlMgr->getUID(mod,str);
+        std::cout<<result<<std::endl;
+        switch (result) {
+            case -1:
+                std::cerr<<"mysql connection error"<<std::endl;
+                break;
+            case -2:
+                std::cerr<<"user is nonexistent"<<std::endl;
+                break;
+            default:
+                std::cout<<"user id is:"<<result<<std::endl;
+        }
+    }
 };
 
 
