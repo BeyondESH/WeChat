@@ -11,24 +11,43 @@ std::string generateUUID() {
     return uuid_string;
 }
 
-StatusServiceImpl::StatusServiceImpl():index(0) {
+StatusServiceImpl::StatusServiceImpl(){
     auto &configMgr=ConfigMgr::getInstance();
     ChatServer chatServer;
-    chatServer.host=configMgr["ChatServer1"]["host"];
-    chatServer.port=configMgr["ChatServer1"]["port"];
-    _chatServers.emplace_back(chatServer);
-    chatServer.host=configMgr["ChatServer2"]["host"];
-    chatServer.port=configMgr["ChatServer2"]["port"];
-    _chatServers.emplace_back(chatServer);
+    std::string numberServer=configMgr["ChatServer"]["number"];
+    int numberServer_int=stoi(numberServer);
+    for (int i = 0; i <numberServer_int; ++i) {
+        std::string serverName="ChatServer"+std::to_string(i);
+        chatServer.host=configMgr[serverName]["host"];
+        chatServer.port=configMgr[serverName]["port"];
+        chatServer.name=configMgr[serverName]["name"];
+        _chatServers.emplace(chatServer.name,chatServer);
+    }
+    _freeServer=_chatServers.begin()->second;
 }
 
 grpc::Status StatusServiceImpl::GetChatServer(grpc::ServerContext *context, const message::GetChatServerReq *request,
     message::GetChatServerRsp *response) {
-    index=(index++)%_chatServers.size();
-    auto chatServer=_chatServers[index];
+    auto chatServer=choseChatServer();
     response->set_host(chatServer.host);
     response->set_port(chatServer.port);
     response->set_error(ErrorCodes::SUCCESS);
     response->set_token(generateUUID());
+    insertToken(request->uid(),response->token());
     return Service::GetChatServer(context, request, response);
+}
+
+ChatServer StatusServiceImpl::choseChatServer() {
+    std::lock_guard<std::mutex> lock(_serverMutex);
+    for (auto &i:_chatServers) {
+        if (i.second.connectCount<_freeServer.connectCount) {
+            _freeServer=i.second;
+        }
+    }
+    return _freeServer;
+}
+
+void StatusServiceImpl::insertToken(int uid, std::string token) {
+    std::lock_guard<std::mutex> lock(_tokenMutex);
+    _tokens.emplace(uid,token);
 }

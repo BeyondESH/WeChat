@@ -14,7 +14,7 @@ void runServer() {
     builder.AddListeningPort(server_address,grpc::InsecureServerCredentials());
     builder.RegisterService(&service);
     std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
-    std::cout << "Server listening on..." << server_address << std::endl;
+    std::cout << "Server listening on:" << server_address << std::endl;
     boost::asio::io_context io_context;
     boost::asio::signal_set signals(io_context,SIGINT,SIGTERM);
     signals.async_wait([&server](const boost::system::error_code &error,int signal_number) {

@@ -65,6 +65,7 @@ message::GetChatServerRsp StatusGrpcClient::getChatServer(const int &uid) {
         grpc::ClientContext context;
         message::GetChatServerRsp respond;
         message::GetChatServerReq request;
+        request.set_uid(uid);
         auto stub=_pool->getStub();
         if (stub==nullptr) {
             return respond;
