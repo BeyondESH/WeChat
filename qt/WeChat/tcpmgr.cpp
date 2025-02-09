@@ -4,7 +4,7 @@ TCPMgr::TCPMgr():_isPending(false)
 {
     connect(&_socket,&QTcpSocket::connected,[&](){
         qDebug()<<"连接成功";
-        emit signal_tcp_connected(true);
+        emit signal_connected_success(true);
     });
 
     connect(&_socket,&QTcpSocket::readyRead,[&](){
@@ -67,17 +67,58 @@ TCPMgr::TCPMgr():_isPending(false)
     connect(&_socket,&QTcpSocket::disconnected,[](){
         qDebug()<<"与客户端断开连接";
     });
+
+    QObject::connect(this, &TCPMgr::signal_send_data, this, &TCPMgr::slot_send_data);
+
     initHandlers();
 }
 
 void TCPMgr::initHandlers()
 {
     _handlers.insert(ReqId::ID_CHAT_LOGIN_RSP,[this](ReqId id,int len,QByteArray data){
-
+        QJsonDocument jsonDoc=QJsonDocument::fromJson(data);
+        if(jsonDoc.isNull()){
+            qDebug()<<tr("json解析失败");
+            return;
+        }
+        QJsonObject jsonObj=jsonDoc.object();
+        if(!jsonObj.contains("error")){
+            qDebug()<<tr("登录失败,错误码:")<<ErrorCodes::ERROR_JSON;
+            emit signal_login_failed(ErrorCodes::ERROR_JSON);
+            return;
+        }
+        int error=jsonObj["error"].toInt();
+        if(error!=ErrorCodes::SUCCESS){
+            qDebug()<<tr("登录失败,错误码:")<<error;
+            emit signal_login_failed(error);
+            return;
+        }
+        emit signal_switch_chatDialog();
     });
 }
 
 void TCPMgr::handleMsg(ReqId id, int len, QByteArray data)
 {
     _handlers[id](id,len,data);
+}
+
+void TCPMgr::slots_tcp_connected(ServerInfo info)
+{
+    qDebug()<<"连接到服务器";
+    _host=info.host;
+    _port=info.port.toUInt();
+    _socket.connectToHost(_host,_port);
+}
+
+void TCPMgr::slot_send_data(ReqId reqId,QString string)
+{
+    quint16 id=static_cast<quint16>(reqId);
+    QByteArray body=string.toUtf8();
+    quint16 len=static_cast<quint16>(body.size());
+    QByteArray data;
+    QDataStream stream(&data,QIODevice::WriteOnly);
+    stream.setByteOrder(QDataStream::BigEndian);
+    stream<<id<<len<<body;
+    data.append(body);
+    _socket.write(data);
 }
