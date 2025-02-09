@@ -35,6 +35,8 @@ enum ReqId{
     ID_REG_USER=1002,//注册用户
     ID_RESET_PASSWORD=1003,//重置密码
     ID_LOGIN=1004,//登录
+    ID_CHAT_LOGIN=1005,//聊天登录
+    ID_CHAT_LOGIN_RSP=1006,//聊天登录回包
 };
 
 //功能模块id

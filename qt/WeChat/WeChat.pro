@@ -16,6 +16,7 @@ SOURCES += \
     mainwindow.cpp \
     registerdialog.cpp \
     resetdialog.cpp \
+    tcpmgr.cpp \
     testwindow.cpp
 
 HEADERS += \
@@ -26,6 +27,7 @@ HEADERS += \
     registerdialog.h \
     resetdialog.h \
     singleton.hpp \
+    tcpmgr.h \
     testwindow.h
 
 FORMS += \
