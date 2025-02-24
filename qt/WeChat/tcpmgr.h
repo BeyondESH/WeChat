@@ -34,7 +34,7 @@ signals:
     void signal_switch_chatDialog();
 public slots:
     void slots_tcp_connected(ServerInfo info);
-    void slot_send_data(ReqId id,QString string);
+    void slot_send_data(ReqId reqId,QString string);
 };
 
 #endif // TCPMGR_H

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Gitee\wechat\StatusServer\build\CMakeFiles\fcb7ed11c03e0c43107f394db2cec887\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{3BBB8AD3-5CDF-371B-BD8B-C6188CFCE653}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

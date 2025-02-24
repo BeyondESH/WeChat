@@ -1,0 +1,3 @@
+D:/Gitee/wechat/StatusServer/build/CMakeFiles/StatusServer.dir
+D:/Gitee/wechat/StatusServer/build/CMakeFiles/ALL_BUILD.dir
+D:/Gitee/wechat/StatusServer/build/CMakeFiles/ZERO_CHECK.dir
