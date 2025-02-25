@@ -1,5 +1,10 @@
 #include "tcpmgr.h"
 
+TCPMgr::~TCPMgr()
+{
+
+}
+
 TCPMgr::TCPMgr():_isPending(false)
 {
     connect(&_socket,&QTcpSocket::connected,[&](){
