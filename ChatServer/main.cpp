@@ -1,25 +1,28 @@
 #include <iostream>
+#include "LogicSystem.h"
+#include "AsioIOcontextPool.h"
+#include <thread>
+#include <csignal>
+#include "ConfigMgr.hpp"
+#include "CServer.h"
 
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+bool isStop=false;
 int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the
-    // <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
-
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code.
-        // We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/>
-        // breakpoint for you, but you can always add more by pressing
-        // <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
+    try {
+        auto pool=AsioIOcontextPool::getInstance();
+        boost::asio::io_context io_context;
+        boost::asio::signal_set signals(io_context,SIGINT,SIGTERM);
+        signals.async_wait([&io_context,pool](const boost::system::error_code&, int) {
+            io_context.stop();
+            pool->stop();
+        });
+        auto &configMgr=ConfigMgr::getInstance();
+        unsigned short port = std::stoul(configMgr["ChatServer1"]["port"]);
+        CServer server(io_context,port);
+        server.start();
+        io_context.run();
+    } catch (const std::exception &e) {
+        std::cerr<<"main error:"<<e.what()<<std::endl;
     }
-
     return 0;
 }
-
-// TIP See CLion help at <a
-// href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>.
-//  Also, you can try interactive lessons for CLion by selecting
-//  'Help | Learn IDE Features' from the main menu.

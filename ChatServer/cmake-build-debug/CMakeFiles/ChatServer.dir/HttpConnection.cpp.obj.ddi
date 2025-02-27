@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "CMakeFiles\\ChatServer.dir\\HttpConnection.cpp.obj",
+            "outputs": [
+                "D:\\Gitee\\wechat\\ChatServer\\cmake-build-debug\\vc140.pdb",
+                "CMakeFiles\\ChatServer.dir\\HttpConnection.cpp.obj.ddi"
+            ],
+            "requires": []
+        }
+    ]
+}

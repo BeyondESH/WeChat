@@ -69,7 +69,227 @@ build CMakeFiles\ChatServer.dir\main.cpp.obj: CXX_COMPILER__ChatServer_scanned_D
   TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
   dyndep = CMakeFiles/ChatServer.dir/CXX.dd
 
-build CMakeFiles\ChatServer.dir\CXX.dd | D$:\Gitee\wechat\ChatServer\cmake-build-debug\CMakeFiles\ChatServer.dir\CXXModules.json CMakeFiles\ChatServer.dir\main.cpp.obj.modmap: CXX_DYNDEP__ChatServer_Debug CMakeFiles\ChatServer.dir\main.cpp.obj.ddi | D$:\Gitee\wechat\ChatServer\cmake-build-debug\CMakeFiles\ChatServer.dir\CXXDependInfo.json
+build CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\AsioIOcontextPool.cpp || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\AsioIOcontextPool.cpp | CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\Crypto.cpp.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\Crypto.cpp || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\Crypto.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\Crypto.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\Crypto.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\Crypto.cpp.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\Crypto.cpp.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\Crypto.cpp | CMakeFiles\ChatServer.dir\Crypto.cpp.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\Crypto.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\CServer.cpp.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\CServer.cpp || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\CServer.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\CServer.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\CServer.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\CServer.cpp.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\CServer.cpp.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\CServer.cpp | CMakeFiles\ChatServer.dir\CServer.cpp.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\CServer.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\HttpConnection.cpp || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\HttpConnection.cpp | CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\LogicSystem.cpp || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\LogicSystem.cpp | CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\MySQLMgr.cpp || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\MySQLMgr.cpp | CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\RedisMgr.cpp || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\RedisMgr.cpp | CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\StatusGrpcClient.cpp || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\StatusGrpcClient.cpp | CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\VerifyGrpcClient.cpp || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\VerifyGrpcClient.cpp | CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\message.pb.cc.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\message.pb.cc || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\message.pb.cc.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\message.pb.cc.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\message.pb.cc.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\message.pb.cc.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\message.pb.cc.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\message.pb.cc | CMakeFiles\ChatServer.dir\message.pb.cc.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\message.pb.cc.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj.ddi: CXX_SCAN__ChatServer_Debug D$:\Gitee\wechat\ChatServer\message.grpc.pb.cc || cmake_object_order_depends_target_ChatServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj.ddi.i
+
+build CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj: CXX_COMPILER__ChatServer_scanned_Debug D$:\Gitee\wechat\ChatServer\message.grpc.pb.cc | CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj.modmap || cmake_object_order_depends_target_ChatServer CMakeFiles\ChatServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\ChatServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\ChatServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\ChatServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\ChatServer\bin\ChatServer.pdb
+  dyndep = CMakeFiles/ChatServer.dir/CXX.dd
+
+build CMakeFiles\ChatServer.dir\CXX.dd | D$:\Gitee\wechat\ChatServer\cmake-build-debug\CMakeFiles\ChatServer.dir\CXXModules.json CMakeFiles\ChatServer.dir\main.cpp.obj.modmap CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj.modmap CMakeFiles\ChatServer.dir\Crypto.cpp.obj.modmap CMakeFiles\ChatServer.dir\CServer.cpp.obj.modmap CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj.modmap CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj.modmap CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj.modmap CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj.modmap CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj.modmap CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj.modmap CMakeFiles\ChatServer.dir\message.pb.cc.obj.modmap CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj.modmap: CXX_DYNDEP__ChatServer_Debug CMakeFiles\ChatServer.dir\main.cpp.obj.ddi CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj.ddi CMakeFiles\ChatServer.dir\Crypto.cpp.obj.ddi CMakeFiles\ChatServer.dir\CServer.cpp.obj.ddi CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj.ddi CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj.ddi CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj.ddi CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj.ddi CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj.ddi CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj.ddi CMakeFiles\ChatServer.dir\message.pb.cc.obj.ddi CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj.ddi | D$:\Gitee\wechat\ChatServer\cmake-build-debug\CMakeFiles\ChatServer.dir\CXXDependInfo.json
 
 
 # =============================================================================
@@ -79,10 +299,10 @@ build CMakeFiles\ChatServer.dir\CXX.dd | D$:\Gitee\wechat\ChatServer\cmake-build
 #############################################
 # Link the executable D:\Gitee\wechat\ChatServer\bin\ChatServer.exe
 
-build D$:\Gitee\wechat\ChatServer\bin\ChatServer.exe: CXX_EXECUTABLE_LINKER__ChatServer_Debug CMakeFiles\ChatServer.dir\main.cpp.obj | D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotocd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobufd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobuf-lited.lib D$:\C++library\vcpkg\installed\x64-windows\lib\libssl.lib D$:\C++library\vcpkg\installed\x64-windows\lib\libcrypto.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\gpr.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++_alts.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_system-vc143-mt-gd-x64-1_86.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc143-mt-gd-x64-1_86.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\redis++.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\mysqlcppconnx.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_json_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_textformat_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mini_descriptor_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_wire_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\utf8_range.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_message_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_base_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mem_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\re2.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_internal.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_marshalling.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_reflection.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_config.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_program_name.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_private_handle_accessor.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag_internal.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\zlibd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\cares.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\address_sorting.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\hiredisd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\abseil_dll.lib
+build D$:\Gitee\wechat\ChatServer\bin\ChatServer.exe: CXX_EXECUTABLE_LINKER__ChatServer_Debug CMakeFiles\ChatServer.dir\main.cpp.obj CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj CMakeFiles\ChatServer.dir\Crypto.cpp.obj CMakeFiles\ChatServer.dir\CServer.cpp.obj CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj CMakeFiles\ChatServer.dir\message.pb.cc.obj CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj | D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotocd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobufd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobuf-lited.lib D$:\C++library\vcpkg\installed\x64-windows\lib\libssl.lib D$:\C++library\vcpkg\installed\x64-windows\lib\libcrypto.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\gpr.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++_alts.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_system-vc143-mt-gd-x64-1_86.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc143-mt-gd-x64-1_86.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\redis++.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\mysqlcppconnx.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_json_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_textformat_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mini_descriptor_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_wire_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\utf8_range.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_message_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_base_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mem_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\re2.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_internal.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_marshalling.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_reflection.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_config.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_program_name.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_private_handle_accessor.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag_internal.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\zlibd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\cares.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\address_sorting.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\abseil_dll.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\hiredisd.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
-  LINK_LIBRARIES = D:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotocd.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobufd.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobuf-lited.lib  D:\C++library\vcpkg\installed\x64-windows\lib\libssl.lib  D:\C++library\vcpkg\installed\x64-windows\lib\libcrypto.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\gpr.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++_alts.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_system-vc143-mt-gd-x64-1_86.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc143-mt-gd-x64-1_86.lib  ws2_32.lib  Mswsock.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\redis++.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\mysqlcppconnx.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_json_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_textformat_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mini_descriptor_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_wire_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\utf8_range.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_message_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_base_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mem_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\re2.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_internal.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_marshalling.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_reflection.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_config.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_program_name.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_private_handle_accessor.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag_internal.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\zlibd.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\cares.lib  advapi32.lib  iphlpapi.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\address_sorting.lib  -ignore:4221  wsock32.lib  gdi32.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\hiredisd.lib  crypt32.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\abseil_dll.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  LINK_LIBRARIES = D:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotocd.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobufd.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobuf-lited.lib  D:\C++library\vcpkg\installed\x64-windows\lib\libssl.lib  D:\C++library\vcpkg\installed\x64-windows\lib\libcrypto.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\gpr.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++_alts.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_system-vc143-mt-gd-x64-1_86.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc143-mt-gd-x64-1_86.lib  ws2_32.lib  Mswsock.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\redis++.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\mysqlcppconnx.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_json_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_textformat_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mini_descriptor_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_wire_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\utf8_range.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_message_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_base_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mem_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\re2.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_internal.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_marshalling.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_reflection.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_config.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_program_name.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_private_handle_accessor.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag_internal.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\zlibd.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\cares.lib  advapi32.lib  iphlpapi.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\address_sorting.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\abseil_dll.lib  -ignore:4221  wsock32.lib  gdi32.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\hiredisd.lib  crypt32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = CMakeFiles\ChatServer.dir
   POST_BUILD = cd .
   PRE_LINK = cd .

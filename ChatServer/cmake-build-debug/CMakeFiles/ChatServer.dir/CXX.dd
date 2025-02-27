@@ -1,3 +1,25 @@
 ninja_dyndep_version = 1.0
 build CMakeFiles\ChatServer.dir\main.cpp.obj: dyndep
 
+build CMakeFiles\ChatServer.dir\AsioIOcontextPool.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\Crypto.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\CServer.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\MySQLMgr.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\message.pb.cc.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\message.grpc.pb.cc.obj: dyndep
+

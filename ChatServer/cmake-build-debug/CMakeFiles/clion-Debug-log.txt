@@ -1,15 +1,5 @@
 "C:\Program Files\JetBrains\CLion 2024.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2024.1/bin/ninja/win/x64/ninja.exe" -G Ninja -S D:\Gitee\wechat\ChatServer -B D:\Gitee\wechat\ChatServer\cmake-build-debug
-CMake Error at CMakeLists.txt:22 (find_package):
-  Could not find a package configuration file provided by "Protobuf" with any
-  of the following names:
-
-    ProtobufConfig.cmake
-    protobuf-config.cmake
-
-  Add the installation prefix of "Protobuf" to CMAKE_PREFIX_PATH or set
-  "Protobuf_DIR" to a directory containing one of the above files.  If
-  "Protobuf" provides a separate development package or SDK, be sure it has
-  been installed.
-
-
--- Configuring incomplete, errors occurred!
+-- Found RE2 via CMake.
+-- Configuring done (0.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: D:/Gitee/wechat/ChatServer/cmake-build-debug

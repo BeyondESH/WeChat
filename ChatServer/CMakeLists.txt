@@ -11,7 +11,35 @@ set(Protobuf_PROTOC_EXECUTABLE "${CMAKE_PREFIX_PATH}/tools/protobuf/protoc.exe")
 set(GRPC_CPP_PLUGIN_EXECUTABLE "${CMAKE_PREFIX_PATH}/tools/grpc/grpc_cpp_plugin.exe")
 # 设置策略 CMP0167 为 NEW
 cmake_policy(SET CMP0167 NEW)
-add_executable(ChatServer main.cpp)
+add_executable(ChatServer main.cpp
+        AsioIOcontextPool.cpp
+        AsioIOcontextPool.h
+        ConfigMgr.hpp
+        const.h
+        Crypto.cpp
+        Crypto.h
+        CServer.cpp
+        CServer.h
+        Defer.hpp
+        HttpConnection.cpp
+        HttpConnection.h
+        LogicSystem.cpp
+        LogicSystem.h
+        MySQLMgr.h
+        MySQLMgr.cpp
+        RedisMgr.cpp
+        RedisMgr.h
+        singleton.hpp
+        StatusGrpcClient.cpp
+        StatusGrpcClient.h
+        Test.hpp
+        VerifyGrpcClient.cpp
+        VerifyGrpcClient.h
+        message.pb.cc
+        message.pb.h
+        message.grpc.pb.cc
+        message.grpc.pb.h
+)
 
 # absl库
 find_package(absl CONFIG REQUIRED)
