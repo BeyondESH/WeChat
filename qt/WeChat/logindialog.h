@@ -32,17 +32,20 @@ private slots:
     void on_loginButton_clicked();
     void on_resetPasswordPB_clicked();
     void slot_mod_login_finished(ReqId req_id,QString res,ErrorCodes ec);
+    void slot_tcp_connect_finished(bool isSuccess);
+    void slot_switch_chatDialog();
+    void slot_login_failed(int error);
 signals:
     void registerPBClicked();//注册按钮
     void resetPasswordPBClicked();//忘记密码
-    void connect_tcp(ServerInfo info);//tcp连接
+    void signal_tcp_connected(ServerInfo info);//tcp连接
 private:
     Ui::LoginDialog *ui;
     void showTip(QString tip,bool isOK);//显示提示
     void initHttpHandlers();//初始化http请求处理函数
     QMap<ReqId,std::function<void(const QJsonObject& jsonObj)>> _handlers;
     int _uid;
-    QString token;
+    QString _token;
 };
 
 #endif // LOGINDIALOG_H

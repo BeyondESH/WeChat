@@ -2,7 +2,7 @@
 #include "ui_logindialog.h"
 #include "global.h"
 #include "httpmgr.h"
-
+#include "tcpmgr.h"
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::LoginDialog)
@@ -11,6 +11,10 @@ LoginDialog::LoginDialog(QWidget *parent)
     polish();//刷新qss
     initHttpHandlers();
     connect(HttpMgr::getInstance().get(),&HttpMgr::signal_mod_login_finished,this,&LoginDialog::slot_mod_login_finished);
+    connect(this,&LoginDialog::signal_tcp_connected,TCPMgr::getInstance().get(),&TCPMgr::slots_tcp_connected);
+    connect(TCPMgr::getInstance().get(),&TCPMgr::signal_switch_chatDialog,this,&LoginDialog::slot_switch_chatDialog);
+    connect(TCPMgr::getInstance().get(),&TCPMgr::signal_connected_success,this,&LoginDialog::slot_tcp_connect_finished);
+    connect(TCPMgr::getInstance().get(),&TCPMgr::signal_login_failed,this,&LoginDialog::slot_login_failed);
 }
 
 LoginDialog::~LoginDialog()
@@ -127,6 +131,25 @@ void LoginDialog::slot_mod_login_finished(ReqId req_id,QString res,ErrorCodes ec
     return;
 }
 
+void LoginDialog::slot_tcp_connect_finished(bool isSuccess)
+{
+    if(isSuccess==true){
+        QJsonObject jsonObj;
+        jsonObj["uid"]=_uid;
+        jsonObj["token"]=_token;
+        QJsonDocument jsonDoc(jsonObj);
+        QString jsonStr=jsonDoc.toJson(QJsonDocument::Indented);
+        TCPMgr::getInstance()->signal_send_data(ReqId::ID_CHAT_LOGIN,jsonStr);//发送登录信息给聊天服务器进行身份验证
+    }else{
+        showTip(tr("服务器连接失败"),false);
+    }
+}
+
+void LoginDialog::slot_login_failed(int error)
+{
+    showTip(tr("登录验证失败"),false);
+}
+
 void LoginDialog::showTip(QString tip, bool isOK)
 {
     ui->errorlabel->clear();
@@ -186,6 +209,10 @@ void LoginDialog::initHttpHandlers()
         qDebug()<<"token:"<<server.token;
         server.uid=jsonObj["uid"].toInt();
         qDebug()<<"uid:"<<server.uid;
+        _uid=server.uid;
+        _token=server.token;
+        emit signal_tcp_connected(server);//连接服务器
+        showTip(tr("正在连接服务器"),true);
     });
 }
 

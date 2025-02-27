@@ -27,7 +27,7 @@ private:
     void handleMsg(ReqId id,int len,QByteArray data);
     QMap<ReqId,std::function<void(ReqId id,int len,QByteArray data)>> _handlers;
 signals:
-    void signal_tcp_connected();
+    void signal_tcp_connected(ServerInfo info);
     void signal_connected_success(bool isSucced);
     void signal_send_data(ReqId id,QString string);
     void signal_login_failed(int error);

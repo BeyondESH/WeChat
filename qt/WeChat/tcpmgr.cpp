@@ -53,18 +53,23 @@ TCPMgr::TCPMgr():_isPending(false)
         switch (socketError) {
         case QAbstractSocket::ConnectionRefusedError:
             qDebug() << "The connection was refused by the peer.";
+            emit signal_connected_success(false);
             break;
         case QAbstractSocket::RemoteHostClosedError:
             qDebug() << "The remote host closed the connection.";
+            emit signal_connected_success(false);
             break;
         case QAbstractSocket::HostNotFoundError:
             qDebug() << "The host was not found.";
+            emit signal_connected_success(false);
             break;
         case QAbstractSocket::SocketTimeoutError:
             qDebug() << "The socket operation timed out.";
+            emit signal_connected_success(false);
             break;
         default:
             qDebug() << "An unidentified error occurred.";
+            emit signal_connected_success(false);
             break;
         }
     });
@@ -88,13 +93,13 @@ void TCPMgr::initHandlers()
         }
         QJsonObject jsonObj=jsonDoc.object();
         if(!jsonObj.contains("error")){
-            qDebug()<<tr("登录失败,错误码:")<<ErrorCodes::ERROR_JSON;
+            qDebug()<<tr("登录验证失败:")<<ErrorCodes::ERROR_JSON;
             emit signal_login_failed(ErrorCodes::ERROR_JSON);
             return;
         }
         int error=jsonObj["error"].toInt();
         if(error!=ErrorCodes::SUCCESS){
-            qDebug()<<tr("登录失败,错误码:")<<error;
+            qDebug()<<tr("登录验证失败:")<<error;
             emit signal_login_failed(error);
             return;
         }
@@ -109,7 +114,7 @@ void TCPMgr::handleMsg(ReqId id, int len, QByteArray data)
 
 void TCPMgr::slots_tcp_connected(ServerInfo info)
 {
-    qDebug()<<"连接到服务器";
+    qDebug()<<"正在连接服务器";
     _host=info.host;
     _port=info.port.toUInt();
     _socket.connectToHost(_host,_port);
