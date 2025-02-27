@@ -9,7 +9,7 @@
 					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
-						"string" : "3.30"
+						"string" : "3.29"
 					},
 					"projectIndex" : 0,
 					"source" : ".",
@@ -27,7 +27,7 @@
 					[
 						0
 					],
-					"name" : "StatusServer",
+					"name" : "GateServer",
 					"targetIndexes" : 
 					[
 						0
@@ -38,9 +38,9 @@
 			[
 				{
 					"directoryIndex" : 0,
-					"id" : "StatusServer::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-StatusServer-Debug-68b42c76c3781e62d424.json",
-					"name" : "StatusServer",
+					"id" : "GateServer::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-GateServer-Debug-3296420a73596f3494e8.json",
+					"name" : "GateServer",
 					"projectIndex" : 0
 				}
 			]
@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/Gitee/wechat/StatusServer/cmake-build-debug",
-		"source" : "D:/Gitee/wechat/StatusServer"
+		"build" : "D:/Gitee/wechat/GateServer/cmake-build-debug",
+		"source" : "D:/Gitee/wechat/GateServer"
 	},
 	"version" : 
 	{

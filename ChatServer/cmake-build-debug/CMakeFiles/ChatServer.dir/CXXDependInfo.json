@@ -1,0 +1,21 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "MSVC",
+	"compiler-id" : "MSVC",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "D:/Gitee/wechat/ChatServer/cmake-build-debug",
+	"dir-cur-src" : "D:/Gitee/wechat/ChatServer",
+	"dir-top-bld" : "D:/Gitee/wechat/ChatServer/cmake-build-debug",
+	"dir-top-src" : "D:/Gitee/wechat/ChatServer",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"D:\\C++library\\vcpkg\\installed\\x64-windows\\include"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "D:/Gitee/wechat/ChatServer/cmake-build-debug/CMakeFiles/ChatServer.dir"
+}

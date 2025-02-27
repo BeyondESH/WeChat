@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "D:/Gitee/wechat/StatusServer/bin/StatusServer.exe"
+			"path" : "D:/Gitee/wechat/ChatServer/bin/ChatServer.exe"
 		},
 		{
-			"path" : "D:/Gitee/wechat/StatusServer/bin/StatusServer.pdb"
+			"path" : "D:/Gitee/wechat/ChatServer/bin/ChatServer.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -41,13 +41,37 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 15,
+				"line" : 14,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 42,
+				"line" : 23,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 27,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 31,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 35,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 38,
 				"parent" : 0
 			},
 			{
@@ -63,33 +87,9 @@
 				"parent" : 0
 			},
 			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 54,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 57,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 65,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 69,
-				"parent" : 0
-			},
-			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 49,
+				"line" : 30,
 				"parent" : 0
 			},
 			{
@@ -133,7 +133,7 @@
 			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 36,
+				"line" : 17,
 				"parent" : 0
 			},
 			{
@@ -153,7 +153,7 @@
 			{
 				"command" : 2,
 				"file" : 3,
-				"line" : 738,
+				"line" : 748,
 				"parent" : 20
 			},
 			{
@@ -165,19 +165,19 @@
 			{
 				"command" : 2,
 				"file" : 3,
-				"line" : 668,
+				"line" : 678,
 				"parent" : 20
 			},
 			{
 				"command" : 2,
 				"file" : 3,
-				"line" : 718,
+				"line" : 728,
 				"parent" : 20
 			},
 			{
 				"command" : 2,
 				"file" : 3,
-				"line" : 698,
+				"line" : 708,
 				"parent" : 20
 			},
 			{
@@ -219,13 +219,13 @@
 			{
 				"command" : 2,
 				"file" : 3,
-				"line" : 1688,
+				"line" : 1708,
 				"parent" : 20
 			},
 			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 64,
+				"line" : 45,
 				"parent" : 0
 			},
 			{
@@ -251,7 +251,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 37,
+				"line" : 18,
 				"parent" : 0
 			},
 			{
@@ -263,7 +263,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 61,
+				"line" : 42,
 				"parent" : 0
 			}
 		]
@@ -314,6 +314,7 @@
 				"backtraces" : 
 				[
 					39,
+					4,
 					5,
 					5,
 					5,
@@ -333,18 +334,11 @@
 			},
 			"sourceIndexes" : 
 			[
-				0,
-				2,
-				6,
-				8,
-				10,
-				13,
-				15,
-				17
+				0
 			]
 		}
 	],
-	"id" : "StatusServer::@6890427a1f51a3e7e1df",
+	"id" : "ChatServer::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -544,11 +538,6 @@
 			},
 			{
 				"backtrace" : 33,
-				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\debug\\lib\\abseil_dll.lib",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 33,
 				"fragment" : "-ignore:4221",
 				"role" : "libraries"
 			},
@@ -573,14 +562,19 @@
 				"role" : "libraries"
 			},
 			{
+				"backtrace" : 33,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\debug\\lib\\abseil_dll.lib",
+				"role" : "libraries"
+			},
+			{
 				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
 				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
-	"name" : "StatusServer",
-	"nameOnDisk" : "StatusServer.exe",
+	"name" : "ChatServer",
+	"nameOnDisk" : "ChatServer.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -592,38 +586,14 @@
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				0,
-				2,
-				6,
-				8,
-				10,
-				13,
-				15,
-				17
-			]
-		},
-		{
-			"name" : "Header Files",
-			"sourceIndexes" : 
-			[
-				1,
-				3,
-				4,
-				5,
-				7,
-				9,
-				11,
-				12,
-				14,
-				16,
-				18
+				0
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				19
+				1
 			]
 		}
 	],
@@ -636,106 +606,9 @@
 			"sourceGroupIndex" : 0
 		},
 		{
-			"backtrace" : 1,
-			"path" : "AsioIOcontextPool.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "AsioIOcontextPool.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "ConfigMgr.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "const.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "Crypto.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "Crypto.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "Defer.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "message.pb.cc",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "message.pb.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "message.grpc.pb.cc",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "message.grpc.pb.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"path" : "MySQLMgr.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "MySQLMgr.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "RedisMgr.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "RedisMgr.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "singleton.hpp",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "StatusServiceImpl.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "StatusServiceImpl.h",
-			"sourceGroupIndex" : 1
-		},
-		{
 			"backtrace" : 41,
 			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_json.natvis",
-			"sourceGroupIndex" : 2
+			"sourceGroupIndex" : 1
 		}
 	],
 	"type" : "EXECUTABLE"

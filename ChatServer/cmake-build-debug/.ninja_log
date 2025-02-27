@@ -1,0 +1,8 @@
+# ninja log v6
+2	268	7623457355622456	build.ninja	a0cb8c0ccd2f2cad
+4	124	7623457356041963	CMakeFiles/ChatServer.dir/main.cpp.obj.ddi	a63678ae92c3c19b
+124	191	7623457357879827	CMakeFiles/ChatServer.dir/CXX.dd	e531823569b71bee
+124	191	7623457357879827	D:/Gitee/wechat/ChatServer/cmake-build-debug/CMakeFiles/ChatServer.dir/CXXModules.json	e531823569b71bee
+124	191	7623457357879827	CMakeFiles/ChatServer.dir/main.cpp.obj.modmap	e531823569b71bee
+192	964	7623457357913440	CMakeFiles/ChatServer.dir/main.cpp.obj	112b33731a120cb5
+964	1681	7623457365638713	D:/Gitee/wechat/ChatServer/bin/ChatServer.exe	26ad0fe1263b0527

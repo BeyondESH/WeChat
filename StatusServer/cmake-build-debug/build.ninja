@@ -109,46 +109,6 @@ build CMakeFiles\StatusServer.dir\Crypto.cpp.obj: CXX_COMPILER__StatusServer_sca
   TARGET_PDB = D:\Gitee\wechat\StatusServer\bin\StatusServer.pdb
   dyndep = CMakeFiles/StatusServer.dir/CXX.dd
 
-build CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi: CXX_SCAN__StatusServer_Debug D$:\Gitee\wechat\StatusServer\message.pb.cc || cmake_object_order_depends_target_StatusServer
-  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
-  DEP_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi.d
-  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi
-  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
-  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
-  OBJ_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj
-  PREPROCESSED_OUTPUT_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi.i
-
-build CMakeFiles\StatusServer.dir\message.pb.cc.obj: CXX_COMPILER__StatusServer_scanned_Debug D$:\Gitee\wechat\StatusServer\message.pb.cc | CMakeFiles\StatusServer.dir\message.pb.cc.obj.modmap || cmake_object_order_depends_target_StatusServer CMakeFiles\StatusServer.dir\CXX.dd
-  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
-  DYNDEP_MODULE_MAP_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj.modmap
-  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
-  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
-  OBJECT_DIR = CMakeFiles\StatusServer.dir
-  OBJECT_FILE_DIR = CMakeFiles\StatusServer.dir
-  TARGET_COMPILE_PDB = CMakeFiles\StatusServer.dir\
-  TARGET_PDB = D:\Gitee\wechat\StatusServer\bin\StatusServer.pdb
-  dyndep = CMakeFiles/StatusServer.dir/CXX.dd
-
-build CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi: CXX_SCAN__StatusServer_Debug D$:\Gitee\wechat\StatusServer\message.grpc.pb.cc || cmake_object_order_depends_target_StatusServer
-  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
-  DEP_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi.d
-  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi
-  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
-  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
-  OBJ_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj
-  PREPROCESSED_OUTPUT_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi.i
-
-build CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj: CXX_COMPILER__StatusServer_scanned_Debug D$:\Gitee\wechat\StatusServer\message.grpc.pb.cc | CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.modmap || cmake_object_order_depends_target_StatusServer CMakeFiles\StatusServer.dir\CXX.dd
-  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
-  DYNDEP_MODULE_MAP_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.modmap
-  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
-  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
-  OBJECT_DIR = CMakeFiles\StatusServer.dir
-  OBJECT_FILE_DIR = CMakeFiles\StatusServer.dir
-  TARGET_COMPILE_PDB = CMakeFiles\StatusServer.dir\
-  TARGET_PDB = D:\Gitee\wechat\StatusServer\bin\StatusServer.pdb
-  dyndep = CMakeFiles/StatusServer.dir/CXX.dd
-
 build CMakeFiles\StatusServer.dir\MySQLMgr.cpp.obj.ddi: CXX_SCAN__StatusServer_Debug D$:\Gitee\wechat\StatusServer\MySQLMgr.cpp || cmake_object_order_depends_target_StatusServer
   DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
   DEP_FILE = CMakeFiles\StatusServer.dir\MySQLMgr.cpp.obj.ddi.d
@@ -209,7 +169,47 @@ build CMakeFiles\StatusServer.dir\StatusServiceImpl.cpp.obj: CXX_COMPILER__Statu
   TARGET_PDB = D:\Gitee\wechat\StatusServer\bin\StatusServer.pdb
   dyndep = CMakeFiles/StatusServer.dir/CXX.dd
 
-build CMakeFiles\StatusServer.dir\CXX.dd | D$:\Gitee\wechat\StatusServer\cmake-build-debug\CMakeFiles\StatusServer.dir\CXXModules.json CMakeFiles\StatusServer.dir\main.cpp.obj.modmap CMakeFiles\StatusServer.dir\AsioIOcontextPool.cpp.obj.modmap CMakeFiles\StatusServer.dir\Crypto.cpp.obj.modmap CMakeFiles\StatusServer.dir\message.pb.cc.obj.modmap CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.modmap CMakeFiles\StatusServer.dir\MySQLMgr.cpp.obj.modmap CMakeFiles\StatusServer.dir\RedisMgr.cpp.obj.modmap CMakeFiles\StatusServer.dir\StatusServiceImpl.cpp.obj.modmap: CXX_DYNDEP__StatusServer_Debug CMakeFiles\StatusServer.dir\main.cpp.obj.ddi CMakeFiles\StatusServer.dir\AsioIOcontextPool.cpp.obj.ddi CMakeFiles\StatusServer.dir\Crypto.cpp.obj.ddi CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi CMakeFiles\StatusServer.dir\MySQLMgr.cpp.obj.ddi CMakeFiles\StatusServer.dir\RedisMgr.cpp.obj.ddi CMakeFiles\StatusServer.dir\StatusServiceImpl.cpp.obj.ddi | D$:\Gitee\wechat\StatusServer\cmake-build-debug\CMakeFiles\StatusServer.dir\CXXDependInfo.json
+build CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi: CXX_SCAN__StatusServer_Debug D$:\Gitee\wechat\StatusServer\message.grpc.pb.cc || cmake_object_order_depends_target_StatusServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi.i
+
+build CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj: CXX_COMPILER__StatusServer_scanned_Debug D$:\Gitee\wechat\StatusServer\message.grpc.pb.cc | CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.modmap || cmake_object_order_depends_target_StatusServer CMakeFiles\StatusServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\StatusServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\StatusServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\StatusServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\StatusServer\bin\StatusServer.pdb
+  dyndep = CMakeFiles/StatusServer.dir/CXX.dd
+
+build CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi: CXX_SCAN__StatusServer_Debug D$:\Gitee\wechat\StatusServer\message.pb.cc || cmake_object_order_depends_target_StatusServer
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DEP_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJ_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi.i
+
+build CMakeFiles\StatusServer.dir\message.pb.cc.obj: CXX_COMPILER__StatusServer_scanned_Debug D$:\Gitee\wechat\StatusServer\message.pb.cc | CMakeFiles\StatusServer.dir\message.pb.cc.obj.modmap || cmake_object_order_depends_target_StatusServer CMakeFiles\StatusServer.dir\CXX.dd
+  DEFINES = -DABSL_CONSUME_DLL -DBOOST_FILESYSTEM_DYN_LINK=1 -DBOOST_FILESYSTEM_NO_LIB -DPROTOBUF_USE_DLLS -D_WIN32_WINNT=0x0601
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\StatusServer.dir\message.pb.cc.obj.modmap
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++20 -MDd -Zi
+  INCLUDES = -external:ID:\C++library\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\StatusServer.dir
+  OBJECT_FILE_DIR = CMakeFiles\StatusServer.dir
+  TARGET_COMPILE_PDB = CMakeFiles\StatusServer.dir\
+  TARGET_PDB = D:\Gitee\wechat\StatusServer\bin\StatusServer.pdb
+  dyndep = CMakeFiles/StatusServer.dir/CXX.dd
+
+build CMakeFiles\StatusServer.dir\CXX.dd | D$:\Gitee\wechat\StatusServer\cmake-build-debug\CMakeFiles\StatusServer.dir\CXXModules.json CMakeFiles\StatusServer.dir\main.cpp.obj.modmap CMakeFiles\StatusServer.dir\AsioIOcontextPool.cpp.obj.modmap CMakeFiles\StatusServer.dir\Crypto.cpp.obj.modmap CMakeFiles\StatusServer.dir\MySQLMgr.cpp.obj.modmap CMakeFiles\StatusServer.dir\RedisMgr.cpp.obj.modmap CMakeFiles\StatusServer.dir\StatusServiceImpl.cpp.obj.modmap CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.modmap CMakeFiles\StatusServer.dir\message.pb.cc.obj.modmap: CXX_DYNDEP__StatusServer_Debug CMakeFiles\StatusServer.dir\main.cpp.obj.ddi CMakeFiles\StatusServer.dir\AsioIOcontextPool.cpp.obj.ddi CMakeFiles\StatusServer.dir\Crypto.cpp.obj.ddi CMakeFiles\StatusServer.dir\MySQLMgr.cpp.obj.ddi CMakeFiles\StatusServer.dir\RedisMgr.cpp.obj.ddi CMakeFiles\StatusServer.dir\StatusServiceImpl.cpp.obj.ddi CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj.ddi CMakeFiles\StatusServer.dir\message.pb.cc.obj.ddi | D$:\Gitee\wechat\StatusServer\cmake-build-debug\CMakeFiles\StatusServer.dir\CXXDependInfo.json
 
 
 # =============================================================================
@@ -219,7 +219,7 @@ build CMakeFiles\StatusServer.dir\CXX.dd | D$:\Gitee\wechat\StatusServer\cmake-b
 #############################################
 # Link the executable D:\Gitee\wechat\StatusServer\bin\StatusServer.exe
 
-build D$:\Gitee\wechat\StatusServer\bin\StatusServer.exe: CXX_EXECUTABLE_LINKER__StatusServer_Debug CMakeFiles\StatusServer.dir\main.cpp.obj CMakeFiles\StatusServer.dir\AsioIOcontextPool.cpp.obj CMakeFiles\StatusServer.dir\Crypto.cpp.obj CMakeFiles\StatusServer.dir\message.pb.cc.obj CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj CMakeFiles\StatusServer.dir\MySQLMgr.cpp.obj CMakeFiles\StatusServer.dir\RedisMgr.cpp.obj CMakeFiles\StatusServer.dir\StatusServiceImpl.cpp.obj | D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotocd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobufd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobuf-lited.lib D$:\C++library\vcpkg\installed\x64-windows\lib\libssl.lib D$:\C++library\vcpkg\installed\x64-windows\lib\libcrypto.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\gpr.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++_alts.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_system-vc143-mt-gd-x64-1_86.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc143-mt-gd-x64-1_86.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\redis++.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\mysqlcppconnx.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_json_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_textformat_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mini_descriptor_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_wire_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\utf8_range.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_message_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_base_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mem_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\re2.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_internal.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_marshalling.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_reflection.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_config.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_program_name.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_private_handle_accessor.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag_internal.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\zlibd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\cares.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\address_sorting.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\abseil_dll.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\hiredisd.lib
+build D$:\Gitee\wechat\StatusServer\bin\StatusServer.exe: CXX_EXECUTABLE_LINKER__StatusServer_Debug CMakeFiles\StatusServer.dir\main.cpp.obj CMakeFiles\StatusServer.dir\AsioIOcontextPool.cpp.obj CMakeFiles\StatusServer.dir\Crypto.cpp.obj CMakeFiles\StatusServer.dir\MySQLMgr.cpp.obj CMakeFiles\StatusServer.dir\RedisMgr.cpp.obj CMakeFiles\StatusServer.dir\StatusServiceImpl.cpp.obj CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj CMakeFiles\StatusServer.dir\message.pb.cc.obj | D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotocd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobufd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobuf-lited.lib D$:\C++library\vcpkg\installed\x64-windows\lib\libssl.lib D$:\C++library\vcpkg\installed\x64-windows\lib\libcrypto.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\gpr.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++_alts.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_system-vc143-mt-gd-x64-1_86.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc143-mt-gd-x64-1_86.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\redis++.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\mysqlcppconnx.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_json_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_textformat_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mini_descriptor_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_wire_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\utf8_range.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_message_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_base_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mem_lib.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\re2.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_internal.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_marshalling.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_reflection.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_config.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_program_name.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_private_handle_accessor.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag_internal.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\zlibd.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\cares.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\address_sorting.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\abseil_dll.lib D$:\C++library\vcpkg\installed\x64-windows\debug\lib\hiredisd.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = D:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotocd.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobufd.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\libprotobuf-lited.lib  D:\C++library\vcpkg\installed\x64-windows\lib\libssl.lib  D:\C++library\vcpkg\installed\x64-windows\lib\libcrypto.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\gpr.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\grpc++_alts.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_system-vc143-mt-gd-x64-1_86.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc143-mt-gd-x64-1_86.lib  ws2_32.lib  Mswsock.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\redis++.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\mysqlcppconnx.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_json_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_textformat_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mini_descriptor_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_wire_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\utf8_range.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_message_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_base_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\upb_mem_lib.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\re2.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_internal.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_marshalling.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_reflection.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_config.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_program_name.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_private_handle_accessor.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\absl_flags_commandlineflag_internal.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\zlibd.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\cares.lib  advapi32.lib  iphlpapi.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\address_sorting.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\abseil_dll.lib  -ignore:4221  wsock32.lib  gdi32.lib  D:\C++library\vcpkg\installed\x64-windows\debug\lib\hiredisd.lib  crypt32.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

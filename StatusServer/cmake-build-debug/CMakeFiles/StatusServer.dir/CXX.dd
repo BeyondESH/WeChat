@@ -5,13 +5,13 @@ build CMakeFiles\StatusServer.dir\AsioIOcontextPool.cpp.obj: dyndep
 
 build CMakeFiles\StatusServer.dir\Crypto.cpp.obj: dyndep
 
-build CMakeFiles\StatusServer.dir\message.pb.cc.obj: dyndep
-
-build CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj: dyndep
-
 build CMakeFiles\StatusServer.dir\MySQLMgr.cpp.obj: dyndep
 
 build CMakeFiles\StatusServer.dir\RedisMgr.cpp.obj: dyndep
 
 build CMakeFiles\StatusServer.dir\StatusServiceImpl.cpp.obj: dyndep
+
+build CMakeFiles\StatusServer.dir\message.grpc.pb.cc.obj: dyndep
+
+build CMakeFiles\StatusServer.dir\message.pb.cc.obj: dyndep
 

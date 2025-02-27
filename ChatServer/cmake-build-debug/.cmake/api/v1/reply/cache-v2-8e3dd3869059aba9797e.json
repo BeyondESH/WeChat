@@ -51,7 +51,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/Gitee/wechat/StatusServer/cmake-build-debug"
+			"value" : "d:/Gitee/wechat/ChatServer/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -491,7 +491,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Gitee/wechat/StatusServer/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "D:/Gitee/wechat/ChatServer/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -587,7 +587,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/Gitee/wechat/StatusServer"
+			"value" : "D:/Gitee/wechat/ChatServer"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -599,7 +599,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "C:/Program Files (x86)/StatusServer"
+			"value" : "C:/Program Files (x86)/ChatServer"
 		},
 		{
 			"name" : "CMAKE_LINKER",
@@ -627,7 +627,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Program Files/JetBrains/CLion 2024.1/bin/ninja/win/x64/ninja.exe"
+			"value" : "C:/PROGRA~1/JETBRA~1/CLION2~1.1/bin/ninja/win/x64/ninja.exe"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -783,7 +783,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "StatusServer"
+			"value" : "ChatServer"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1126,6 +1126,42 @@
 			"value" : "FALSE"
 		},
 		{
+			"name" : "ChatServer_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "D:/Gitee/wechat/ChatServer/cmake-build-debug"
+		},
+		{
+			"name" : "ChatServer_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "ChatServer_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "D:/Gitee/wechat/ChatServer"
+		},
+		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL",
 			"properties" : 
 			[
@@ -1135,7 +1171,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[D:/C++library/vcpkg/installed/x64-windows/lib/libcrypto.lib][D:/C++library/vcpkg/installed/x64-windows/include][c ][v3.4.0()]"
+			"value" : "[D:/C++library/vcpkg/installed/x64-windows/lib/libcrypto.lib][D:/C++library/vcpkg/installed/x64-windows/include][c ][v3.4.1()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_Protobuf",
@@ -1147,7 +1183,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "[D:/C++library/vcpkg/installed/x64-windows/bin/protoc.exe][optimized;D:/C++library/vcpkg/installed/x64-windows/bin/libprotobuf.dll;debug;D:/C++library/vcpkg/installed/x64-windows/debug/bin/libprotobufd.dll][D:/C++library/vcpkg/installed/x64-windows/include][v29.2.0()]"
+			"value" : "[D:/C++library/vcpkg/installed/x64-windows/bin/protoc.exe][optimized;D:/C++library/vcpkg/installed/x64-windows/bin/libprotobuf.dll;debug;D:/C++library/vcpkg/installed/x64-windows/debug/bin/libprotobufd.dll][D:/C++library/vcpkg/installed/x64-windows/include][v29.3.0()]"
 		},
 		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_Threads",
@@ -1284,42 +1320,6 @@
 			],
 			"type" : "FILEPATH",
 			"value" : "D:/C++library/vcpkg/installed/x64-windows/lib/libssl.lib"
-		},
-		{
-			"name" : "StatusServer_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "D:/Gitee/wechat/StatusServer/cmake-build-debug"
-		},
-		{
-			"name" : "StatusServer_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "StatusServer_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "D:/Gitee/wechat/StatusServer"
 		},
 		{
 			"name" : "UNOFFICIAL_MYSQL_CONNECTOR_CPP_INITIALIZED",

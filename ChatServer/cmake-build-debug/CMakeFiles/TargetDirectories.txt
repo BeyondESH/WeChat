@@ -1,0 +1,3 @@
+D:/Gitee/wechat/ChatServer/cmake-build-debug/CMakeFiles/ChatServer.dir
+D:/Gitee/wechat/ChatServer/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Gitee/wechat/ChatServer/cmake-build-debug/CMakeFiles/rebuild_cache.dir

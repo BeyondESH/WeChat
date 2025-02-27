@@ -611,9 +611,9 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding Boost
 FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[D:/C++library/vcpkg/installed/x64-windows/share/boost/BoostConfig.cmake][cfound components: system filesystem json ][v1.86.0()]
 //Details about finding OpenSSL
-FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL:INTERNAL=[optimized;D:/C++library/vcpkg/installed/x64-windows/lib/libcrypto.lib;debug;D:/C++library/vcpkg/installed/x64-windows/debug/lib/libcrypto.lib][D:/C++library/vcpkg/installed/x64-windows/include][c ][v3.4.0()]
+FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL:INTERNAL=[optimized;D:/C++library/vcpkg/installed/x64-windows/lib/libcrypto.lib;debug;D:/C++library/vcpkg/installed/x64-windows/debug/lib/libcrypto.lib][D:/C++library/vcpkg/installed/x64-windows/include][c ][v3.4.1()]
 //Details about finding Protobuf
-FIND_PACKAGE_MESSAGE_DETAILS_Protobuf:INTERNAL=[D:/C++library/vcpkg/installed/x64-windows/bin/protoc.exe][optimized;D:/C++library/vcpkg/installed/x64-windows/bin/libprotobuf.dll;debug;D:/C++library/vcpkg/installed/x64-windows/debug/bin/libprotobufd.dll][D:/C++library/vcpkg/installed/x64-windows/include][v29.2.0()]
+FIND_PACKAGE_MESSAGE_DETAILS_Protobuf:INTERNAL=[D:/C++library/vcpkg/installed/x64-windows/bin/protoc.exe][optimized;D:/C++library/vcpkg/installed/x64-windows/bin/libprotobuf.dll;debug;D:/C++library/vcpkg/installed/x64-windows/debug/bin/libprotobufd.dll][D:/C++library/vcpkg/installed/x64-windows/include][v29.3.0()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding ZLIB

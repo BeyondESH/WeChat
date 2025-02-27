@@ -20,10 +20,6 @@ add_executable(StatusServer main.cpp
         Crypto.h
         Crypto.cpp
         Defer.hpp
-        message.pb.cc
-        message.pb.h
-        message.grpc.pb.cc
-        message.grpc.pb.h
         MySQLMgr.h
         MySQLMgr.cpp
         RedisMgr.h
@@ -31,6 +27,10 @@ add_executable(StatusServer main.cpp
         singleton.hpp
         StatusServiceImpl.cpp
         StatusServiceImpl.h
+        message.grpc.pb.h
+        message.grpc.pb.cc
+        message.pb.h
+        message.pb.cc
 )
 # absl库
 find_package(absl CONFIG REQUIRED)
