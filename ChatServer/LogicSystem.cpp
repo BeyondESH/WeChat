@@ -3,14 +3,14 @@
 //
 #include "VerifyGrpcClient.h"
 #include "LogicSystem.h"
-#include "HttpConnection.h"
+#include "CSession.h"
 #include "MySQLMgr.h"
 #include "RedisMgr.h"
 #include "Crypto.h"
 #include "StatusGrpcClient.h"
 using json = nlohmann::json;
 
-bool LogicSystem::handleGet(std::string path, std::shared_ptr<HttpConnection> connection) {
+bool LogicSystem::handleGet(std::string path, std::shared_ptr<CSession> connection) {
     //未找到path
     if (_getHandlers.find(path) == _getHandlers.end()) {
         return false;
@@ -19,7 +19,7 @@ bool LogicSystem::handleGet(std::string path, std::shared_ptr<HttpConnection> co
     return true;
 }
 
-bool LogicSystem::handlePost(std::string path, std::shared_ptr<HttpConnection> connection) {
+bool LogicSystem::handlePost(std::string path, std::shared_ptr<CSession> connection) {
     //未找到path
     if (_postHandlers.find(path) == _postHandlers.end()) {
         return false;
@@ -37,12 +37,12 @@ void LogicSystem::regGet(std::string url, HttpHandler handler) {
 
 LogicSystem::LogicSystem() {
     //注册get请求
-    regGet("/get_test", [](std::shared_ptr<HttpConnection> connection) {
+    regGet("/get_test", [](std::shared_ptr<CSession> connection) {
         boost::beast::ostream(connection->_response.body()) << "receive get_test request";
     });
 
     //注册post请求
-    regPost("/get_varifycode", [](std::shared_ptr<HttpConnection> connection) {
+    regPost("/get_varifycode", [](std::shared_ptr<CSession> connection) {
         auto body_str = boost::beast::buffers_to_string(connection->_request.body().data()); //获取body
         std::cout << "receive body is:" << body_str << std::endl;
         connection->_response.set(boost::beast::http::field::content_type, "text/json");
@@ -74,7 +74,7 @@ LogicSystem::LogicSystem() {
         }
     });
 
-    regPost("/user_register", [](std::shared_ptr<HttpConnection> connection) {
+    regPost("/user_register", [](std::shared_ptr<CSession> connection) {
         auto body_str = boost::beast::buffers_to_string(connection->_request.body().data()); //获取body
         std::cout << "receive body is:" << body_str << std::endl;
         connection->_response.set(boost::beast::http::field::content_type, "text/json");
@@ -142,7 +142,7 @@ LogicSystem::LogicSystem() {
         return true;
     });
 
-    regPost("/reset_password", [](std::shared_ptr<HttpConnection> connection) {
+    regPost("/reset_password", [](std::shared_ptr<CSession> connection) {
         auto body_str = boost::beast::buffers_to_string(connection->_request.body().data()); //获取body
         std::cout << "receive body is:" << body_str << std::endl;
         connection->_response.set(boost::beast::http::field::content_type, "text/json");
@@ -209,7 +209,7 @@ LogicSystem::LogicSystem() {
     });
 
     //账户登录
-    regPost("/account_login", [](std::shared_ptr<HttpConnection> connection) {
+    regPost("/account_login", [](std::shared_ptr<CSession> connection) {
         auto body_str = boost::beast::buffers_to_string(connection->_request.body().data()); //获取body
         std::cout << "receive body is:" << body_str << std::endl;
         connection->_response.set(boost::beast::http::field::content_type, "text/json");
@@ -265,7 +265,7 @@ LogicSystem::LogicSystem() {
     });
 
     //邮箱登录
-    regPost("/email_login", [](std::shared_ptr<HttpConnection> connection) {
+    regPost("/email_login", [](std::shared_ptr<CSession> connection) {
         auto body_str = boost::beast::buffers_to_string(connection->_request.body().data()); //获取body
         std::cout << "receive body is:" << body_str << std::endl;
         connection->_response.set(boost::beast::http::field::content_type, "text/json");

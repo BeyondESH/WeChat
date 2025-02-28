@@ -21,8 +21,8 @@ add_executable(ChatServer main.cpp
         CServer.cpp
         CServer.h
         Defer.hpp
-        HttpConnection.cpp
-        HttpConnection.h
+        CSession.cpp
+        CSession.h
         LogicSystem.cpp
         LogicSystem.h
         MySQLMgr.h

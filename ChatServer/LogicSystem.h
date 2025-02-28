@@ -7,17 +7,17 @@
 
 #include "const.h"
 //提前声明
-class HttpConnection;
+class CSession;
 
-typedef std::function<void(std::shared_ptr<HttpConnection>)>HttpHandler;
+typedef std::function<void(std::shared_ptr<CSession>)>HttpHandler;
 
 class LogicSystem:public Singleton<LogicSystem>{
     friend class Singleton<LogicSystem>;
 public:
     ~LogicSystem();
     //处理get请求
-    bool handleGet(std::string path,std::shared_ptr<HttpConnection> connection);
-    bool handlePost(std::string path,std::shared_ptr<HttpConnection> connection);
+    bool handleGet(std::string path,std::shared_ptr<CSession> connection);
+    bool handlePost(std::string path,std::shared_ptr<CSession> connection);
     void regGet(std::string url,HttpHandler handler);
     void regPost(std::string url,HttpHandler handler);
 private:

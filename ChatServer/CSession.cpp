@@ -2,14 +2,19 @@
 // Created by Beyond on 2024/11/3.
 //
 #include "LogicSystem.h"
-#include "HttpConnection.h"
-
-HttpConnection::HttpConnection(boost::asio::io_context &ioc) : _socket(ioc) {
+#include "CSession.h"
+#include <boost/uuid.hpp>
+CSession::CSession(boost::asio::io_context &ioc) : _socket(ioc) {
+    boost::uuids::uuid uuid=boost::uuids::random_generator()();
+    _connectionId=boost::uuids::to_string(uuid);
 }
 
-void HttpConnection::start() {
+void CSession::start() {
     auto self = shared_from_this();
     //读取并处理请求
+    _socket.async_read_some(&_buffer,[self](boost::system::error_code ec,std::size_t number) {
+
+    });
     boost::beast::http::async_read(_socket, _buffer, _request,
                                    [self](boost::beast::error_code ec, std::size_t bytes_transferred) {
                                        try {
@@ -27,17 +32,17 @@ void HttpConnection::start() {
                                    });
 }
 
-void HttpConnection::checkDeadLine() {
-    auto self = shared_from_this();
-    _deadLine.async_wait([self](boost::beast::error_code ec) {
-        if (!ec) {
-            self->_socket.close(ec);
-        }
-    });
-}
+// void CSession::checkDeadLine() {
+//     auto self = shared_from_this();
+//     _deadLine.async_wait([self](boost::beast::error_code ec) {
+//         if (!ec) {
+//             self->_socket.close(ec);
+//         }
+//     });
+// }
 
 //发送应答
-void HttpConnection::response() {
+void CSession::response() {
     auto self = shared_from_this();
     _response.content_length(_response.body().size());
     boost::beast::http::async_write(_socket, _response,
@@ -48,7 +53,7 @@ void HttpConnection::response() {
 }
 
 //处理请求
-void HttpConnection::handleRequest() {
+void CSession::handleRequest() {
     //设置响应头
     _response.version(_request.version());//设置版本
     _response.keep_alive(false);//短连接
@@ -90,6 +95,10 @@ void HttpConnection::handleRequest() {
     }
 }
 
-boost::asio::ip::tcp::socket & HttpConnection::getSocket() {
+boost::asio::ip::tcp::socket & CSession::getSocket() {
     return this->_socket;
+}
+
+std::string & CSession::getSessionId() {
+    return _sessionId;
 }

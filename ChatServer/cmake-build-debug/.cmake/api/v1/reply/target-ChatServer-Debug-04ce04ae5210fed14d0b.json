@@ -700,12 +700,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "HttpConnection.cpp",
+			"path" : "TCPConnection.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "HttpConnection.h",
+			"path" : "TCPConnection.h",
 			"sourceGroupIndex" : 1
 		},
 		{
