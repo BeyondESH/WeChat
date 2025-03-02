@@ -10,6 +10,7 @@
 #include <mutex>
 #include <queue>
 #include <condition_variable>
+#include "MsgNode.h"
 //提前声明
 class LogicSystem;
 
@@ -21,16 +22,21 @@ public:
     boost::asio::ip::tcp::socket& getSocket();
     std::string& getSessionId();
 private:
-    boost::asio::ip::tcp::socket _socket;
-    boost::beast::flat_buffer _buffer{8192};
+    void read();
 
+    boost::asio::ip::tcp::socket _socket;
+    char *_buffer[MSG_MAX_LEN];
     //boost::beast::net::steady_timer _deadLine{_socket.get_executor(),std::chrono::seconds(60)};//超时定时器,60s
     //void checkDeadLine();//检查超时
-
     std::string _sessionId;
-    std::string _uid;
+    std::string _userId;
     std::mutex _mutex;
-    int _cv;
+    std::condition_variable _cv;
+    std::atomic_bool _isStop;
+    std::atomic_bool _isParsed;
+    std::shared_ptr<MsgNode> _msg_head;
+    std::shared_ptr<MsgNode> _msg_body;
+
 };
 
 

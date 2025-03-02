@@ -39,6 +39,10 @@ add_executable(ChatServer main.cpp
         message.pb.h
         message.grpc.pb.cc
         message.grpc.pb.h
+        MsgNode.cpp
+        MsgNode.h
+        LogicNode.cpp
+        LogicNode.h
 )
 
 # absl库

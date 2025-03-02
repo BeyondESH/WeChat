@@ -47,12 +47,6 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 51,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
 				"line" : 55,
 				"parent" : 0
 			},
@@ -71,13 +65,13 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 66,
+				"line" : 67,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 74,
+				"line" : 70,
 				"parent" : 0
 			},
 			{
@@ -87,9 +81,15 @@
 				"parent" : 0
 			},
 			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 82,
+				"parent" : 0
+			},
+			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 58,
+				"line" : 62,
 				"parent" : 0
 			},
 			{
@@ -133,7 +133,7 @@
 			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 45,
+				"line" : 49,
 				"parent" : 0
 			},
 			{
@@ -225,7 +225,7 @@
 			{
 				"command" : 4,
 				"file" : 0,
-				"line" : 73,
+				"line" : 77,
 				"parent" : 0
 			},
 			{
@@ -251,7 +251,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 46,
+				"line" : 50,
 				"parent" : 0
 			},
 			{
@@ -263,7 +263,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 70,
+				"line" : 74,
 				"parent" : 0
 			}
 		]
@@ -345,7 +345,9 @@
 				19,
 				22,
 				24,
-				26
+				26,
+				28,
+				30
 			]
 		}
 	],
@@ -608,7 +610,9 @@
 				19,
 				22,
 				24,
-				26
+				26,
+				28,
+				30
 			]
 		},
 		{
@@ -630,14 +634,16 @@
 				21,
 				23,
 				25,
-				27
+				27,
+				29,
+				31
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				28
+				32
 			]
 		}
 	],
@@ -700,12 +706,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "TCPConnection.cpp",
+			"path" : "CSession.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "TCPConnection.h",
+			"path" : "CSession.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -793,6 +799,28 @@
 		{
 			"backtrace" : 1,
 			"path" : "message.grpc.pb.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "MsgNode.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "MsgNode.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "LogicNode.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "LogicNode.h",
 			"sourceGroupIndex" : 1
 		},
 		{

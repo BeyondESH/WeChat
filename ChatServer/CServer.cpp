@@ -27,7 +27,7 @@ void CServer::start() {
             new_connection->start(); //开始处理请求
             {
                 std::lock_guard<std::mutex> lock(self->_mutex);
-                self->_connections[new_connection->getConnectionId()]=new_connection;
+                self->_sessions[new_connection->getSessionId()]=new_connection;
             }
             self->start(); //继续监听
         } catch (std::exception &e) {
@@ -38,6 +38,10 @@ void CServer::start() {
     });
 }
 
-void CServer::closeSession(const std::string sessionId) {
-
+void CServer::closeSession(const std::string &sessionId) {
+    try {
+        _sessions.erase(sessionId);
+    } catch (const std::exception &e) {
+        std::cerr<<"main error:"<<e.what()<<std::endl;
+    }
 }

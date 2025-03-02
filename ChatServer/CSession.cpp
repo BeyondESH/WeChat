@@ -4,32 +4,16 @@
 #include "LogicSystem.h"
 #include "CSession.h"
 #include <boost/uuid.hpp>
-CSession::CSession(boost::asio::io_context &ioc) : _socket(ioc) {
-    boost::uuids::uuid uuid=boost::uuids::random_generator()();
-    _connectionId=boost::uuids::to_string(uuid);
+#include "LogicNode.h"
+
+CSession::CSession(boost::asio::io_context &ioc) : _socket(ioc), _isStop(false), _isParsed(false),_msg_body(std::make_shared<MsgNode>()),_msg_head(std::make_shared<MsgNode>(0,4,nullptr)) {
+    boost::uuids::uuid uuid = boost::uuids::random_generator()();
+    _sessionId = boost::uuids::to_string(uuid);
 }
 
 void CSession::start() {
     auto self = shared_from_this();
-    //读取并处理请求
-    _socket.async_read_some(&_buffer,[self](boost::system::error_code ec,std::size_t number) {
-
-    });
-    boost::beast::http::async_read(_socket, _buffer, _request,
-                                   [self](boost::beast::error_code ec, std::size_t bytes_transferred) {
-                                       try {
-                                           //读取错误
-                                           if (ec.value() != 0) {
-                                               std::cerr << "read error:" << ec.what() << std::endl;
-                                               return;
-                                           }
-                                           boost::ignore_unused(bytes_transferred);//不需要粘包处理
-                                           self->handleRequest();//处理请求
-                                           self->checkDeadLine();//检查超时
-                                       } catch (std::exception &e) {
-                                           std::cerr << "read error:" << e.what() << std::endl;
-                                       }
-                                   });
+    read();
 }
 
 // void CSession::checkDeadLine() {
@@ -41,64 +25,61 @@ void CSession::start() {
 //     });
 // }
 
-//发送应答
-void CSession::response() {
-    auto self = shared_from_this();
-    _response.content_length(_response.body().size());
-    boost::beast::http::async_write(_socket, _response,
-                                    [self](boost::beast::error_code ec, std::size_t bytes_transferred) {
-                                        self->_socket.shutdown(boost::asio::ip::tcp::socket::shutdown_send, ec);
-                                        self->_deadLine.cancel();
-                                    });
-}
 
-//处理请求
-void CSession::handleRequest() {
-    //设置响应头
-    _response.version(_request.version());//设置版本
-    _response.keep_alive(false);//短连接
-    switch (_request.method()) {
-        case boost::beast::http::verb::get: {
-            bool result = LogicSystem::getInstance()->handleGet(_request.target(), shared_from_this());
-            //处理失败
-            if (result==false) {
-                _response.result(boost::beast::http::status::not_found);//404
-                _response.set(boost::beast::http::field::content_type, "text/plain");
-                boost::beast::ostream(_response.body()) << "url nor found\r\n";
-                response();//发送
-                return;
-            }
-            //处理成功
-            _response.result(boost::beast::http::status::ok);
-            _response.set(boost::beast::http::field::server, "GateServer");
-            response();//发送
-            return;
-        }
-        case boost::beast::http::verb::post:{
-            bool result = LogicSystem::getInstance()->handlePost(_request.target(), shared_from_this());
-            //处理失败
-            if (result==false) {
-                _response.result(boost::beast::http::status::not_found);//404
-                _response.set(boost::beast::http::field::content_type, "text/plain");
-                boost::beast::ostream(_response.body()) << "url nor found\r\n";
-                response();//发送
-                return;
-            }
-            //处理成功
-            _response.result(boost::beast::http::status::ok);
-            _response.set(boost::beast::http::field::server, "GateServer");
-            response();//发送
-            return;
-        }
-        default:
-            return;
-    }
-}
 
-boost::asio::ip::tcp::socket & CSession::getSocket() {
+boost::asio::ip::tcp::socket &CSession::getSocket() {
     return this->_socket;
 }
 
-std::string & CSession::getSessionId() {
+std::string &CSession::getSessionId() {
     return _sessionId;
+}
+
+void CSession::read() {
+    auto self=shared_from_this();
+    //读取并处理请求
+    _socket.async_read_some(&boost::asio::buffer(_buffer,MSG_MAX_LEN), [self](boost::system::error_code ec, std::size_t bytes_transferred) {
+        try {
+            if (ec.value()!=0) {
+                std::cerr << "read error:" << ec.what() << std::endl;
+                return;
+            }
+            while (bytes_transferred>0) {
+                //读取头部
+                if (self->_isParsed == false) {
+                    if (bytes_transferred+self->_msg_head->currentLen < MSG_HEAD_SIZE) {
+                        memcpy(self->_msg_head->data+self->_msg_head->currentLen,self->_buffer+self->_msg_head->currentLen,bytes_transferred);
+                        self->_msg_head->currentLen+=bytes_transferred;
+                        return;
+                    }
+                    memcpy(self->_msg_head->data+self->_msg_head->currentLen,self->_buffer+self->_msg_head->currentLen,MSG_HEAD_SIZE-self->_msg_head->currentLen);
+                    self->_msg_head->currentLen=MSG_HEAD_SIZE;
+                    bytes_transferred-=MSG_HEAD_SIZE;
+                    self->_isParsed==true;
+
+                    //解析头部信息
+                    memcpy(&self->_msg_head->totalLen,self->_msg_head->data+2,2);
+                }
+                //读取body
+                if (bytes_transferred+self->_msg_body->currentLen<self->_msg_head->totalLen) {
+                    memcpy(self->_msg_body->data+self->_msg_body->currentLen,self->_buffer+self->_msg_body->currentLen,bytes_transferred);
+                    self->_msg_body->currentLen+=bytes_transferred;
+                    return;
+                }
+                memcpy(self->_msg_body->data+self->_msg_body->currentLen,self->_buffer+self->_msg_body->currentLen,self->_msg_head->totalLen-self->_msg_body->currentLen);
+                self->_msg_body->currentLen=self->_msg_body->totalLen;
+                bytes_transferred-=self->_msg_head->totalLen;
+                //传给逻辑系统队列
+                short id;
+                memcpy(&id,self->_msg_head->data,2);//获取id
+                std::shared_ptr<LogicNode> logicNode =std::make_shared<LogicNode>(id,self->_msg_body,self);
+                LogicSystem::getInstance()->postMsgToQueue(logicNode);
+                self->_isParsed=false;
+            }
+            self->read();
+        } catch (std::exception &e) {
+            std::cerr << "read error:" << e.what() << std::endl;
+            self->read();
+        }
+    });
 }

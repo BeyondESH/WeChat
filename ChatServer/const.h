@@ -42,5 +42,7 @@ enum ErrorCodes{
 };
 
 #define CODE_PREFIX "verifycode_"
-
+#define MSG_MAX_LEN 8192
+#define MSG_HEAD_SIZE 4
+#define MSG_ID_SIZE 2
 #endif //GATESERVER_CONST_H

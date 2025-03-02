@@ -15,11 +15,11 @@ public:
     CServer(boost::asio::io_context& ioc,unsigned  short& port);//构造函数
     void start();//启动服务器
 private:
-    void closeSession(const std::string sessionId);
+    void closeSession(const std::string &sessionId);
 
     boost::asio::ip::tcp::acceptor _acceptor;//接收器
     boost::asio::io_context& _ioc;//io上下文
-    std::map<std::string,std::shared_ptr<CSession>> _connections;
+    std::map<std::string,std::shared_ptr<CSession>> _sessions;
     std::mutex _mutex;
 };
 
