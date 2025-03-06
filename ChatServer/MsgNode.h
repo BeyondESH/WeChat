@@ -9,6 +9,7 @@
 
 class MsgNode {
 public:
+    void clear();
     MsgNode();
     MsgNode(short currentLen,short totalLen,char* data);
     MsgNode(const MsgNode& msgNode);

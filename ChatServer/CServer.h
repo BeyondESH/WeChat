@@ -11,6 +11,7 @@
 class CSession;
 
 class CServer :public std::enable_shared_from_this<CServer>{
+    friend class CSession;
 public:
     CServer(boost::asio::io_context& ioc,unsigned  short& port);//构造函数
     void start();//启动服务器

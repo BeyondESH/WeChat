@@ -4,6 +4,13 @@
 
 #include "MsgNode.h"
 
+#include <cstring>
+
+void MsgNode::clear() {
+    memset(data,0,totalLen);
+    currentLen=0;
+}
+
 MsgNode::MsgNode():currentLen(0),totalLen(0),data(nullptr) {
 }
 

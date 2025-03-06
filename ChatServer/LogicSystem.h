@@ -24,6 +24,8 @@ public:
     // void regGet(std::string url,HttpHandler handler);
     // void regPost(std::string url,HttpHandler handler);
 private:
+
+
     LogicSystem();
     LogicSystem(const LogicSystem&)=delete;
     LogicSystem&operator=(const LogicSystem&)=delete;

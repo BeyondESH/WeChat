@@ -13,11 +13,12 @@
 #include "MsgNode.h"
 //提前声明
 class LogicSystem;
+class CServer;
 
 class CSession:public std::enable_shared_from_this<CSession>{
     friend class LogicSystem;
 public:
-    CSession(boost::asio::io_context &ioc);
+    CSession(boost::asio::io_context &ioc,std::shared_ptr<CServer> cserver);
     void start();
     boost::asio::ip::tcp::socket& getSocket();
     std::string& getSessionId();
@@ -36,7 +37,7 @@ private:
     std::atomic_bool _isParsed;
     std::shared_ptr<MsgNode> _msg_head;
     std::shared_ptr<MsgNode> _msg_body;
-
+    std::shared_ptr<CServer> _cserver;
 };
 
 

@@ -16,7 +16,7 @@ CServer::CServer(boost::asio::io_context &ioc, unsigned short &port)
 void CServer::start() {
     auto self = shared_from_this();
     auto &io_context = AsioIOcontextPool::getInstance()->getIOContext(); //从线程池中获取一个io_context
-    std::shared_ptr<CSession> new_connection = std::make_shared<CSession>(io_context); //创建新连接
+    std::shared_ptr<CSession> new_connection = std::make_shared<CSession>(io_context,self); //创建新连接
     _acceptor.async_accept(new_connection->getSocket(), [self,new_connection](boost::system::error_code ec) {
         try {
             //监听错误，重新监听
@@ -42,6 +42,6 @@ void CServer::closeSession(const std::string &sessionId) {
     try {
         _sessions.erase(sessionId);
     } catch (const std::exception &e) {
-        std::cerr<<"main error:"<<e.what()<<std::endl;
+        std::cerr<<"close session error:"<<e.what()<<std::endl;
     }
 }
