@@ -26,7 +26,7 @@ private:
     void read();
 
     boost::asio::ip::tcp::socket _socket;
-    char *_buffer[MSG_MAX_LEN];
+    char _buffer[MSG_MAX_LEN];
     //boost::beast::net::steady_timer _deadLine{_socket.get_executor(),std::chrono::seconds(60)};//超时定时器,60s
     //void checkDeadLine();//检查超时
     std::string _sessionId;

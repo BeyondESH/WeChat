@@ -40,6 +40,7 @@ void CServer::start() {
 
 void CServer::closeSession(const std::string &sessionId) {
     try {
+        std::lock_guard<std::mutex> lock(_mutex);
         _sessions.erase(sessionId);
     } catch (const std::exception &e) {
         std::cerr<<"close session error:"<<e.what()<<std::endl;

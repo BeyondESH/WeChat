@@ -7,15 +7,33 @@
 #include <cstring>
 
 void MsgNode::clear() {
-    memset(data,0,totalLen);
+    if (totalLen!=0) {
+        memset(data,0,totalLen);
+    }
     currentLen=0;
 }
 
-MsgNode::MsgNode():currentLen(0),totalLen(0),data(nullptr) {
-}
-
-MsgNode::MsgNode(short currentLen, short totalLen, char *data) : currentLen(currentLen), totalLen(totalLen), data(data) {
+MsgNode::MsgNode(short currentLen, short totalLen) : currentLen(currentLen), totalLen(totalLen){
+    if (totalLen>0) {
+        this->data=new char[totalLen];
+        memset(this->data,0,totalLen);
+    }else {
+        this->data=nullptr;
+    }
 }
 
 MsgNode::MsgNode(const MsgNode &msgNode):currentLen(msgNode.currentLen),totalLen(msgNode.totalLen),data(msgNode.data) {
+    if (msgNode.data != nullptr && totalLen > 0) {
+        data = new char[totalLen];
+        memcpy(data, msgNode.data, totalLen);
+    } else {
+        data = nullptr;
+    }
+}
+
+MsgNode::~MsgNode() {
+    if (data!=nullptr) {
+        delete[] data;
+        data=nullptr;
+    }
 }
