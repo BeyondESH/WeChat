@@ -12,7 +12,7 @@ LoginDialog::LoginDialog(QWidget *parent)
     initHttpHandlers();
     connect(HttpMgr::getInstance().get(),&HttpMgr::signal_mod_login_finished,this,&LoginDialog::slot_mod_login_finished);
     connect(this,&LoginDialog::signal_tcp_connected,TCPMgr::getInstance().get(),&TCPMgr::slots_tcp_connected);
-    connect(TCPMgr::getInstance().get(),&TCPMgr::signal_switch_chatDialog,this,&LoginDialog::slot_switch_chatDialog);
+    //connect(TCPMgr::getInstance().get(),&TCPMgr::signal_switch_chatDialog,this,&LoginDialog::slot_switch_chatDialog);
     connect(TCPMgr::getInstance().get(),&TCPMgr::signal_connected_success,this,&LoginDialog::slot_tcp_connect_finished);
     connect(TCPMgr::getInstance().get(),&TCPMgr::signal_login_failed,this,&LoginDialog::slot_login_failed);
 }

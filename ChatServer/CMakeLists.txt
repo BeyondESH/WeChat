@@ -43,6 +43,8 @@ add_executable(ChatServer main.cpp
         MsgNode.h
         LogicNode.cpp
         LogicNode.h
+        SendNode.cpp
+        SendNode.h
 )
 
 # absl库

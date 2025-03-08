@@ -6,7 +6,7 @@
 #include <boost/uuid.hpp>
 #include "LogicNode.h"
 #include "CServer.h"
-
+#include "SendNode.h"
 CSession::CSession(boost::asio::io_context &ioc,std::shared_ptr<CServer> cserver) : _cserver(cserver),_socket(ioc), _isStop(false), _isParsed(false),_msg_head(std::make_shared<MsgNode>(0,4)),_msg_body(std::make_shared<MsgNode>(0,0)) {
     boost::uuids::uuid uuid = boost::uuids::random_generator()();
     _sessionId = boost::uuids::to_string(uuid);
@@ -65,7 +65,7 @@ void CSession::read() {
                     memcpy(self->_msg_head->data+self->_msg_head->currentLen,self->_buffer+self->_msg_head->currentLen,MSG_HEAD_SIZE-self->_msg_head->currentLen);
                     self->_msg_head->currentLen=MSG_HEAD_SIZE;
                     bytes_transferred-=MSG_HEAD_SIZE;
-                    
+
                     //解析头部信息,获取body长度
                     memcpy(&self->_msg_body->totalLen,self->_msg_head->data+2,2);
                     self->_msg_body->totalLen=boost::asio::detail::socket_ops::network_to_host_short(self->_msg_body->totalLen);
@@ -111,4 +111,53 @@ void CSession::read() {
             self->read();
         }
     });
+}
+
+void CSession::send(char *data,short totalLen,short id) {
+    try {
+        auto self=shared_from_this();
+        std::lock_guard<std::mutex> lock(_mutex);
+        int queueSize=_send_queue.size();
+        if (queueSize>QUEUE_MAX_SIZE) {
+            std::cerr<<"queue size is overflow:"<<queueSize<<std::endl;
+            return;
+        }
+        _send_queue.emplace(std::make_shared<SendNode>(data,id,totalLen));
+        //等待前序节点发送完成后pop
+        if (queueSize>0) {
+            return;
+        }
+        auto &sendNode=_send_queue.front();
+        boost::asio::async_write(_socket,boost::asio::buffer(sendNode->data,sendNode->totalLen), std::bind(&CSession::handle_async_write,self,std::placeholders::_1,std::placeholders::_2,self));
+    } catch (const boost::system::error_code &ec) {
+        std::cerr << "send error:" << ec.what() << std::endl;
+        close();
+        _cserver->closeSession(getSessionId());
+    }
+}
+
+void CSession::close() {
+    _socket.close();
+    _isStop=true;
+}
+
+void CSession::handle_async_write(const boost::system::error_code &ec, std::size_t bytes_transferred,std::shared_ptr<CSession> self) {
+    try {
+        std::lock_guard<std::mutex> lock(self->_mutex);
+        if (ec.value()!=0) {
+            std::cerr << "send error:" << ec.what() << std::endl;
+            self->close();
+            self->_cserver->closeSession(self->getSessionId());
+            return;
+        }
+        self->_send_queue.pop();
+        if (!_send_queue.empty()) {
+            auto &sendNode=self->_send_queue.front();
+            boost::asio::async_write(_socket,boost::asio::buffer(sendNode->data,sendNode->totalLen),std::bind(&CSession::handle_async_write,self,std::placeholders::_1,std::placeholders::_2,self));
+        }
+    } catch (const boost::system::error_code &ec) {
+        std::cerr << "handle async write error:" << ec.what() << std::endl;
+        close();
+        _cserver->closeSession(getSessionId());
+    }
 }

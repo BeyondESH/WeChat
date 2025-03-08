@@ -7,42 +7,87 @@
 #include "MySQLMgr.h"
 #include "RedisMgr.h"
 #include "Crypto.h"
+#include "LogicNode.h"
 #include "StatusGrpcClient.h"
+#include "MsgNode.h"
+#include <nlohmann/json.hpp>
+
 using json = nlohmann::json;
 
-bool LogicSystem::handleGet(std::string path, std::shared_ptr<CSession> connection) {
-    //未找到path
-    if (_getHandlers.find(path) == _getHandlers.end()) {
-        return false;
-    }
-    _getHandlers[path](connection);
-    return true;
-}
-
-bool LogicSystem::handlePost(std::string path, std::shared_ptr<CSession> connection) {
-    //未找到path
-    if (_postHandlers.find(path) == _postHandlers.end()) {
-        return false;
-    }
-    _postHandlers[path](connection);
-    return true;
-}
-
 LogicSystem::~LogicSystem() {
+    close();
+}
+
+bool LogicSystem::handleMsg(std::shared_ptr<LogicNode> logicNode) {
+    try {
+        auto id=logicNode.get()->_id;
+        auto iter=_msgHandlers.find(id);
+        if (iter==_msgHandlers.end()) {
+            std::cerr<<"LogicNode does not exist"<<std::endl;
+            return false;
+        }else {
+            auto msgNode=std::move(logicNode.get()->_msgNode);
+            auto session=std::move(logicNode.get()->_session);
+            iter->second(msgNode,session);
+            return true;
+        }
+    } catch (const std::exception &e){
+        std::cerr<<"handle msg error:"<<e.what()<<std::endl;
+        return false;
+    }
 }
 
 void LogicSystem::postMsgToQueue(std::shared_ptr<LogicNode> logicNode) {
-
+    try {
+        std::lock_guard<std::mutex> lock(_mutex);
+        if (_queue.size() > QUEUE_MAX_SIZE) {
+            std::cerr<<"queue is full, drop msg!"<<std::endl;
+            return;
+        }
+        _queue.emplace(logicNode);
+        _cv.notify_one();
+    } catch (const std::error_code &ec) {
+        std::cerr <<"post msg to queue error:" <<ec.value() << std::endl;
+    }
 }
 
-void LogicSystem::regGet(std::string url, HttpHandler handler) {
-    _getHandlers.insert({url, handler});
+LogicSystem::LogicSystem():_isStop(false) {
+    try {
+        auto registerHandlers=[this]() {
+            _msgHandlers[MSG_CHAT_LOGIN]=[](std::shared_ptr<MsgNode> msgNode,std::shared_ptr<CSession> session) {
+                std::string msg_str(msgNode.get()->data,msgNode.get()->totalLen);
+                std::cerr<<"handle msg_str:"<<msg_str<<std::endl;
+                json src_root=json::parse(msg_str);
+                json root;
+                std::string uid=src_root["uid"];
+                std::string token=src_root["token"];
+            };
+        };
+        std::thread thread_dealMsg([&]() {
+            std::unique_lock<std::mutex> lock(_mutex);
+            _cv.wait(lock,[this]() {
+                return _isStop||!_queue.empty();
+            });
+            if (_isStop) {
+                while (!_queue.empty()) {
+                    auto logicNode=std::move(_queue.front());
+                    handleMsg(logicNode);
+                    _queue.pop();
+                }
+                return;
+            }
+            auto logicNode=std::move(_queue.front());
+            _queue.pop();
+            auto msgNode=std::move(logicNode.get()->_msgNode);
+            handleMsg(logicNode);
+        });
+    } catch (const std::exception &e) {
+        std::cerr<<"LogicSystem exception:"<<e.what()<<std::endl;
+    }
 }
 
-LogicSystem::LogicSystem() {
-
-}
-
-void LogicSystem::regPost(std::string url, HttpHandler handler) {
-    _postHandlers.insert({url, handler});
+void LogicSystem::close() {
+    std::lock_guard<std::mutex> lock(_mutex);
+    _isStop=true;
+    _cv.notify_all();
 }
