@@ -72,7 +72,8 @@ std::shared_ptr<mysqlx::Session> MySQLConnectPool::getSession()
     }
 }
 
-SessionGuard MySQLConnectPool::getSessionGuard() {
+SessionGuard MySQLConnectPool::getSessionGuard()
+{
     return SessionGuard(getSession());
 }
 
@@ -332,12 +333,13 @@ int MySQLMgr::resetPassword(const std::string &email, const std::string &passwor
             return -2;
         }
         // 查询密码是否相同
-        //std::string cryptoPwd = Crypto::stringToSha256(password);
-        //password已经在qt客户端被加密过了
+        // std::string cryptoPwd = Crypto::stringToSha256(password);
+        // password已经在qt客户端被加密过了
         auto oldPwdResult = session->sql("SELECT `password` from wechat.user where `email`=\'" + email + "\'").execute();
         auto row = oldPwdResult.fetchOne();
-        std::string oldPassword=row[0].get<std::string>();
-        if(password==oldPassword){
+        std::string oldPassword = row[0].get<std::string>();
+        if (password == oldPassword)
+        {
             return -3;
         }
         // 更新密码
@@ -351,87 +353,119 @@ int MySQLMgr::resetPassword(const std::string &email, const std::string &passwor
     }
 }
 
-int MySQLMgr::loginAcconut(const std::string &user, const std::string &password) {
-    try {
-        auto session=_pool->getSessionGuard();
-        if (!session) {
+int MySQLMgr::loginAcconut(const std::string &user, const std::string &password)
+{
+    try
+    {
+        auto session = _pool->getSessionGuard();
+        if (!session)
+        {
             return -1;
         }
-        //查询用户是否存在
-        auto existAccount=MySQLMgr::getInstance()->queryUser(user);
-        if (existAccount==false) {
-            std::cerr<<"User is nonexistent"<<std::endl;
+        // 查询用户是否存在
+        auto existAccount = MySQLMgr::getInstance()->queryUser(user);
+        if (existAccount == false)
+        {
+            std::cerr << "User is nonexistent" << std::endl;
             return -2;
         }
-        //查询密码是否正确
-        auto result=session->sql("SELECT `password` from wechat.user where `name`=?").bind(user).execute();
-        auto row=result.fetchOne();
-        std::string reallyPassword=row[0].get<std::string>();
-        if (password!=reallyPassword) {
-            std::cerr<<"Password is error"<<std::endl;
+        // 查询密码是否正确
+        auto result = session->sql("SELECT `password` from wechat.user where `name`=?").bind(user).execute();
+        auto row = result.fetchOne();
+        std::string reallyPassword = row[0].get<std::string>();
+        if (password != reallyPassword)
+        {
+            std::cerr << "Password is error" << std::endl;
             return -3;
-        }else{
+        }
+        else
+        {
             return 0;
         }
-    } catch (const mysqlx::Error &error) {
-        std::cerr<<"Failed to login by account:"<<error.what()<<std::endl;
+    }
+    catch (const mysqlx::Error &error)
+    {
+        std::cerr << "Failed to login by account:" << error.what() << std::endl;
         return -1;
     }
 }
 
-int MySQLMgr::loginEmail(const std::string &email, const std::string &password) {
-    try {
-        auto session=_pool->getSessionGuard();
-        if (!session) {
+int MySQLMgr::loginEmail(const std::string &email, const std::string &password)
+{
+    try
+    {
+        auto session = _pool->getSessionGuard();
+        if (!session)
+        {
             return -1;
         }
-        //查询用户是否存在
-        auto existEmail=MySQLMgr::getInstance()->queryEmail(email);
-        if (existEmail==false) {
-            std::cerr<<"User is nonexistent"<<std::endl;
+        // 查询用户是否存在
+        auto existEmail = MySQLMgr::getInstance()->queryEmail(email);
+        if (existEmail == false)
+        {
+            std::cerr << "User is nonexistent" << std::endl;
             return -2;
         }
-        //查询密码是否正确
-        auto result=session->sql("SELECT `password` from wechat.user where `email`=?").bind(email).execute();
-        auto row=result.fetchOne();
-        std::string reallyPassword=row[0].get<std::string>();
-        if (password!=reallyPassword) {
-            std::cerr<<"Password is error"<<std::endl;
+        // 查询密码是否正确
+        auto result = session->sql("SELECT `password` from wechat.user where `email`=?").bind(email).execute();
+        auto row = result.fetchOne();
+        std::string reallyPassword = row[0].get<std::string>();
+        if (password != reallyPassword)
+        {
+            std::cerr << "Password is error" << std::endl;
             return -3;
-        }else{
+        }
+        else
+        {
             return 0;
         }
-    } catch (const mysqlx::Error &error) {
-        std::cerr<<"Failed to login by email:"<<error.what()<<std::endl;
+    }
+    catch (const mysqlx::Error &error)
+    {
+        std::cerr << "Failed to login by email:" << error.what() << std::endl;
         return -1;
     }
 }
 
-int MySQLMgr::getUID(const int mod,const std::string &str) {
-    try {
-        auto session=_pool->getSessionGuard();
-        if (!session) {
+int MySQLMgr::getUID(const int mod, const std::string &str)
+{
+    try
+    {
+        auto session = _pool->getSessionGuard();
+        if (!session)
+        {
             return -1;
         }
-        if (mod==0) {
-            auto result=session->sql("SELECT `id` from wechat.user where `email`=?").bind(str).execute();
-            auto row=result.fetchOne();
-            if (!row) {
+        if (mod == 0)
+        {
+            auto result = session->sql("SELECT `id` from wechat.user where `email`=?").bind(str).execute();
+            auto row = result.fetchOne();
+            if (!row)
+            {
                 return -2;
-            }else {
-                return row[0].get<int>();
             }
-        }else {
-            auto result=session->sql("SELECT `id` from wechat.user where `name`=?").bind(str).execute();
-            auto row=result.fetchOne();
-            if (!row) {
-                return -2;
-            }else {
+            else
+            {
                 return row[0].get<int>();
             }
         }
-    } catch (const mysqlx::Error &error) {
-        std::cerr<<"Failed to get UID:"<<error.what()<<std::endl;
+        else
+        {
+            auto result = session->sql("SELECT `id` from wechat.user where `name`=?").bind(str).execute();
+            auto row = result.fetchOne();
+            if (!row)
+            {
+                return -2;
+            }
+            else
+            {
+                return row[0].get<int>();
+            }
+        }
+    }
+    catch (const mysqlx::Error &error)
+    {
+        std::cerr << "Failed to get UID:" << error.what() << std::endl;
         return -1;
     }
 }
@@ -449,24 +483,45 @@ MySQLMgr::MySQLMgr()
     _pool = std::make_unique<MySQLConnectPool>(_settings, std::thread::hardware_concurrency());
 }
 
-SessionGuard::SessionGuard(std::shared_ptr<mysqlx::Session> session):_session(session) {
-
+SessionGuard::SessionGuard(std::shared_ptr<mysqlx::Session> session) : _session(session)
+{
 }
 
-SessionGuard::~SessionGuard() {
-    if (_session) {
-            MySQLMgr::getInstance()->_pool->returnSession(_session);
+SessionGuard::~SessionGuard()
+{
+    try
+    {
+        if (_session)
+        {
+            auto mgr = MySQLMgr::getInstance();
+            if (mgr && mgr->_pool)
+            {
+                mgr->_pool->returnSession(_session);
+            }
+        }
+    }
+    catch (const std::bad_weak_ptr &)
+    {
+        // 单例已被销毁，忽略异常
+        std::cerr << "Warning: MySQLMgr singleton was already destroyed when returning session" << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Error when returning session: " << e.what() << std::endl;
     }
 }
 
-SessionGuard::operator bool() const {
+SessionGuard::operator bool() const
+{
     return _session != nullptr;
 }
 
-std::shared_ptr<mysqlx::Session> SessionGuard::get() const {
+std::shared_ptr<mysqlx::Session> SessionGuard::get() const
+{
     return _session;
 }
 
-std::shared_ptr<mysqlx::Session> SessionGuard::operator->() const {
+std::shared_ptr<mysqlx::Session> SessionGuard::operator->() const
+{
     return _session;
 }

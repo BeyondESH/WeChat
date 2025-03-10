@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2024.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2024.1/bin/ninja/win/x64/ninja.exe" -G Ninja -S D:\Gitee\wechat\StatusServer -B D:\Gitee\wechat\StatusServer\cmake-build-debug
+"C:\Program Files\JetBrains\CLion 2024.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2024.1/bin/ninja/win/x64/ninja.exe" -DCMAKE_TOOLCHAIN_FILE=D:/C++library/vcpkg/scripts/buildsystems/vcpkg.cmake -G Ninja -S D:\Gitee\wechat\StatusServer -B D:\Gitee\wechat\StatusServer\cmake-build-debug
 -- The C compiler identification is MSVC 19.43.34808.0
 -- The CXX compiler identification is MSVC 19.43.34808.0
 -- Detecting C compiler ABI info
@@ -19,11 +19,11 @@
 -- Looking for pthread_create in pthread - not found
 -- Found Threads: TRUE
 -- Found Protobuf: D:/C++library/vcpkg/installed/x64-windows/bin/protoc.exe (found version "29.3.0")
--- Found OpenSSL: D:/C++library/vcpkg/installed/x64-windows/lib/libcrypto.lib (found version "3.4.1")
+-- Found OpenSSL: optimized;D:/C++library/vcpkg/installed/x64-windows/lib/libcrypto.lib;debug;D:/C++library/vcpkg/installed/x64-windows/debug/lib/libcrypto.lib (found version "3.4.1")
 -- Found ZLIB: optimized;D:/C++library/vcpkg/installed/x64-windows/lib/zlib.lib;debug;D:/C++library/vcpkg/installed/x64-windows/debug/lib/zlibd.lib (found version "1.3.1")
 -- Found c-ares: D:/C++library/vcpkg/installed/x64-windows/share/c-ares/c-ares-config.cmake (found version "1.34.4")
 -- Found RE2 via CMake.
 -- Found nlohmann_json: D:/C++library/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_jsonConfig.cmake (found version "3.11.3")
--- Configuring done (3.0s)
+-- Configuring done (3.6s)
 -- Generating done (0.1s)
 -- Build files have been written to: D:/Gitee/wechat/StatusServer/cmake-build-debug

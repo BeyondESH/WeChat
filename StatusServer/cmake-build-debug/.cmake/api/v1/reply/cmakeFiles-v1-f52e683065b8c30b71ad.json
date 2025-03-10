@@ -10,6 +10,15 @@
 			"path" : "C:/Program Files/JetBrains/CLion 2024.1/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake"
 		},
 		{
+			"isExternal" : true,
+			"path" : "D:/C++library/vcpkg/scripts/buildsystems/vcpkg.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/JetBrains/CLion 2024.1/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDependentOption.cmake"
+		},
+		{
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files/JetBrains/CLion 2024.1/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystem.cmake.in"
@@ -17,6 +26,15 @@
 		{
 			"isGenerated" : true,
 			"path" : "cmake-build-debug/CMakeFiles/3.30.5/CMakeSystem.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/C++library/vcpkg/scripts/buildsystems/vcpkg.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/JetBrains/CLion 2024.1/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeDependentOption.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -860,6 +878,10 @@
 		},
 		{
 			"isExternal" : true,
+			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/protobuf/vcpkg-cmake-wrapper.cmake"
+		},
+		{
+			"isExternal" : true,
 			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/protobuf/protobuf-config-version.cmake"
 		},
 		{
@@ -922,6 +944,10 @@
 			"path" : "C:/Program Files/JetBrains/CLion 2024.1/bin/cmake/win/x64/share/cmake-3.30/Modules/FindPackageMessage.cmake"
 		},
 		{
+			"isExternal" : true,
+			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/openssl/vcpkg-cmake-wrapper.cmake"
+		},
+		{
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files/JetBrains/CLion 2024.1/bin/cmake/win/x64/share/cmake-3.30/Modules/FindOpenSSL.cmake"
@@ -950,6 +976,10 @@
 			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/grpc/gRPCConfig.cmake"
 		},
 		{
+			"isExternal" : true,
+			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/zlib/vcpkg-cmake-wrapper.cmake"
+		},
+		{
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files/JetBrains/CLion 2024.1/bin/cmake/win/x64/share/cmake-3.30/Modules/FindZLIB.cmake"
@@ -973,6 +1003,10 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files/JetBrains/CLion 2024.1/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/protobuf/vcpkg-cmake-wrapper.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -1128,6 +1162,10 @@
 		{
 			"isExternal" : true,
 			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/grpc/gRPCPluginTargets-release.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/boost/vcpkg-cmake-wrapper.cmake"
 		},
 		{
 			"isExternal" : true,
