@@ -14,70 +14,68 @@
 
 using json = nlohmann::json;
 
-LogicSystem::~LogicSystem()
-{
+LogicSystem::~LogicSystem() {
     close();
 }
 
-bool LogicSystem::handleMsg(std::shared_ptr<LogicNode> logicNode)
-{
-    try
-    {
+bool LogicSystem::handleMsg(std::shared_ptr<LogicNode> logicNode) {
+    try {
         auto id = logicNode.get()->_id;
         auto iter = _msgHandlers.find(id);
-        if (iter == _msgHandlers.end())
-        {
+        if (iter == _msgHandlers.end()) {
             std::cerr << "LogicNode does not exist" << std::endl;
             return false;
-        }
-        else
-        {
+        } else {
             auto msgNode = std::move(logicNode.get()->_msgNode);
             auto session = std::move(logicNode.get()->_session);
             iter->second(msgNode, session);
             return true;
         }
-    }
-    catch (const std::exception &e)
-    {
+    } catch (const std::exception &e) {
         std::cerr << "handle msg error:" << e.what() << std::endl;
         return false;
     }
 }
 
-void LogicSystem::postMsgToQueue(std::shared_ptr<LogicNode> logicNode)
-{
-    try
-    {
+void LogicSystem::postMsgToQueue(std::shared_ptr<LogicNode> logicNode) {
+    try {
         std::lock_guard<std::mutex> lock(_mutex);
-        if (_queue.size() > QUEUE_MAX_SIZE)
-        {
+        if (_queue.size() > QUEUE_MAX_SIZE) {
             std::cerr << "queue is full, drop msg!" << std::endl;
             return;
         }
         _queue.emplace(logicNode);
         _cv.notify_one();
-    }
-    catch (const std::error_code &ec)
-    {
+    } catch (const std::error_code &ec) {
         std::cerr << "post msg to queue error:" << ec.value() << std::endl;
     }
 }
 
-LogicSystem::LogicSystem() : _isStop(false)
-{
-    try
-    {
-        auto registerHandlers = [this]()
-        {
-            _msgHandlers[ID_CHAT_LOGIN] = [](std::shared_ptr<MsgNode> msgNode, std::shared_ptr<CSession> session)
-            {
+LogicSystem::LogicSystem() : _isStop(false) {
+    try {
+        auto registerHandlers = [this]() {
+            _msgHandlers[ID_CHAT_LOGIN] = [](std::shared_ptr<MsgNode> msgNode, std::shared_ptr<CSession> session) {
                 std::string msg_str(msgNode.get()->data, msgNode.get()->totalLen);
-                std::cerr << "handle msg_str:" << msg_str << std::endl;
+                if (msg_str.empty()) {
+                    std::cerr << "接收到空消息" << std::endl;
+                    json root;
+                    root["error"] = ErrorCodes::ERROR_JSON;  // 错误代码
+                    std::string json_str = root.dump(4);
+                    session->send(json_str.data(), json_str.length(), ID_CHAT_LOGIN_RSP);
+                    return;
+                }
+                std::cout << "handle msg_str:" << msg_str << std::endl;
                 json src_root = json::parse(msg_str);
                 json root;
-                std::string uid = src_root["uid"];
+                std::string uid_str = src_root["uid"];
+                int uid = std::stoi(uid_str);
                 std::string token = src_root["token"];
+                auto respond = StatusGrpcClient::getInstance()->checkToken(uid, token); //查询并验证token
+                root["error"] = respond.error();
+                char *json_str = root.dump(4).data();
+                std::cout << "sent json is:" << json_str << std::endl;
+                short totalLen = strlen(json_str);
+                session->send(json_str, totalLen, ID_CHAT_LOGIN_RSP);
             };
         };
 
@@ -85,48 +83,39 @@ LogicSystem::LogicSystem() : _isStop(false)
         registerHandlers();
 
         // 创建消息处理线程
-        std::thread([this]()
-                    {
-            while (!_isStop) {
-                std::shared_ptr<LogicNode> logicNode;
-                {
-                    std::unique_lock<std::mutex> lock(_mutex);
-                    _cv.wait(lock, [this]() {
-                        return _isStop || !_queue.empty();
-                    });
-                    
-                    if (_isStop) {
-                        break;
+        std::thread([this]() {
+                    while (!_isStop) {
+                        std::shared_ptr<LogicNode> logicNode; {
+                            std::unique_lock<std::mutex> lock(_mutex);
+                            _cv.wait(lock, [this]() {
+                                return _isStop || !_queue.empty();
+                            });
+                            if (_isStop) {
+                                break;
+                            }
+                            if (!_queue.empty()) {
+                                logicNode = std::move(_queue.front());
+                                _queue.pop();
+                            }
+                        }
+                        if (logicNode) {
+                            handleMsg(logicNode);
+                        }
                     }
-                    
-                    if (!_queue.empty()) {
-                        logicNode = std::move(_queue.front());
+                    // 处理剩余消息
+                    std::lock_guard<std::mutex> lock(_mutex);
+                    while (!_queue.empty()) {
+                        auto logicNode = std::move(_queue.front());
+                        handleMsg(logicNode);
                         _queue.pop();
                     }
-                }
-                
-                if (logicNode) {
-                    handleMsg(logicNode);
-                }
-            }
-            
-            // 处理剩余消息
-            std::lock_guard<std::mutex> lock(_mutex);
-            while (!_queue.empty()) {
-                auto logicNode = std::move(_queue.front());
-                handleMsg(logicNode);
-                _queue.pop();
-            } })
-            .detach();
-    }
-    catch (const std::exception &e)
-    {
+                }).detach();
+    } catch (const std::exception &e) {
         std::cerr << "LogicSystem exception:" << e.what() << std::endl;
     }
 }
 
-void LogicSystem::close()
-{
+void LogicSystem::close() {
     std::lock_guard<std::mutex> lock(_mutex);
     _isStop = true;
     _cv.notify_all();

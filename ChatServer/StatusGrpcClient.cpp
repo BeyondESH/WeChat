@@ -90,3 +90,35 @@ message::GetChatServerRsp StatusGrpcClient::getChatServer(const int &uid) {
         return respond;
     }
 }
+
+message::CheckTokenRsp StatusGrpcClient::checkToken(const int &uid, const std::string &token) {
+    try {
+        grpc::ClientContext context;
+        message::CheckTokenRsp respond;
+        message::CheckTokenReq request;
+        request.set_uid(uid);
+        request.set_token(token);
+        auto stub=_pool->getStub();
+        if (stub==nullptr) {
+            std::cout<<"Failed to get stub"<<std::endl;
+            respond.set_error(RPC_FAILED);
+            return respond;
+        }
+        Defer defer([&]() {
+            _pool->returnStub(std::move(stub));
+        });
+        grpc::Status status=stub->CheckToken(&context,request,&respond);
+        if (status.ok()) {
+            return respond;
+        }else {
+            std::cout<<"Failed to check the token:"<<status.error_message()<<std::endl;
+            respond.set_error(RPC_FAILED);
+            return respond;
+        }
+    } catch (const std::exception &e) {
+        std::cerr<<e.what()<<std::endl;
+        message::CheckTokenRsp respond;
+        respond.set_error(RPC_FAILED);
+        return respond;
+    }
+}

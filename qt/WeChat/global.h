@@ -73,6 +73,7 @@ enum ErrorCodes{
     PasswordUpFailed=1010,//密码修改失败
     ERR_MYSQL=1011,//mysql连接错误
     PasswordSame=1012,//新旧密码相同
+    Token_Invalid=1013,//token无效
 };
 
 struct ServerInfo{

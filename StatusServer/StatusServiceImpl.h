@@ -20,8 +20,10 @@ class StatusServiceImpl final :public message::StatusService::Service{
 public:
     StatusServiceImpl();
     grpc::Status GetChatServer(grpc::ServerContext *context, const message::GetChatServerReq *request, message::GetChatServerRsp *response) override;
+    grpc::Status CheckToken(grpc::ServerContext *context, const message::CheckTokenReq *request, message::CheckTokenRsp *response) override;
     ChatServer choseChatServer();
     void insertToken(int uid,std::string token);
+    bool checkToken(int &uid,std::string &token);
     std::unordered_map<std::string,ChatServer> _chatServers;
     std::mutex _serverMutex;
     std::unordered_map<int,std::string> _tokens;

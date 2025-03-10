@@ -99,10 +99,11 @@ void TCPMgr::initHandlers()
         }
         int error=jsonObj["error"].toInt();
         if(error!=ErrorCodes::SUCCESS){
-            qDebug()<<tr("登录验证失败:")<<error;
+            qDebug()<<tr("token验证失败:")<<error;
             emit signal_login_failed(error);
             return;
         }
+        qDebug()<<"token验证成功";
         emit signal_switch_chatDialog();
     });
 }

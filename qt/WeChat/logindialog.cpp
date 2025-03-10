@@ -140,6 +140,7 @@ void LoginDialog::slot_tcp_connect_finished(bool isSuccess)
         QJsonDocument jsonDoc(jsonObj);
         QString jsonStr=jsonDoc.toJson(QJsonDocument::Indented);
         TCPMgr::getInstance()->signal_send_data(ReqId::ID_CHAT_LOGIN,jsonStr);//发送登录信息给聊天服务器进行身份验证
+        qDebug()<<"进行token验证";
     }else{
         showTip(tr("服务器连接失败"),false);
     }

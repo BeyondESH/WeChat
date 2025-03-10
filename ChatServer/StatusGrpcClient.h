@@ -32,6 +32,7 @@ class StatusGrpcClient:public Singleton<StatusGrpcClient> {
 friend class Singleton<StatusGrpcClient>;
 public:
     message::GetChatServerRsp getChatServer(const int &uid);
+    message::CheckTokenRsp checkToken(const int &uid,const std::string &token);
 private:
     StatusGrpcClient();
     StatusGrpcClient(const StatusGrpcClient&)=delete;
