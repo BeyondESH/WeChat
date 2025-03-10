@@ -4,15 +4,19 @@
 
 #include "StatusServiceImpl.h"
 #include "ConfigMgr.hpp"
-#include <boost/uuid.hpp>
-std::string generateUUID() {
-    boost::uuids::uuid uuid=boost::uuids::random_generator()();
-    std::string uuid_string=boost::uuids::to_string(uuid);
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
+std::string generateUUID()
+{
+    boost::uuids::uuid uuid = boost::uuids::random_generator()();
+    std::string uuid_string = boost::uuids::to_string(uuid);
     return uuid_string;
 }
 
-StatusServiceImpl::StatusServiceImpl(){
-    auto &configMgr=ConfigMgr::getInstance();
+StatusServiceImpl::StatusServiceImpl()
+{
+    auto &configMgr = ConfigMgr::getInstance();
     ChatServer chatServer;
     std::string numberServer=configMgr["ChatServer"]["number"];
     int numberServer_int=stoi(numberServer);
@@ -27,30 +31,35 @@ StatusServiceImpl::StatusServiceImpl(){
 }
 
 grpc::Status StatusServiceImpl::GetChatServer(grpc::ServerContext *context, const message::GetChatServerReq *request,
-    message::GetChatServerRsp *response) {
-    std::cout<<"Run GetChatServer..."<<std::endl;
-    auto chatServer=choseChatServer();
+                                              message::GetChatServerRsp *response)
+{
+    std::cout << "Run GetChatServer..." << std::endl;
+    auto chatServer = choseChatServer();
     response->set_host(chatServer.host);
     response->set_port(chatServer.port);
     response->set_error(ErrorCodes::SUCCESS);
-    std::cout<<"GetChatServer success"<<std::endl;
+    std::cout << "GetChatServer success" << std::endl;
     response->set_token(generateUUID());
-    std::cout<<"Token is:"<<response->token()<<std::endl;
-    insertToken(request->uid(),response->token());
+    std::cout << "Token is:" << response->token() << std::endl;
+    insertToken(request->uid(), response->token());
     return grpc::Status::OK;
 }
 
-ChatServer StatusServiceImpl::choseChatServer() {
+ChatServer StatusServiceImpl::choseChatServer()
+{
     std::lock_guard<std::mutex> lock(_serverMutex);
-    for (auto &i:_chatServers) {
-        if (i.second.connectCount<_freeServer.connectCount) {
-            _freeServer=i.second;
+    for (auto &i : _chatServers)
+    {
+        if (i.second.connectCount < _freeServer.connectCount)
+        {
+            _freeServer = i.second;
         }
     }
     return _freeServer;
 }
 
-void StatusServiceImpl::insertToken(int uid, std::string token) {
+void StatusServiceImpl::insertToken(int uid, std::string token)
+{
     std::lock_guard<std::mutex> lock(_tokenMutex);
-    _tokens.emplace(uid,token);
+    _tokens.emplace(uid, token);
 }

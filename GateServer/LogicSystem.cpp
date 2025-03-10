@@ -252,7 +252,9 @@ LogicSystem::LogicSystem() {
             if (respond.error() != ErrorCodes::SUCCESS) {
                 root["error"] = respond.error();
             } else {
-                root["token"] = respond.token();
+                root["token"]= respond.token();
+                root["host"]=respond.host();
+                root["port"]=respond.port();
             }
         }
 
@@ -309,6 +311,8 @@ LogicSystem::LogicSystem() {
                 root["error"] = respond.error();
             } else {
                 root["token"] = respond.token();
+                root["host"]=respond.host();
+                root["port"]=respond.port();
             }
         }
 

@@ -112,11 +112,11 @@ void TCPMgr::handleMsg(ReqId id, int len, QByteArray data)
     _handlers[id](id,len,data);
 }
 
-void TCPMgr::slots_tcp_connected(ServerInfo info)
+void TCPMgr::slots_tcp_connected(ServerInfo server)
 {
     qDebug()<<"正在连接服务器";
-    _host=info.host;
-    _port=info.port.toUInt();
+    _host=server.host;
+    _port=server.port.toUInt();
     _socket.connectToHost(_host,_port);
 }
 
@@ -128,7 +128,7 @@ void TCPMgr::slot_send_data(ReqId reqId,QString string)
     QByteArray data;
     QDataStream stream(&data,QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::BigEndian);
-    stream<<id<<len<<body;
+    stream<<id<<len;
     data.append(body);
     _socket.write(data);
 }

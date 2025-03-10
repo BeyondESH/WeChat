@@ -54,7 +54,7 @@ void LogicSystem::postMsgToQueue(std::shared_ptr<LogicNode> logicNode) {
 LogicSystem::LogicSystem():_isStop(false) {
     try {
         auto registerHandlers=[this]() {
-            _msgHandlers[MSG_CHAT_LOGIN]=[](std::shared_ptr<MsgNode> msgNode,std::shared_ptr<CSession> session) {
+            _msgHandlers[ID_CHAT_LOGIN]=[](std::shared_ptr<MsgNode> msgNode,std::shared_ptr<CSession> session) {
                 std::string msg_str(msgNode.get()->data,msgNode.get()->totalLen);
                 std::cerr<<"handle msg_str:"<<msg_str<<std::endl;
                 json src_root=json::parse(msg_str);
@@ -63,6 +63,7 @@ LogicSystem::LogicSystem():_isStop(false) {
                 std::string token=src_root["token"];
             };
         };
+
         std::thread thread_dealMsg([&]() {
             std::unique_lock<std::mutex> lock(_mutex);
             _cv.wait(lock,[this]() {

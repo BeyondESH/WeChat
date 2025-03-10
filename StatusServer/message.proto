@@ -27,6 +27,22 @@ message GetChatServerRsp {
     string token = 4;
 }
 
+message CheckTokenReq {
+    int32 uid = 1;
+    string token = 2;
+}
+
+message CheckTokenRsp {
+    int32 error = 1;
+    int32 uid=2;
+    string token = 3;
+}
+
 service StatusService {
     rpc GetChatServer (GetChatServerReq) returns (GetChatServerRsp) {}
+    rpc CheckToken (CheckTokenReq) returns (CheckTokenRsp) {}
 }
+
+
+
+

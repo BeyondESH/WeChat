@@ -7,7 +7,7 @@ build CMakeFiles\ChatServer.dir\Crypto.cpp.obj: dyndep
 
 build CMakeFiles\ChatServer.dir\CServer.cpp.obj: dyndep
 
-build CMakeFiles\ChatServer.dir\HttpConnection.cpp.obj: dyndep
+build CMakeFiles\ChatServer.dir\CSession.cpp.obj: dyndep
 
 build CMakeFiles\ChatServer.dir\LogicSystem.cpp.obj: dyndep
 
@@ -18,6 +18,12 @@ build CMakeFiles\ChatServer.dir\RedisMgr.cpp.obj: dyndep
 build CMakeFiles\ChatServer.dir\StatusGrpcClient.cpp.obj: dyndep
 
 build CMakeFiles\ChatServer.dir\VerifyGrpcClient.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\MsgNode.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\LogicNode.cpp.obj: dyndep
+
+build CMakeFiles\ChatServer.dir\SendNode.cpp.obj: dyndep
 
 build CMakeFiles\ChatServer.dir\message.pb.cc.obj: dyndep
 

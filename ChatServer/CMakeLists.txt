@@ -35,16 +35,16 @@ add_executable(ChatServer main.cpp
         Test.hpp
         VerifyGrpcClient.cpp
         VerifyGrpcClient.h
-        message.pb.cc
-        message.pb.h
-        message.grpc.pb.cc
-        message.grpc.pb.h
         MsgNode.cpp
         MsgNode.h
         LogicNode.cpp
         LogicNode.h
         SendNode.cpp
         SendNode.h
+        message.pb.cc
+        message.pb.h
+        message.grpc.pb.cc
+        message.grpc.pb.h
 )
 
 # absl库
