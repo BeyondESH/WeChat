@@ -13,10 +13,11 @@ TCPMgr::TCPMgr():_isPending(false)
     });
 
     connect(&_socket,&QTcpSocket::readyRead,[&](){
+        qDebug()<<"接收数据";
         _buffer.append(_socket.readAll());//读取数据
-        QDataStream stream(&_buffer,QIODevice::ReadOnly);
-        stream.setVersion(QDataStream::Version::Qt_6_8);
-        while(true){
+        //stream.setVersion(QDataStream::Version::Qt_6_8);
+        while(_buffer.size() > 0){
+            QDataStream stream(&_buffer,QIODevice::ReadOnly);
             if(!_isPending){
                 //解释消息头
                 if(_buffer.size()<static_cast<int>(sizeof(quint16)*2)){
@@ -24,22 +25,23 @@ TCPMgr::TCPMgr():_isPending(false)
                     qDebug()<<"消息头不完整";
                     return;
                 }
-                stream>>_msgId>>_msgLen;
-                // 输出消息头
+                 const char* data = _buffer.constData();
+                 _msgId = qFromBigEndian(*reinterpret_cast<const quint16*>(data));
+                _msgLen = qFromBigEndian(*reinterpret_cast<const quint16*>(data + 2));
                 qDebug() << "Message ID:" << _msgId << ", Length:" << _msgLen;
                 _buffer.remove(0,sizeof(quint16)*2);
                 _buffer.squeeze();
-            }
-            if(_buffer.size()-sizeof(quint16)*2<_msgLen){
-                //消息体不完整
                 _isPending=true;
+            }
+            if(_buffer.size()<_msgLen){
+                //消息体不完整
                 return;
             }
-            _isPending=false;
             QByteArray body=_buffer.left(_msgLen);
             _buffer.remove(0,_msgLen);
             _buffer.squeeze();
-            handleMsg(static_cast<ReqId>(_msgId),_msgLen,body);
+            handleMsg(static_cast<ReqId>(_msgId),_msgLen,body);//处理消息
+            _isPending=false;
         }
     });
 
@@ -93,7 +95,7 @@ void TCPMgr::initHandlers()
         }
         QJsonObject jsonObj=jsonDoc.object();
         if(!jsonObj.contains("error")){
-            qDebug()<<tr("登录验证失败:")<<ErrorCodes::ERROR_JSON;
+            qDebug()<<tr("token验证失败:")<<ErrorCodes::ERROR_JSON;
             emit signal_login_failed(ErrorCodes::ERROR_JSON);
             return;
         }

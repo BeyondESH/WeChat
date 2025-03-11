@@ -53,10 +53,10 @@ grpc::Status StatusServiceImpl::GetChatServer(grpc::ServerContext *context, cons
 
 grpc::Status StatusServiceImpl::CheckToken(grpc::ServerContext *context, const message::CheckTokenReq *request,
     message::CheckTokenRsp *response) {
-    return Service::CheckToken(context, request, response);
     int uid =request->uid();
     std::string token =request->token();
     bool result =checkToken(uid,token);
+    std::cout<<"check result:"<<result<<std::endl;
     if (result==true) {
         response->set_error(ErrorCodes::SUCCESS);
     }else {

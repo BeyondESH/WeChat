@@ -22,12 +22,10 @@ MsgNode::MsgNode(short currentLen, short totalLen) : currentLen(currentLen), tot
     }
 }
 
-MsgNode::MsgNode(const MsgNode &msgNode):currentLen(msgNode.currentLen),totalLen(msgNode.totalLen),data(msgNode.data) {
+MsgNode::MsgNode(const MsgNode &msgNode):currentLen(msgNode.currentLen),totalLen(msgNode.totalLen),data(nullptr) {
     if (msgNode.data != nullptr && totalLen > 0) {
         data = new char[totalLen];
         memcpy(data, msgNode.data, totalLen);
-    } else {
-        data = nullptr;
     }
 }
 

@@ -26,8 +26,8 @@ bool LogicSystem::handleMsg(std::shared_ptr<LogicNode> logicNode) {
             std::cerr << "LogicNode does not exist" << std::endl;
             return false;
         } else {
-            auto msgNode = std::move(logicNode.get()->_msgNode);
-            auto session = std::move(logicNode.get()->_session);
+            auto msgNode = logicNode.get()->_msgNode;
+            auto session = logicNode.get()->_session;
             iter->second(msgNode, session);
             return true;
         }
@@ -55,6 +55,7 @@ LogicSystem::LogicSystem() : _isStop(false) {
     try {
         auto registerHandlers = [this]() {
             _msgHandlers[ID_CHAT_LOGIN] = [](std::shared_ptr<MsgNode> msgNode, std::shared_ptr<CSession> session) {
+                std::cout<<"handle ID_CHAT_LOGIN msg" << std::endl;
                 std::string msg_str(msgNode.get()->data, msgNode.get()->totalLen);
                 if (msg_str.empty()) {
                     std::cerr << "接收到空消息" << std::endl;
@@ -67,15 +68,15 @@ LogicSystem::LogicSystem() : _isStop(false) {
                 std::cout << "handle msg_str:" << msg_str << std::endl;
                 json src_root = json::parse(msg_str);
                 json root;
-                std::string uid_str = src_root["uid"];
-                int uid = std::stoi(uid_str);
+                int uid = src_root["uid"].get<int>();
                 std::string token = src_root["token"];
                 auto respond = StatusGrpcClient::getInstance()->checkToken(uid, token); //查询并验证token
+                std::cout<<"check token result is:"<<respond.error()<<std::endl;
                 root["error"] = respond.error();
-                char *json_str = root.dump(4).data();
+                std::string json_str = root.dump(4);
                 std::cout << "sent json is:" << json_str << std::endl;
-                short totalLen = strlen(json_str);
-                session->send(json_str, totalLen, ID_CHAT_LOGIN_RSP);
+                short totalLen = strlen(json_str.data());
+                session->send(json_str.data(), totalLen, ID_CHAT_LOGIN_RSP);
             };
         };
 
