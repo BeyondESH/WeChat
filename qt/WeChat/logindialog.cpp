@@ -3,6 +3,7 @@
 #include "global.h"
 #include "httpmgr.h"
 #include "tcpmgr.h"
+#include "UserMgr.h"
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::LoginDialog)
@@ -148,12 +149,14 @@ void LoginDialog::slot_tcp_connect_finished(bool isSuccess)
 
 void LoginDialog::slot_switch_chatDialog()
 {
+    showTip(tr("登录成功"),true);
     qDebug()<<"切换至聊天界面";
 }
 
 void LoginDialog::slot_login_failed(int error)
 {
-    showTip(tr("登录验证失败"),false);
+    showTip(tr("登录失败"),false);
+    UserMgr::getInstance()->clear();
 }
 
 void LoginDialog::showTip(QString tip, bool isOK)
@@ -204,8 +207,7 @@ void LoginDialog::initHttpHandlers()
             return;
             break;
         case ErrorCodes::SUCCESS:
-            qDebug()<<"登录成功";
-            showTip(tr("登录成功"),true);
+            qDebug()<<"用户存在";
         }
 
         ServerInfo server;
@@ -217,6 +219,9 @@ void LoginDialog::initHttpHandlers()
         qDebug()<<"uid:"<<server.uid;
         _uid=server.uid;
         _token=server.token;
+        UserMgr::getInstance()->setAccount(jsonObj["user"].toString());
+        UserMgr::getInstance()->setPassword(jsonObj["password"].toString());
+        UserMgr::getInstance()->setUid(jsonObj["uid"].toInt());
         emit signal_tcp_connected(server);//连接服务器
         showTip(tr("正在连接服务器"),true);
     });

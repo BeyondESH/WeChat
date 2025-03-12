@@ -1,5 +1,5 @@
 #include "tcpmgr.h"
-
+#include "UserMgr.h"
 TCPMgr::~TCPMgr()
 {
 
@@ -106,6 +106,7 @@ void TCPMgr::initHandlers()
             return;
         }
         qDebug()<<"token验证成功";
+        UserMgr::getInstance()->setToken(jsonObj["token"].toString());
         emit signal_switch_chatDialog();
     });
 }
