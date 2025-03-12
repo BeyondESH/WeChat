@@ -10,9 +10,10 @@ class MsgNode;
 class SendNode {
 public:
     SendNode(char *data, short id, short total_len);
-    char *data;
-    short id;
-    short totalLen;
+    ~SendNode();
+    char *_data;
+    short _id;
+    short _totalLen;
 };
 
 

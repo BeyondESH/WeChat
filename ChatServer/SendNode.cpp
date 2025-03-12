@@ -4,5 +4,12 @@
 
 #include "SendNode.h"
 
-SendNode::SendNode(char *data, short id, short total_len):data(data),id(id),totalLen(total_len) {
+SendNode::SendNode(char *data, short id, short total_len):_data(data),_id(id),_totalLen(total_len){
+}
+
+SendNode::~SendNode() {
+    if (_data!=nullptr) {
+        delete[] _data;
+        _data=nullptr;
+    }
 }
