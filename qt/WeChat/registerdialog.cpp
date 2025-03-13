@@ -3,33 +3,33 @@
 #include "global.h"
 #include "httpmgr.h"
 #include <QTimer>
+#include <QMouseEvent>
+
 RegisterDialog::RegisterDialog(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::RegisterDialog)
-    ,_corrects(std::vector<int>(4,0))
+    : QDialog(parent), ui(new Ui::RegisterDialog), _corrects(std::vector<int>(4, 0))
 {
     ui->setupUi(this);
-    polish();//刷新qss
-    //处理注册完成信号
-    connect(HttpMgr::getInstance().get(),&HttpMgr::signal_mod_register_finished,this,&RegisterDialog::slot_mod_register_finished);
-    //初始化http请求处理函数
+    polish(); // 刷新qss
+    // 处理注册完成信号
+    connect(HttpMgr::getInstance().get(), &HttpMgr::signal_mod_register_finished, this, &RegisterDialog::slot_mod_register_finished);
+    // 初始化http请求处理函数
     initHttpHandlers();
 }
 
 RegisterDialog::~RegisterDialog()
 {
-    qDebug()<<"RegisterDialog调用了析构函数";
+    qDebug() << "RegisterDialog调用了析构函数";
     delete ui;
 }
 
 void RegisterDialog::polish()
 {
-    ui->accountNotelabel->setProperty("state","normal");
-    ui->passwordNotelabel->setProperty("state","normal");
-    ui->verifyNodeLabel->setProperty("state","normal");
-    ui->emailNotelabel->setProperty("state","normal");
-    ui->codeNodeLabel->setProperty("state","normal");
-    ui->errorlabel->setProperty("state","normal");
+    ui->accountNotelabel->setProperty("state", "normal");
+    ui->passwordNotelabel->setProperty("state", "normal");
+    ui->verifyNodeLabel->setProperty("state", "normal");
+    ui->emailNotelabel->setProperty("state", "normal");
+    ui->codeNodeLabel->setProperty("state", "normal");
+    ui->errorlabel->setProperty("state", "normal");
     repolish(ui->codeNodeLabel);
     repolish(ui->emailNotelabel);
     repolish(ui->verifyNodeLabel);
@@ -41,10 +41,13 @@ void RegisterDialog::polish()
 void RegisterDialog::showTip(QString tip, bool isOK)
 {
     ui->errorlabel->clear();
-    if(isOK==true){
-        ui->errorlabel->setProperty("state","normal");
-    }else{
-        ui->errorlabel->setProperty("state","error");
+    if (isOK == true)
+    {
+        ui->errorlabel->setProperty("state", "normal");
+    }
+    else
+    {
+        ui->errorlabel->setProperty("state", "error");
     }
     repolish(ui->errorlabel);
     ui->errorlabel->setText(tip);
@@ -52,8 +55,9 @@ void RegisterDialog::showTip(QString tip, bool isOK)
 
 void RegisterDialog::initHttpHandlers()
 {
-    //注册获取验证码回包的逻辑
-    _handlers.insert(ReqId::ID_GET_VARIFY_CODE,[this](const QJsonObject& jsonObj){
+    // 注册获取验证码回包的逻辑
+    _handlers.insert(ReqId::ID_GET_VARIFY_CODE, [this](const QJsonObject &jsonObj)
+                     {
         int error=jsonObj["error"].toInt();
         if(error!=ErrorCodes::SUCCESS){
             showTip(tr("参数错误"),false);
@@ -65,11 +69,11 @@ void RegisterDialog::initHttpHandlers()
 
         //调试
         auto email=jsonObj["email"].toString();
-        qDebug()<<"邮箱为："<<email;
-    });
+        qDebug()<<"邮箱为："<<email; });
 
-    //注册账号注册回包的逻辑
-    _handlers.insert(ReqId::ID_REG_USER,[this](const QJsonObject &jsonObj){
+    // 注册账号注册回包的逻辑
+    _handlers.insert(ReqId::ID_REG_USER, [this](const QJsonObject &jsonObj)
+                     {
         int error=jsonObj["error"].toInt();
         switch(error){
         case ErrorCodes::UserExist:
@@ -104,8 +108,7 @@ void RegisterDialog::initHttpHandlers()
             }
             remainTime--;
         });
-        timer->start(1000);
-    });
+        timer->start(1000); });
 }
 
 void RegisterDialog::on_backPushButton_clicked()
@@ -113,51 +116,59 @@ void RegisterDialog::on_backPushButton_clicked()
     emit backPBClicked();
 }
 
-
 void RegisterDialog::on_checkBox_checkStateChanged(const Qt::CheckState &arg1)
 {
-    if(arg1==Qt::Checked){
+    if (arg1 == Qt::Checked)
+    {
         ui->passwordLineEdit->setEchoMode(QLineEdit::Normal);
-    }else{
+    }
+    else
+    {
         ui->passwordLineEdit->setEchoMode(QLineEdit::Password);
     }
 }
 
-
 void RegisterDialog::on_checkBox_2_checkStateChanged(const Qt::CheckState &arg1)
 {
-    if(arg1==Qt::Checked){
+    if (arg1 == Qt::Checked)
+    {
         ui->verifylineEdit->setEchoMode(QLineEdit::Normal);
-    }else{
+    }
+    else
+    {
         ui->verifylineEdit->setEchoMode(QLineEdit::Password);
     }
 }
-
 
 void RegisterDialog::on_getCodepushButton_clicked()
 {
     ui->errorlabel->clear();
     ui->emailNotelabel->clear();
     ui->codeNodeLabel->clear();
-    auto const email=ui->emailLineEdit->text();
-    //判断邮箱是否为空
-    if(email.isEmpty()){
-        ui->codeNodeLabel->setProperty("state","error");
+    auto const email = ui->emailLineEdit->text();
+    // 判断邮箱是否为空
+    if (email.isEmpty())
+    {
+        ui->codeNodeLabel->setProperty("state", "error");
         repolish(ui->codeNodeLabel);
         ui->codeNodeLabel->setText("邮箱不能为空");
-    }else{
-        //判断邮箱格式是否正确
-        QRegularExpression re("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");//正确的邮箱格式
-        bool match=re.match(email).hasMatch();
-        if(match){
-            //发送验证码
+    }
+    else
+    {
+        // 判断邮箱格式是否正确
+        QRegularExpression re("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"); // 正确的邮箱格式
+        bool match = re.match(email).hasMatch();
+        if (match)
+        {
+            // 发送验证码
             QJsonObject jsonObj;
-            jsonObj["email"]=email;
-            HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/get_varifycode"),jsonObj,ReqId::ID_GET_VARIFY_CODE,Modules::REGISTERMOD);
-            //倒计时60s
-            QTimer *updateTimer =new QTimer(this);
-            remainTime=60;//60秒
-            connect(updateTimer,&QTimer::timeout,[this,updateTimer](){
+            jsonObj["email"] = email;
+            HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix + "/get_varifycode"), jsonObj, ReqId::ID_GET_VARIFY_CODE, Modules::REGISTERMOD);
+            // 倒计时60s
+            QTimer *updateTimer = new QTimer(this);
+            remainTime = 60; // 60秒
+            connect(updateTimer, &QTimer::timeout, [this, updateTimer]()
+                    {
                 if(remainTime>0){
                     ui->getCodepushButton->setEnabled(false);
                     ui->getCodepushButton->setText(QString::number(remainTime));
@@ -167,244 +178,303 @@ void RegisterDialog::on_getCodepushButton_clicked()
                     ui->getCodepushButton->setEnabled(true);
                     updateTimer->stop();
                     updateTimer->deleteLater();
-                }
-            });
-            updateTimer->start(1000);//每秒更新一次
-        }else{
-            //格式不匹配
-            ui->emailNotelabel->setProperty("state","error");
+                } });
+            updateTimer->start(1000); // 每秒更新一次
+        }
+        else
+        {
+            // 格式不匹配
+            ui->emailNotelabel->setProperty("state", "error");
             repolish(ui->emailNotelabel);
             ui->emailNotelabel->setText("邮箱格式错误");
         }
     }
 }
 
-//处理注册完成信号的槽函数
+// 处理注册完成信号的槽函数
 void RegisterDialog::slot_mod_register_finished(ReqId req_id, QString res, ErrorCodes ec)
 {
-    //错误处理
-    if(ec!=ErrorCodes::SUCCESS){
-        if(req_id==ReqId::ID_GET_VARIFY_CODE){
-            ui->codeNodeLabel->setProperty("state","error");
+    // 错误处理
+    if (ec != ErrorCodes::SUCCESS)
+    {
+        if (req_id == ReqId::ID_GET_VARIFY_CODE)
+        {
+            ui->codeNodeLabel->setProperty("state", "error");
             repolish(ui->codeNodeLabel);
             ui->codeNodeLabel->setText("网路连接错误");
-        }else if(req_id==ReqId::ID_REG_USER){
-            showTip(tr("网络连接错误"),false);
+        }
+        else if (req_id == ReqId::ID_REG_USER)
+        {
+            showTip(tr("网络连接错误"), false);
         }
         return;
     }
 
-    //解析json字符串
-    QByteArray byte=res.toUtf8();
-    QJsonDocument jsonDoc=QJsonDocument::fromJson(byte);
-    //json解析为空
-    if(jsonDoc.isNull()){
-        this->showTip(tr("Json解析失败"),false);
+    // 解析json字符串
+    QByteArray byte = res.toUtf8();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(byte);
+    // json解析为空
+    if (jsonDoc.isNull())
+    {
+        this->showTip(tr("Json解析失败"), false);
         return;
     }
-    //json解析错误
-    if(!jsonDoc.isObject()){
-        this->showTip(tr("Json解析失败"),false);
+    // json解析错误
+    if (!jsonDoc.isObject())
+    {
+        this->showTip(tr("Json解析失败"), false);
         return;
     }
-    //json解析成功
-    QJsonObject jsonObj=jsonDoc.object();
+    // json解析成功
+    QJsonObject jsonObj = jsonDoc.object();
     _handlers[req_id](jsonObj);
     return;
 }
 
 void RegisterDialog::on_submitPushButton_clicked()
 {
-    //qDebug()<<_isCorrect;
+    // qDebug()<<_isCorrect;
     ui->errorlabel->clear();
-    if(ui->accountLineEdit->text()==nullptr){
-        ui->accountNotelabel->setProperty("state","error");
+    if (ui->accountLineEdit->text() == nullptr)
+    {
+        ui->accountNotelabel->setProperty("state", "error");
         repolish(ui->accountNotelabel);
         ui->accountNotelabel->setText(tr("账号不能为空"));
         return;
     }
-    if(ui->emailLineEdit->text()==nullptr){
-        ui->emailNotelabel->setProperty("state","error");
+    if (ui->emailLineEdit->text() == nullptr)
+    {
+        ui->emailNotelabel->setProperty("state", "error");
         repolish(ui->emailNotelabel);
         ui->emailNotelabel->setText(tr("邮箱不能为空"));
         return;
     }
-    if(ui->passwordLineEdit->text()==nullptr){
-        ui->passwordNotelabel->setProperty("state","error");
+    if (ui->passwordLineEdit->text() == nullptr)
+    {
+        ui->passwordNotelabel->setProperty("state", "error");
         repolish(ui->passwordNotelabel);
         ui->passwordNotelabel->setText(tr("密码不能为空"));
         return;
     }
-    if(ui->verifylineEdit->text()==nullptr){
-        ui->verifyNodeLabel->setProperty("state","error");
+    if (ui->verifylineEdit->text() == nullptr)
+    {
+        ui->verifyNodeLabel->setProperty("state", "error");
         repolish(ui->verifyNodeLabel);
         ui->verifyNodeLabel->setText(tr("请再此确认"));
         return;
     }
-    if(ui->verifylineEdit->text()!=ui->passwordLineEdit->text()){
-        ui->verifyNodeLabel->setProperty("state","error");
+    if (ui->verifylineEdit->text() != ui->passwordLineEdit->text())
+    {
+        ui->verifyNodeLabel->setProperty("state", "error");
         repolish(ui->verifyNodeLabel);
         ui->verifyNodeLabel->setText(tr("两次密码不相同"));
         return;
     }
 
-    if(ui->codeLineEdit->text()==nullptr){
-        ui->codeNodeLabel->setProperty("state","error");
+    if (ui->codeLineEdit->text() == nullptr)
+    {
+        ui->codeNodeLabel->setProperty("state", "error");
         repolish(ui->codeNodeLabel);
         ui->codeNodeLabel->setText(tr("验证码不能为空"));
         return;
     }
 
-    if(ui->codeLineEdit->text().length()!=6){
-        ui->codeNodeLabel->setProperty("state","error");
+    if (ui->codeLineEdit->text().length() != 6)
+    {
+        ui->codeNodeLabel->setProperty("state", "error");
         repolish(ui->codeNodeLabel);
         ui->codeNodeLabel->setText(tr("验证码错误"));
         return;
     }
 
-    for(auto &i:_corrects){
-        if(i==0){
+    for (auto &i : _corrects)
+    {
+        if (i == 0)
+        {
             return;
         }
     }
-    //发送注册请求
+    // 发送注册请求
     QJsonObject infoJson;
-    infoJson["user"]=ui->accountLineEdit->text();
-    infoJson["password"]=stringToSha256(ui->passwordLineEdit->text());
-    infoJson["email"]=ui->emailLineEdit->text();
-    infoJson["verifyCode"]=ui->codeLineEdit->text();
-    qDebug()<<infoJson["password"];
-    HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix+"/user_register"),infoJson,ReqId::ID_REG_USER,Modules::REGISTERMOD);
+    infoJson["user"] = ui->accountLineEdit->text();
+    infoJson["password"] = stringToSha256(ui->passwordLineEdit->text());
+    infoJson["email"] = ui->emailLineEdit->text();
+    infoJson["verifyCode"] = ui->codeLineEdit->text();
+    qDebug() << infoJson["password"];
+    HttpMgr::getInstance()->postHttpRequest(QUrl(gate_url_prefix + "/user_register"), infoJson, ReqId::ID_REG_USER, Modules::REGISTERMOD);
 }
-
 
 void RegisterDialog::on_accountLineEdit_textEdited(const QString &arg1)
 {
     ui->accountNotelabel->clear();
-    ui->accountNotelabel->setProperty("state","normal");
+    ui->accountNotelabel->setProperty("state", "normal");
     repolish(ui->accountNotelabel);
     ui->accountNotelabel->setText(tr("账号由8~16个数字或字母组成"));
 }
 
-
 void RegisterDialog::on_accountLineEdit_editingFinished()
 {
-    _corrects[0]=1;
+    _corrects[0] = 1;
     ui->accountNotelabel->clear();
-    //判断账号格式是否正确
-    if(ui->accountLineEdit->text()!=nullptr){
-        QString account=ui->accountLineEdit->text();
-        QRegularExpression re("^[a-zA-Z0-9]{8,16}$");//账号由8~16个数字或字母组成
-        bool match=re.match(account).hasMatch();
-        if(!match){
-            //格式不匹配
-            ui->accountNotelabel->setProperty("state","error");
+    // 判断账号格式是否正确
+    if (ui->accountLineEdit->text() != nullptr)
+    {
+        QString account = ui->accountLineEdit->text();
+        QRegularExpression re("^[a-zA-Z0-9]{8,16}$"); // 账号由8~16个数字或字母组成
+        bool match = re.match(account).hasMatch();
+        if (!match)
+        {
+            // 格式不匹配
+            ui->accountNotelabel->setProperty("state", "error");
             repolish(ui->accountNotelabel);
             ui->accountNotelabel->setText("账号格式错误");
-            _corrects[0]=0;
+            _corrects[0] = 0;
         }
     }
 }
-
 
 void RegisterDialog::on_emailLineEdit_editingFinished()
 {
-    _corrects[1]=1;
+    _corrects[1] = 1;
     //_isCorrect=true;
     ui->emailNotelabel->clear();
-    //判断邮箱是否为空
-    auto email=ui->emailLineEdit->text();
-    if(email==nullptr){
-        ui->codeNodeLabel->setProperty("state","error");
+    // 判断邮箱是否为空
+    auto email = ui->emailLineEdit->text();
+    if (email == nullptr)
+    {
+        ui->codeNodeLabel->setProperty("state", "error");
         repolish(ui->codeNodeLabel);
         ui->codeNodeLabel->setText("邮箱不能为空");
-    }else{
-        //判断邮箱格式是否正确
-        QRegularExpression re("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");//正确的邮箱格式
-        bool match=re.match(email).hasMatch();
-        if(!match){
-            //格式不匹配
-            ui->emailNotelabel->setProperty("state","error");
+    }
+    else
+    {
+        // 判断邮箱格式是否正确
+        QRegularExpression re("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"); // 正确的邮箱格式
+        bool match = re.match(email).hasMatch();
+        if (!match)
+        {
+            // 格式不匹配
+            ui->emailNotelabel->setProperty("state", "error");
             repolish(ui->emailNotelabel);
             ui->emailNotelabel->setText("邮箱格式错误");
-            _corrects[1]=0;
+            _corrects[1] = 0;
         }
     }
 }
 
-
 void RegisterDialog::on_emailLineEdit_textEdited(const QString &arg1)
 {
-
 }
-
 
 void RegisterDialog::on_passwordLineEdit_textEdited(const QString &arg1)
 {
     ui->passwordNotelabel->clear();
-    ui->passwordNotelabel->setProperty("state","normal");
+    ui->passwordNotelabel->setProperty("state", "normal");
     repolish(ui->passwordNotelabel);
     ui->passwordNotelabel->setText(tr("密码由8~20个数字或字母组成"));
 }
 
-
 void RegisterDialog::on_verifylineEdit_textEdited(const QString &arg1)
 {
     ui->verifyNodeLabel->clear();
-    ui->verifyNodeLabel->setProperty("state","normal");
+    ui->verifyNodeLabel->setProperty("state", "normal");
     repolish(ui->passwordNotelabel);
     ui->verifyNodeLabel->setText(tr("请和密码保持相同"));
 }
 
-
 void RegisterDialog::on_verifylineEdit_editingFinished()
 {
-    _corrects[3]=1;
+    _corrects[3] = 1;
     ui->verifyNodeLabel->clear();
-    ui->verifyNodeLabel->setProperty("state","normal");
+    ui->verifyNodeLabel->setProperty("state", "normal");
     repolish(ui->verifyNodeLabel);
-    //比较是否密码相同
-    if(ui->passwordLineEdit->text()!=ui->verifylineEdit->text()){
-        ui->verifyNodeLabel->setProperty("state","error");
+    // 比较是否密码相同
+    if (ui->passwordLineEdit->text() != ui->verifylineEdit->text())
+    {
+        ui->verifyNodeLabel->setProperty("state", "error");
         repolish(ui->verifyNodeLabel);
         ui->verifyNodeLabel->setText(tr("两次密码不相同"));
-        _corrects[3]=0;
+        _corrects[3] = 0;
     }
 }
 
-
 void RegisterDialog::on_passwordLineEdit_editingFinished()
 {
-    _corrects[2]=1;
+    _corrects[2] = 1;
     ui->passwordNotelabel->clear();
-    ui->passwordNotelabel->setProperty("state","normal");
+    ui->passwordNotelabel->setProperty("state", "normal");
     repolish(ui->passwordNotelabel);
-    QString password=ui->passwordLineEdit->text();
-    if(password!=nullptr){
-        //判断密码格式是否正确
-        QRegularExpression re("^[A-Za-z0-9]{8,20}$");//密码由8~20个数字或字母组成
-        bool match=re.match(password).hasMatch();
-        if(!match){
-            //格式不匹配
-            ui->passwordNotelabel->setProperty("state","error");
+    QString password = ui->passwordLineEdit->text();
+    if (password != nullptr)
+    {
+        // 判断密码格式是否正确
+        QRegularExpression re("^[A-Za-z0-9]{8,20}$"); // 密码由8~20个数字或字母组成
+        bool match = re.match(password).hasMatch();
+        if (!match)
+        {
+            // 格式不匹配
+            ui->passwordNotelabel->setProperty("state", "error");
             repolish(ui->passwordNotelabel);
             ui->passwordNotelabel->setText("密码格式错误");
-            _corrects[2]=0;
+            _corrects[2] = 0;
         }
     }
 }
 
-
 void RegisterDialog::on_codeLineEdit_editingFinished()
 {
     ui->codeNodeLabel->clear();
-    ui->codeNodeLabel->setProperty("state","normal");
+    ui->codeNodeLabel->setProperty("state", "normal");
     repolish(ui->codeNodeLabel);
 }
-
 
 void RegisterDialog::on_quitPB_clicked()
 {
     QApplication::quit();
 }
 
+// 添加鼠标事件处理函数的实现
+void RegisterDialog::mousePressEvent(QMouseEvent *event)
+{
+    // 判断鼠标是否在titlebar区域内
+    if (ui->titlebar->geometry().contains(event->pos()) && event->button() == Qt::LeftButton)
+    {
+        isDragging = true;
+        dragPosition = event->globalPosition().toPoint() - window()->frameGeometry().topLeft();
+        event->accept();
+    }
+    else
+    {
+        QDialog::mousePressEvent(event);
+    }
+}
+
+void RegisterDialog::mouseMoveEvent(QMouseEvent *event)
+{
+    if (isDragging && (event->buttons() & Qt::LeftButton))
+    {
+        // 获取MainWindow并移动它
+        if (QWidget *mainWindow = window())
+        {
+            mainWindow->move(event->globalPosition().toPoint() - dragPosition);
+            event->accept();
+        }
+    }
+    else
+    {
+        QDialog::mouseMoveEvent(event);
+    }
+}
+
+void RegisterDialog::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (isDragging && event->button() == Qt::LeftButton)
+    {
+        isDragging = false;
+        event->accept();
+    }
+    else
+    {
+        QDialog::mouseReleaseEvent(event);
+    }
+}
