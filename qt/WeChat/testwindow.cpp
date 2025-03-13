@@ -1,6 +1,7 @@
 #include "testwindow.h"
 #include "logindialog.h"//登录页面
 #include "registerdialog.h"//注册页面
+#include "chatdialog.h"//聊天界面
 void testWindow::logindialog(MainWindow &w)
 {
     w.hide();
@@ -13,4 +14,11 @@ void testWindow::registerdialog(MainWindow &w)
     w.hide();
     RegisterDialog *r=new RegisterDialog();
     r->show();
+}
+
+void testWindow::chatdialog(MainWindow &w)
+{
+    w.hide();
+    ChatDialog *c=new ChatDialog();
+    c->show();
 }

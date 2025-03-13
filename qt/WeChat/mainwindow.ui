@@ -29,6 +29,9 @@
    <iconset resource="rc.qrc">
     <normaloff>:/img/loginDialog/img/wechat.svg</normaloff>:/img/loginDialog/img/wechat.svg</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -36,7 +39,7 @@
      <x>0</x>
      <y>0</y>
      <width>320</width>
-     <height>17</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

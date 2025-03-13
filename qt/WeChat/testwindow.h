@@ -20,6 +20,8 @@ public:
     static void logindialog(MainWindow &w);
     //测试注册页面
     static void registerdialog(MainWindow &w);
+    //测试聊天页面
+    static void chatdialog(MainWindow &w);
 };
 
 #endif // TESTWINDOW_H

@@ -18,7 +18,7 @@ class LoginDialog;
 class LoginDialog : public QDialog
 {
     Q_OBJECT
-
+    friend class MainWindow;
 public:
     explicit LoginDialog(QWidget *parent = nullptr);
     ~LoginDialog();
@@ -33,7 +33,6 @@ private slots:
     void on_resetPasswordPB_clicked();
     void slot_mod_login_finished(ReqId req_id,QString res,ErrorCodes ec);
     void slot_tcp_connect_finished(bool isSuccess);
-    void slot_switch_chatDialog();
     void slot_login_failed(int error);
 signals:
     void registerPBClicked();//注册按钮

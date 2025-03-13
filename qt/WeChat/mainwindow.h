@@ -14,6 +14,7 @@
 #include "logindialog.h"//登录页面
 #include "registerdialog.h"//注册页面
 #include "resetdialog.h"
+#include "chatdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -29,15 +30,21 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void setCentralWidget(QWidget *widget);
+signals:
+    void signal_set_centralWidget(QWidget *widget);
+
 private:
     Ui::MainWindow *ui;
     LoginDialog *_loginDialog;
     RegisterDialog *_registerDialog;
     ResetDialog *_resetDialog;
-
+    ChatDialog *_chatDialog;
 public slots:
     void openLoginDialog();
     void openRegisterDialog();
     void openResetDialog();
+    void slot_switch_chatDialog();
+    void slot_set_centralWidget(QWidget *widget);
 };
 #endif // MAINWINDOW_H

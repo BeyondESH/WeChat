@@ -4,6 +4,7 @@
 #include "httpmgr.h"
 #include "tcpmgr.h"
 #include "UserMgr.h"
+#include "ChatDialog.h"
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::LoginDialog)
@@ -13,7 +14,6 @@ LoginDialog::LoginDialog(QWidget *parent)
     initHttpHandlers();
     connect(HttpMgr::getInstance().get(),&HttpMgr::signal_mod_login_finished,this,&LoginDialog::slot_mod_login_finished);
     connect(this,&LoginDialog::signal_tcp_connected,TCPMgr::getInstance().get(),&TCPMgr::slots_tcp_connected);
-    connect(TCPMgr::getInstance().get(),&TCPMgr::signal_switch_chatDialog,this,&LoginDialog::slot_switch_chatDialog);
     connect(TCPMgr::getInstance().get(),&TCPMgr::signal_connected_success,this,&LoginDialog::slot_tcp_connect_finished);
     connect(TCPMgr::getInstance().get(),&TCPMgr::signal_login_failed,this,&LoginDialog::slot_login_failed);
 }
@@ -145,12 +145,6 @@ void LoginDialog::slot_tcp_connect_finished(bool isSuccess)
     }else{
         showTip(tr("服务器连接失败"),false);
     }
-}
-
-void LoginDialog::slot_switch_chatDialog()
-{
-    showTip(tr("登录成功"),true);
-    qDebug()<<"切换至聊天界面";
 }
 
 void LoginDialog::slot_login_failed(int error)
