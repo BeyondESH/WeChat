@@ -372,7 +372,19 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(97, 101, 154);</string>
+        <string notr="true">#registerPushButton{
+	color: rgb(99, 102, 159);
+}
+
+#registerPushButton:hover{
+	
+	color: rgb(255, 72, 0);
+}
+
+#registerPushButton:pressed{
+	color: rgb(100, 103, 162);
+}
+</string>
        </property>
        <property name="text">
         <string>注册</string>
@@ -644,7 +656,19 @@ QPushButton#loginButton:pressed {
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: rgb(97, 101, 154);</string>
+          <string notr="true">#resetPasswordPB{
+	color: rgb(99, 102, 159);
+}
+
+#resetPasswordPB:hover{
+	
+	color: rgb(255, 72, 0);
+}
+
+#resetPasswordPB:pressed{
+	color: rgb(100, 103, 162);
+}
+</string>
          </property>
          <property name="text">
           <string>忘记密码</string>
@@ -669,7 +693,19 @@ QPushButton#loginButton:pressed {
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">color: rgb(97, 101, 154);</string>
+          <string notr="true">#morePB{
+	color: rgb(99, 102, 159);
+}
+
+#morePB:hover{
+	
+	color: rgb(255, 72, 0);
+}
+
+#morePB:pressed{
+	color: rgb(100, 103, 162);
+}
+</string>
          </property>
          <property name="text">
           <string>更多</string>

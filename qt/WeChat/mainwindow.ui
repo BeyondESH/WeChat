@@ -33,9 +33,8 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch=""/>
+   <layout class="QVBoxLayout" name="verticalLayout"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
   <include location="rc.qrc"/>
