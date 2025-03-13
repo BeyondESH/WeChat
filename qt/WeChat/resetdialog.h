@@ -30,6 +30,8 @@ private slots:
     void on_passwordLineEdit_editingFinished();
     void on_codeLineEdit_editingFinished();
 
+    void on_quitPB_clicked();
+
 signals:
     void backPBClicked();
 private:

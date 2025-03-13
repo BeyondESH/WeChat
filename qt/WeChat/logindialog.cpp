@@ -221,3 +221,10 @@ void LoginDialog::initHttpHandlers()
     });
 }
 
+
+void LoginDialog::on_quitPB_clicked()
+{
+    qDebug()<<"退出";
+    QApplication::quit();
+}
+

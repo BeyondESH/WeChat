@@ -34,6 +34,8 @@ private slots:
     void slot_mod_login_finished(ReqId req_id,QString res,ErrorCodes ec);
     void slot_tcp_connect_finished(bool isSuccess);
     void slot_login_failed(int error);
+    void on_quitPB_clicked();
+
 signals:
     void registerPBClicked();//注册按钮
     void resetPasswordPBClicked();//忘记密码

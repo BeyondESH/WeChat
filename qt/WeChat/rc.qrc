@@ -4,9 +4,10 @@
         <file>img/7e4373cd5c03a49ab7512d666468410.jpg</file>
         <file>img/wechat.png</file>
         <file>img/wechat.svg</file>
-        <file>img/quit.svg</file>
         <file>img/set.svg</file>
         <file>img/user.svg</file>
+        <file>img/quit.svg</file>
+        <file>img/quit_clicked.svg</file>
     </qresource>
     <qresource prefix="/">
         <file>style/stylesheet.qss</file>

@@ -402,3 +402,9 @@ void RegisterDialog::on_codeLineEdit_editingFinished()
     repolish(ui->codeNodeLabel);
 }
 
+
+void RegisterDialog::on_quitPB_clicked()
+{
+    QApplication::quit();
+}
+

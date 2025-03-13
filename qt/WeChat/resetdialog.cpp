@@ -363,3 +363,9 @@ void ResetDialog::on_codeLineEdit_editingFinished()
     ui->codeNodeLabel->setProperty("state","normal");
     repolish(ui->codeNodeLabel);
 }
+
+void ResetDialog::on_quitPB_clicked()
+{
+    QApplication::quit();
+}
+

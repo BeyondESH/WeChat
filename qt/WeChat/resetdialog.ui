@@ -20,7 +20,7 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+   <item row="1" column="0">
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
       <widget class="QStackedWidget" name="stackedWidget">
@@ -28,7 +28,7 @@
         <number>0</number>
        </property>
        <widget class="QWidget" name="page">
-        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+        <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
          <item>
           <spacer name="verticalSpacer_2">
            <property name="orientation">
@@ -658,19 +658,6 @@
           </layout>
          </item>
          <item>
-          <spacer name="verticalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Orientation::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -788,6 +775,57 @@ QPushButton#submitPushButton:pressed {
         </layout>
        </widget>
        <widget class="QWidget" name="page_2"/>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="titlebar" stretch="1,5,1">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="styleSheet">
+        <string notr="true">color: rgb(150, 150, 150);</string>
+       </property>
+       <property name="text">
+        <string>微信</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="quitPB">
+       <property name="styleSheet">
+        <string notr="true">#quitPB{
+	image: url(:/img/loginDialog/img/quit.svg);
+	background-color: rgb(255, 255, 255);
+	border-radius: 4px;
+}
+
+#quitPB:hover{
+	image: url(:/img/loginDialog/img/quit_clicked.svg);
+	background-color: rgb(255, 85, 43);
+}
+
+#quitPB:pressed{
+	image: url(:/img/loginDialog/img/quit_clicked.svg);
+	background-color:rgb(216, 59, 19);
+}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
       </widget>
      </item>
     </layout>
