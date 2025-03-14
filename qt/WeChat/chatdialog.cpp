@@ -12,3 +12,16 @@ ChatDialog::~ChatDialog()
 {
     delete ui;
 }
+
+
+void ChatDialog::on_searchLE_editingFinished()
+{
+    ui->quitPB->close();
+}
+
+
+void ChatDialog::on_searchLE_textEdited(const QString &arg1)
+{
+    ui->quitPB->show();
+}
+

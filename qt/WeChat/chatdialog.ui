@@ -97,73 +97,105 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>20</height>
+          <height>10</height>
          </size>
         </property>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="chatOptionPB">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
+       <widget class="QWidget" name="functionWD1" native="true">
         <property name="minimumSize">
          <size>
           <width>36</width>
-          <height>36</height>
+          <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>36</width>
-          <height>36</height>
+          <height>16777215</height>
          </size>
         </property>
-        <property name="sizeIncrement">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="baseSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;聊天&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="whatsThis">
-         <string>
-</string>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">#chatOptionPB{
-	border-style:none;
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="spacing">
+          <number>24</number>
+         </property>
+         <item>
+          <widget class="QCheckBox" name="chatCB">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;聊天&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="whatsThis">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#chatCB::indicator:unchecked{
+	width: 20px;
+    height: 20px;
+	
+	image: url(:/img/loginDialog/img/chat.svg);
+}
+
+#chatCB::indicator:checked{
+		width: 20px;
+    height: 20px;
+	image: url(:/img/loginDialog/img/chat_clicked.svg);
+}
+	</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="usersCB">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;通讯录&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#usersCB::indicator:unchecked{
+	width: 20px;
+    height: 20px;
+	image: url(:/img/loginDialog/img/address.svg);
+}
+
+#usersCB::indicator:checked{
+		width: 20px;
+    height: 20px;
+	image: url(:/img/loginDialog/img/address_cliecked.svg);
 }</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="rc.qrc">
-          <normaloff>:/img/loginDialog/img/chat.svg</normaloff>
-          <normalon>:/img/loginDialog/img/chat_clicked.png</normalon>
-          <disabledoff>:/img/loginDialog/img/chat_clicked.png</disabledoff>
-          <disabledon>:/img/loginDialog/img/chat_clicked.png</disabledon>
-          <activeoff>:/img/loginDialog/img/chat_clicked.png</activeoff>
-          <selectedon>:/img/loginDialog/img/chat_clicked.png</selectedon>:/img/loginDialog/img/chat.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
@@ -178,6 +210,71 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QWidget" name="functionWD2" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>36</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>36</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <item>
+          <widget class="QCheckBox" name="settingCB">
+           <property name="minimumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="toolTip">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;设置及其他&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">#settingCB::indicator:unchecked{
+	width: 20px;
+    height: 20px;
+	image: url(:/img/loginDialog/img/settings.svg);
+}
+
+#settingCB::indicator:checked{
+		width: 20px;
+    height: 20px;
+	image: url(:/img/loginDialog/img/settings_clicked.svg);
+}
+
+#settingCB::indicator:hover{
+		width: 20px;
+    height: 20px;
+	image: url(:/img/loginDialog/img/settings_clicked.svg);
+}
+
+#settingCB::indicator:pressed{
+		width: 20px;
+    height: 20px;
+	image: url(:/img/loginDialog/img/settings.svg);
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -445,8 +542,7 @@ border-style:none;
 
 #plusPB:hover {
 	border-radius: 4px;
-	
-	background-color: rgb(175, 175, 175);
+	background-color: rgb(209, 209, 209);
 }</string>
            </property>
            <property name="text">
@@ -511,39 +607,6 @@ border-style:none;
        <height>0</height>
       </size>
      </property>
-     <widget class="QWidget" name="widget" native="true">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>220</y>
-        <width>195</width>
-        <height>43</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="sizeConstraint">
-        <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-      </layout>
-     </widget>
     </widget>
    </item>
   </layout>

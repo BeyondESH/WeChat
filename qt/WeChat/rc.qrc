@@ -9,15 +9,15 @@
         <file>img/quit.svg</file>
         <file>img/quit_clicked.svg</file>
         <file>img/address.svg</file>
-        <file>img/address_clicked.png</file>
         <file>img/settings.svg</file>
         <file>img/settings_clicked.svg</file>
         <file>img/chat.svg</file>
-        <file>img/chat_clicked.png</file>
         <file>img/fork_clicked.svg</file>
         <file>img/fork.svg</file>
         <file>img/plus.svg</file>
         <file>img/search.svg</file>
+        <file>img/address_cliecked.svg</file>
+        <file>img/chat_clicked.svg</file>
     </qresource>
     <qresource prefix="/">
         <file>style/stylesheet.qss</file>

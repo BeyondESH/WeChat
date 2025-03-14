@@ -15,6 +15,11 @@ public:
     explicit ChatDialog(QWidget *parent = nullptr);
     ~ChatDialog();
 
+private slots:
+    void on_searchLE_editingFinished();
+
+    void on_searchLE_textEdited(const QString &arg1);
+
 private:
     Ui::ChatDialog *ui;
 };
