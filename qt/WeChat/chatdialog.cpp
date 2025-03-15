@@ -1,16 +1,49 @@
 #include "chatdialog.h"
 #include "ui_chatdialog.h"
 
+#include <QMouseEvent>
 ChatDialog::ChatDialog(QWidget *parent)
     : QDialog(parent), ui(new Ui::ChatDialog)
 {
     ui->setupUi(this);
-    init();
+    uiInit();
+    ui->searchWidget->installEventFilter(this);
+    ui->sidebarWD->installEventFilter(this);
+    ui->titleWD->installEventFilter(this);
 }
 
 ChatDialog::~ChatDialog()
 {
     delete ui;
+}
+
+bool ChatDialog::eventFilter(QObject *obj, QEvent *event)
+{
+    if(obj==ui->searchWidget||obj==ui->sidebarWD||obj==ui->titleWD){
+        if(event->type()==QEvent::MouseButtonPress){
+            QMouseEvent* mouseEvent=static_cast<QMouseEvent*>(event);
+            if(mouseEvent->button()==Qt::LeftButton){
+                _isDragging=true;
+                _dragPosition=mouseEvent->globalPosition().toPoint()-this->parentWidget()->pos();
+                return true;
+            }
+        }
+        if(event->type()==QEvent::MouseButtonRelease){
+            QMouseEvent* mouseEvent=static_cast<QMouseEvent*>(event);
+            if(mouseEvent->button()==Qt::LeftButton){
+                _isDragging=false;
+                return true;
+            }
+        }
+        if(event->type()==QEvent::MouseMove){
+            QMouseEvent* mouseEvent=static_cast<QMouseEvent*>(event);
+            if(_isDragging){
+                this->parentWidget()->move(mouseEvent->globalPos()-_dragPosition);
+                return true;
+            }
+        }
+    }
+    return QDialog::eventFilter(obj,event);
 }
 
 void ChatDialog::on_searchLE_textEdited(const QString &arg1)
@@ -49,13 +82,11 @@ void ChatDialog::on_maxPB_toggled(bool checked)
     {
         pb->setIcon(QIcon(":/img/loginDialog/img/max_clicked.svg"));
         this->parentWidget()->showMaximized();
-        qDebug() << "showMaximized";
     }
     else
     {
         pb->setIcon(QIcon(":/img/loginDialog/img/max.svg"));
         this->parentWidget()->showNormal();
-        qDebug() << "showNormal";
     }
 }
 
@@ -78,7 +109,7 @@ void ChatDialog::on_chatCB_clicked()
     ui->searchList->close();
 }
 
-void ChatDialog::init()
+void ChatDialog::uiInit()
 {
     ui->clearPB->close();
     ui->chatUserList->show();

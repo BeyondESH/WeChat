@@ -2,7 +2,6 @@
 #define CHATDIALOG_H
 
 #include <QDialog>
-#include <QMouseEvent>
 
 namespace Ui {
 class ChatDialog;
@@ -11,11 +10,11 @@ class ChatDialog;
 class ChatDialog : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit ChatDialog(QWidget *parent = nullptr);
     ~ChatDialog();
-
+protected:
+    bool eventFilter(QObject *obj, QEvent *event) override;
 private slots:
     void on_searchLE_textEdited(const QString &arg1);
     void on_clearPB_clicked();
@@ -32,8 +31,9 @@ private slots:
     void on_minPB_clicked();
 private:
     Ui::ChatDialog *ui;
-    void init();
-
+    void uiInit();
+    bool _isDragging = false;
+    QPoint _dragPosition;
 };
 
 #endif // CHATDIALOG_H
