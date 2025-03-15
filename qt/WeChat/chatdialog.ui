@@ -633,15 +633,32 @@ border-style:none;
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">#userList{
-	
-	
+         <string notr="true">#chatUserList{
 	background-color: rgb(229, 229, 229);
+outline: 0px;
+}
+
+#chatUserList::item:hover{
+	border:none;
+	background-color: rgb(209, 209, 209);
+	outline :none;
+}	
+
+#chatUserList::item:selected{
+	border:none;
+	background-color: rgb(198, 198, 198);
+	color: rgb(0, 0, 0);
+	outline :none;
 }</string>
         </property>
         <item>
          <property name="text">
           <string>chat</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>123</string>
          </property>
         </item>
        </widget>
@@ -662,9 +679,21 @@ border-style:none;
         </property>
         <property name="styleSheet">
          <string notr="true">#searchList{
-	
-	
 	background-color: rgb(229, 229, 229);
+outline: 0px;
+}
+
+#searchList::item:hover{
+	border:none;
+	background-color: rgb(209, 209, 209);
+	outline :none;
+}	
+
+#searchList::item:selected{
+	border:none;
+	background-color: rgb(198, 198, 198);
+	color: rgb(0, 0, 0);
+	outline :none;
 }</string>
         </property>
         <item>
@@ -687,6 +716,25 @@ border-style:none;
           <width>225</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#conUserList{
+	background-color: rgb(229, 229, 229);
+outline: 0px;
+}
+
+#conUserList::item:hover{
+	border:none;
+	background-color: rgb(209, 209, 209);
+	outline :none;
+}	
+
+#conUserList::item:selected{
+	border:none;
+	background-color: rgb(198, 198, 198);
+	color: rgb(0, 0, 0);
+	outline :none;
+}</string>
         </property>
         <item>
          <property name="text">
