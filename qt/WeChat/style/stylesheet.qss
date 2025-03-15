@@ -1,3 +1,7 @@
+* {
+    font-family: "等线";
+}
+
 /*账号*/
 #accountNotelabel[state="normal"] {
     color: green;

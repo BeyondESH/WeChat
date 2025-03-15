@@ -134,6 +134,11 @@
              <height>20</height>
             </size>
            </property>
+           <property name="font">
+            <font>
+             <stylestrategy>PreferAntialias</stylestrategy>
+            </font>
+           </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
@@ -584,6 +589,11 @@ border-style:none;
 #plusPB:hover {
 	border-radius: 4px;
 	background-color: rgb(209, 209, 209);
+}
+
+#plusPB:pressed {
+	border-radius: 4px;
+	background-color: rgb(198, 198, 198);
 }</string>
            </property>
            <property name="text">
@@ -1438,7 +1448,7 @@ border-style:none;
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>20</width>
+             <width>25</width>
              <height>112</height>
             </size>
            </property>
@@ -1540,7 +1550,7 @@ border-style:none;
             <font>
              <family>等线</family>
              <pointsize>11</pointsize>
-             <bold>true</bold>
+             <fontweight>Medium</fontweight>
             </font>
            </property>
            <property name="cursor">
