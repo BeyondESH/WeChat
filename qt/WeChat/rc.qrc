@@ -30,6 +30,8 @@
         <file>img/top.svg</file>
         <file>img/more_clicked.svg</file>
         <file>img/more.svg</file>
+        <file>img/document_hover.svg</file>
+        <file>img/smile_hover.svg</file>
     </qresource>
     <qresource prefix="/">
         <file>style/stylesheet.qss</file>

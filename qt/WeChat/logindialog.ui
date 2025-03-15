@@ -89,6 +89,9 @@ font: 9pt &quot;等线&quot;;</string>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="styleSheet">
         <string notr="true">#settingPB{
 	image: url(:/img/loginDialog/img/set.svg);
@@ -114,6 +117,9 @@ font: 9pt &quot;等线&quot;;</string>
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
         <string notr="true">#quitPB{
@@ -160,7 +166,7 @@ font: 9pt &quot;等线&quot;;</string>
         <font>
          <family>等线</family>
          <pointsize>15</pointsize>
-         <bold>true</bold>
+         <fontweight>Medium</fontweight>
         </font>
        </property>
        <property name="styleSheet">
@@ -375,6 +381,9 @@ font: 9pt &quot;等线&quot;;</string>
          <pointsize>10</pointsize>
         </font>
        </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="styleSheet">
         <string notr="true">#registerPushButton{
 	color: rgb(99, 102, 159);
@@ -586,6 +595,9 @@ font: 9pt &quot;等线&quot;;</string>
          <bold>true</bold>
         </font>
        </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton#loginButton {
     background-color: rgb(5, 193, 96);
@@ -669,6 +681,9 @@ QPushButton#loginButton:pressed {
            <family>等线</family>
           </font>
          </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
          <property name="styleSheet">
           <string notr="true">#resetPasswordPB{
 	color: rgb(99, 102, 159);
@@ -710,6 +725,9 @@ QPushButton#loginButton:pressed {
           <font>
            <family>等线</family>
           </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="styleSheet">
           <string notr="true">#morePB{
