@@ -18,6 +18,18 @@
         <file>img/search.svg</file>
         <file>img/address_cliecked.svg</file>
         <file>img/chat_clicked.svg</file>
+        <file>img/max_clicked.svg</file>
+        <file>img/smile_clicked.svg</file>
+        <file>img/min.svg</file>
+        <file>img/min_clicked.svg</file>
+        <file>img/smile.svg</file>
+        <file>img/max.svg</file>
+        <file>img/document.svg</file>
+        <file>img/document_clicked.svg</file>
+        <file>img/top_clicked.svg</file>
+        <file>img/top.svg</file>
+        <file>img/more_clicked.svg</file>
+        <file>img/more.svg</file>
     </qresource>
     <qresource prefix="/">
         <file>style/stylesheet.qss</file>

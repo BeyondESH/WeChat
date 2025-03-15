@@ -54,6 +54,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>15</pointsize>
                <bold>true</bold>
               </font>

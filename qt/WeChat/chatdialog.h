@@ -16,9 +16,12 @@ public:
     ~ChatDialog();
 
 private slots:
-    void on_searchLE_editingFinished();
-
     void on_searchLE_textEdited(const QString &arg1);
+
+    void on_clearPB_clicked();
+    void on_topPB_toggled(bool checked);
+
+    void on_maxPB_toggled(bool checked);
 
 private:
     Ui::ChatDialog *ui;

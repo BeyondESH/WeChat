@@ -34,6 +34,11 @@
     <layout class="QHBoxLayout" name="titlebar" stretch="1,5,1">
      <item>
       <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>等线</family>
+        </font>
+       </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(150, 150, 150);</string>
        </property>
@@ -115,6 +120,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>15</pointsize>
                <bold>true</bold>
               </font>
@@ -176,6 +182,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -200,6 +207,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -310,6 +318,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -334,6 +343,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -441,6 +451,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -465,6 +476,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -594,6 +606,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -618,6 +631,7 @@
              </property>
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -735,6 +749,7 @@
             <widget class="QLabel" name="codeLabel">
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -747,6 +762,7 @@
             <widget class="QLineEdit" name="codeLineEdit">
              <property name="font">
               <font>
+               <family>等线</family>
                <pointsize>13</pointsize>
               </font>
              </property>
@@ -768,6 +784,11 @@
                <width>35</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>等线</family>
+              </font>
              </property>
              <property name="text">
               <string>获取</string>
@@ -893,6 +914,7 @@
                </property>
                <property name="font">
                 <font>
+                 <family>等线</family>
                  <pointsize>13</pointsize>
                  <bold>true</bold>
                 </font>
@@ -936,6 +958,7 @@ QPushButton#submitPushButton:pressed {
                </property>
                <property name="font">
                 <font>
+                 <family>等线</family>
                  <pointsize>13</pointsize>
                  <bold>true</bold>
                 </font>

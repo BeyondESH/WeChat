@@ -50,11 +50,15 @@
       <widget class="QLabel" name="titleLabel">
        <property name="font">
         <font>
-         <family>微软雅黑</family>
+         <family>等线</family>
+         <pointsize>9</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(150, 150, 150);</string>
+        <string notr="true">color: rgb(150, 150, 150);
+font: 9pt &quot;等线&quot;;</string>
        </property>
        <property name="text">
         <string>微信</string>
@@ -154,7 +158,7 @@
       <widget class="QLabel" name="label">
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>等线</family>
          <pointsize>15</pointsize>
          <bold>true</bold>
         </font>
@@ -191,7 +195,7 @@
       <widget class="QLabel" name="accountLabel">
        <property name="font">
         <font>
-         <family>黑体</family>
+         <family>等线</family>
          <pointsize>13</pointsize>
         </font>
        </property>
@@ -228,7 +232,7 @@
        </property>
        <property name="font">
         <font>
-         <family>黑体</family>
+         <family>等线</family>
          <pointsize>13</pointsize>
         </font>
        </property>
@@ -300,7 +304,7 @@
       <widget class="QLabel" name="passwordLabel">
        <property name="font">
         <font>
-         <family>黑体</family>
+         <family>等线</family>
          <pointsize>13</pointsize>
         </font>
        </property>
@@ -325,7 +329,7 @@
        </property>
        <property name="font">
         <font>
-         <family>黑体</family>
+         <family>等线</family>
          <pointsize>13</pointsize>
         </font>
        </property>
@@ -367,7 +371,7 @@
        </property>
        <property name="font">
         <font>
-         <family>黑体</family>
+         <family>等线</family>
          <pointsize>10</pointsize>
         </font>
        </property>
@@ -503,6 +507,11 @@
          <height>25</height>
         </size>
        </property>
+       <property name="font">
+        <font>
+         <family>等线</family>
+        </font>
+       </property>
        <property name="layoutDirection">
         <enum>Qt::LayoutDirection::LeftToRight</enum>
        </property>
@@ -572,9 +581,9 @@
        </property>
        <property name="font">
         <font>
-         <family>黑体</family>
+         <family>等线</family>
          <pointsize>12</pointsize>
-         <fontweight>DemiBold</fontweight>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
@@ -655,6 +664,11 @@ QPushButton#loginButton:pressed {
            <height>16777215</height>
           </size>
          </property>
+         <property name="font">
+          <font>
+           <family>等线</family>
+          </font>
+         </property>
          <property name="styleSheet">
           <string notr="true">#resetPasswordPB{
 	color: rgb(99, 102, 159);
@@ -691,6 +705,11 @@ QPushButton#loginButton:pressed {
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>等线</family>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">#morePB{

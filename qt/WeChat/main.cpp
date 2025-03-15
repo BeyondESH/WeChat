@@ -7,6 +7,10 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    // 设置全局字体为等线
+    QFont dengxian("等线");
+    a.setFont(dengxian);
+
     //读取qss
     QFile qssFile(":/style/stylesheet.qss");
     if(qssFile.open(QFile::ReadOnly)){

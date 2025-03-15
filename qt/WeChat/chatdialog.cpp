@@ -13,15 +13,37 @@ ChatDialog::~ChatDialog()
     delete ui;
 }
 
-
-void ChatDialog::on_searchLE_editingFinished()
+void ChatDialog::on_searchLE_textEdited(const QString &arg1)
 {
-    ui->quitPB->close();
+    ui->clearPB->show();
 }
 
 
-void ChatDialog::on_searchLE_textEdited(const QString &arg1)
+void ChatDialog::on_clearPB_clicked()
 {
-    ui->quitPB->show();
+    ui->searchLE->clear();
+}
+
+
+
+void ChatDialog::on_topPB_toggled(bool checked)
+{
+    auto pb=ui->topPB;
+    if(checked){
+        pb->setIcon(QIcon(":/img/loginDialog/img/top_clicked.svg"));
+    }else{
+        pb->setIcon(QIcon(":/img/loginDialog/img/top.svg"));
+    }
+}
+
+
+void ChatDialog::on_maxPB_toggled(bool checked)
+{
+    auto pb=ui->maxPB;
+    if(checked){
+        pb->setIcon(QIcon(":/img/loginDialog/img/max_clicked.svg"));
+    }else{
+        pb->setIcon(QIcon(":/img/loginDialog/img/max.svg"));
+    }
 }
 
