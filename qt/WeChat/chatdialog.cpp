@@ -1,6 +1,6 @@
 #include "chatdialog.h"
 #include "ui_chatdialog.h"
-
+#include <QScrollBar>
 #include <QMouseEvent>
 #include "chatuserwidget.h"
 #include <QRandomGenerator>
@@ -12,7 +12,9 @@ ChatDialog::ChatDialog(QWidget *parent)
     ui->searchWidget->installEventFilter(this);
     ui->sidebarWD->installEventFilter(this);
     ui->titleWD->installEventFilter(this);
+    ui->chatUserList->installEventFilter(this);
     addChatUserList();
+    ui->chatUserList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 ChatDialog::~ChatDialog()
@@ -24,7 +26,8 @@ std::vector<QString>  strs ={"你好",
                              "This is the way",
                              "I love you",
                              "I miss you",
-                             "My love is written in the wind ever since the whole world is you"};
+                             "My love is written in the wind ever since the whole world is you",
+                             "这些数据只是测试数据"};
 std::vector<QString> heads = {
     ":/img/loginDialog/img/avatar/AL.jpg",
     ":/img/loginDialog/img/avatar/BS.jpg",
@@ -117,6 +120,20 @@ bool ChatDialog::eventFilter(QObject *obj, QEvent *event)
                 this->parentWidget()->move(mouseEvent->globalPos()-_dragPosition);
                 return true;
             }
+        }
+    }
+
+    if(obj==ui->chatUserList){
+        if(event->type()==QEvent::Enter){
+            // 启用像素级滚动
+            ui->chatUserList->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+            // 调整滚动速度
+            ui->chatUserList->verticalScrollBar()->setSingleStep(10);
+            ui->chatUserList->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+            return true;
+        }else if(event->type()==QEvent::Leave){
+            ui->chatUserList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+            return true;
         }
     }
     return QDialog::eventFilter(obj,event);

@@ -39,7 +39,7 @@
     <number>12</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>15</number>
    </property>
    <property name="bottomMargin">
     <number>12</number>
@@ -72,13 +72,13 @@
     <widget class="QWidget" name="widget" native="true">
      <property name="minimumSize">
       <size>
-       <width>162</width>
+       <width>146</width>
        <height>40</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>162</width>
+       <width>146</width>
        <height>40</height>
       </size>
      </property>
@@ -93,7 +93,7 @@
        <number>3</number>
       </property>
       <property name="rightMargin">
-       <number>15</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -152,7 +152,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>88</width>
+             <width>87</width>
              <height>11</height>
             </size>
            </property>
@@ -169,7 +169,7 @@
            <property name="styleSheet">
             <string notr="true">#timeLB{
 	
-	color: rgb(185, 185, 185);
+	color: rgb(153, 153, 153);
 }</string>
            </property>
            <property name="text">
@@ -214,6 +214,7 @@
           <widget class="QLabel" name="msgLB">
            <property name="font">
             <font>
+             <pointsize>10</pointsize>
              <bold>false</bold>
             </font>
            </property>
@@ -235,7 +236,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>73</width>
+             <width>67</width>
              <height>9</height>
             </size>
            </property>
