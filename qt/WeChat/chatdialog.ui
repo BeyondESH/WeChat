@@ -635,16 +635,6 @@ outline: 0px;
 	outline :none;
 }</string>
         </property>
-        <item>
-         <property name="text">
-          <string>chat</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>123</string>
-         </property>
-        </item>
        </widget>
       </item>
       <item>
@@ -680,11 +670,6 @@ outline: 0px;
 	outline :none;
 }</string>
         </property>
-        <item>
-         <property name="text">
-          <string>search</string>
-         </property>
-        </item>
        </widget>
       </item>
       <item>
@@ -720,11 +705,6 @@ outline: 0px;
 	outline :none;
 }</string>
         </property>
-        <item>
-         <property name="text">
-          <string>con</string>
-         </property>
-        </item>
        </widget>
       </item>
      </layout>

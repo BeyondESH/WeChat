@@ -13,6 +13,7 @@ class ChatDialog : public QDialog
 public:
     explicit ChatDialog(QWidget *parent = nullptr);
     ~ChatDialog();
+    void addChatUserList();
 protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
 private slots:

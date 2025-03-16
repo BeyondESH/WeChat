@@ -15,12 +15,12 @@ public:
     explicit ChatUserWidget(QWidget *parent = nullptr);
     ~ChatUserWidget();
     QSize sizeHint() const override;
-    void setInfo(const QString& name,const QString& _pos,const QDate& time,const QString& msg);
+    void setInfo(const QString& name,const QString& headPath,const QDateTime& time,const QString& msg);
 private:
     Ui::ChatUserWidget *ui;
     QString _name;
-    QString _pos;
-    QDate _time;
+    QString _headPath;
+    QDateTime  _time;
     QString _msg;
 };
 

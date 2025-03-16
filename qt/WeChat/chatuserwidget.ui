@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>226</width>
+    <width>225</width>
     <height>64</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>226</width>
+    <width>225</width>
     <height>64</height>
    </size>
   </property>
@@ -26,7 +26,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(229, 229, 229);</string>
+   <string notr="true"/>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <property name="spacing">
@@ -39,7 +39,7 @@
     <number>12</number>
    </property>
    <property name="rightMargin">
-    <number>15</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
     <number>12</number>
@@ -69,7 +69,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame">
+    <widget class="QWidget" name="widget" native="true">
      <property name="minimumSize">
       <size>
        <width>162</width>
@@ -82,12 +82,6 @@
        <height>40</height>
       </size>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::Shape::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Shadow::Raised</enum>
-     </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <property name="spacing">
        <number>10</number>
@@ -99,7 +93,7 @@
        <number>3</number>
       </property>
       <property name="rightMargin">
-       <number>0</number>
+       <number>15</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -158,7 +152,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>101</width>
+             <width>88</width>
              <height>11</height>
             </size>
            </property>
@@ -241,7 +235,7 @@
            </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>86</width>
+             <width>73</width>
              <height>9</height>
             </size>
            </property>

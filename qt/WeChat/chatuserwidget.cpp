@@ -7,6 +7,7 @@ ChatUserWidget::ChatUserWidget(QWidget *parent)
 {
     ui->setupUi(this);
     setItemTye(CHAT_USER_ITEM);
+    ui->distrubPB->close();
 }
 
 ChatUserWidget::~ChatUserWidget()
@@ -32,19 +33,25 @@ void ChatUserWidget::setInfo(const QString &name, const QString &headPath, const
     //设置名字
     ui->userNameLB->setText(_name);
     //设置消息
+    ui->userNameLB->setMaximumWidth(100);
+    ui->msgLB->setMaximumWidth(100);
     ui->msgLB->setText(_msg);
-
     //处理时间
-    QDateTime today=QDateTime::currentDateTime();//获取当前日期
-    int days=today.daysTo(_time);//获取两个日期之间的天数
-    if(days==2){
-        ui->timeLB->setText("前天");
-    }else if(days==1){
-        ui->timeLB->setText("昨天");
-    }else if(days==0){
+    QDate today = QDate::currentDate();
+    QDate messageDate = _time.date();
+    
+    if (messageDate == today) {
+        // 今天发送的消息，只显示时间
         ui->timeLB->setText(_time.toString("hh:mm"));
-    }else{
-        ui->timeLB->setText(_time.toString("yyyy-MM-dd"));
+    } else if (messageDate == today.addDays(-1)) {
+        // 昨天发送的消息
+        ui->timeLB->setText("昨天");
+    } else if (messageDate == today.addDays(-2)) {
+        // 前天发送的消息
+        ui->timeLB->setText("前天");
+    } else {
+        // 更早的消息，显示日期
+        ui->timeLB->setText(_time.toString("yy/M/d"));
     }
 }
 

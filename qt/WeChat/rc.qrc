@@ -34,6 +34,15 @@
         <file>img/disturb.svg</file>
         <file>img/avatar/AL.jpg</file>
         <file>img/avatar/me.jpg</file>
+        <file>img/avatar/BS.jpg</file>
+        <file>img/avatar/DB.jpg</file>
+        <file>img/avatar/JZ.jpg</file>
+        <file>img/avatar/LM.jpg</file>
+        <file>img/avatar/MAO.jpg</file>
+        <file>img/avatar/RK.jpg</file>
+        <file>img/avatar/SY.jpg</file>
+        <file>img/avatar/wz.jpg</file>
+        <file>img/avatar/YZ.jpg</file>
     </qresource>
     <qresource prefix="/">
         <file>style/stylesheet.qss</file>
