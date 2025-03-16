@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/img/loginDialog">
-        <file>C:/Users/Beyond/Pictures/7e4373cd5c03a49ab7512d666468410.jpg</file>
         <file>img/7e4373cd5c03a49ab7512d666468410.jpg</file>
         <file>img/wechat.png</file>
         <file>img/wechat.svg</file>
@@ -32,6 +31,9 @@
         <file>img/more.svg</file>
         <file>img/document_hover.svg</file>
         <file>img/smile_hover.svg</file>
+        <file>img/disturb.svg</file>
+        <file>img/avatar/AL.jpg</file>
+        <file>img/avatar/me.jpg</file>
     </qresource>
     <qresource prefix="/">
         <file>style/stylesheet.qss</file>

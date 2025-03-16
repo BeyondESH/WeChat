@@ -361,16 +361,16 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <property name="spacing">
-          <number>6</number>
+          <number>10</number>
          </property>
          <property name="leftMargin">
-          <number>10</number>
+          <number>12</number>
          </property>
          <property name="topMargin">
           <number>20</number>
          </property>
          <property name="rightMargin">
-          <number>10</number>
+          <number>12</number>
          </property>
          <property name="bottomMargin">
           <number>10</number>
@@ -598,22 +598,6 @@ border-style:none;
              <normaloff>:/img/loginDialog/img/plus.svg</normaloff>:/img/loginDialog/img/plus.svg</iconset>
            </property>
           </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Orientation::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Policy::Minimum</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>5</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </widget>
