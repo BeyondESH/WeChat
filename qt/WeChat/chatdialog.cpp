@@ -9,6 +9,7 @@ ChatDialog::ChatDialog(QWidget *parent)
 {
     ui->setupUi(this);
     uiInit();
+    connect(this,&ChatDialog::signal_loading_chat_user,this,&ChatDialog::slots_loading_chat_user);
     ui->searchWidget->installEventFilter(this);
     ui->sidebarWD->installEventFilter(this);
     ui->titleWD->installEventFilter(this);
@@ -79,7 +80,7 @@ QDateTime generateRandomDateTime(const QDate& minDate, const QDate& maxDate) {
 
 void ChatDialog::addChatUserList()
 {
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 100; i++)
     {
         QDate minDate(2025, 3, 13);  // 最小日期
         QDate maxDate=QDate::currentDate();  // 最大日期
@@ -98,6 +99,7 @@ void ChatDialog::addChatUserList()
 
 bool ChatDialog::eventFilter(QObject *obj, QEvent *event)
 {
+    //窗口拖动
     if(obj==ui->searchWidget||obj==ui->sidebarWD||obj==ui->titleWD){
         if(event->type()==QEvent::MouseButtonPress){
             QMouseEvent* mouseEvent=static_cast<QMouseEvent*>(event);
@@ -123,16 +125,40 @@ bool ChatDialog::eventFilter(QObject *obj, QEvent *event)
         }
     }
 
+    //滚动体设置
     if(obj==ui->chatUserList){
         if(event->type()==QEvent::Enter){
             // 启用像素级滚动
             ui->chatUserList->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
             // 调整滚动速度
-            ui->chatUserList->verticalScrollBar()->setSingleStep(10);
+            ui->chatUserList->verticalScrollBar()->setSingleStep(8);
             ui->chatUserList->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-            return true;
+            QString styleSheet = ui->chatUserList->styleSheet();
+            return false;
         }else if(event->type()==QEvent::Leave){
             ui->chatUserList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+            QString styleSheet = ui->chatUserList->styleSheet();
+            return false;
+        }else if(event->type()==QEvent::Wheel){
+            QScrollBar* scrollBar=ui->chatUserList->verticalScrollBar();
+            int maxScrollValue=scrollBar->maximum();
+            int currentValue=scrollBar->value();
+            if(maxScrollValue-currentValue<=0){
+                qDebug()<<"加载更多内容";
+                emit signal_loading_chat_user();
+            }
+            return false;
+        }
+    }
+
+    //双击缩放
+    if(obj==ui->searchWidget||obj==ui->titleWD){
+        if(event->type()==QEvent::MouseButtonDblClick){
+            if(this->parentWidget()->isMaximized()){
+                this->parentWidget()->showNormal();
+            }else{
+                this->parentWidget()->showMaximized();
+            }
             return true;
         }
     }
@@ -225,4 +251,14 @@ void ChatDialog::on_quitPB_clicked()
 void ChatDialog::on_minPB_clicked()
 {
     this->parentWidget()->showMinimized();
+}
+
+void ChatDialog::slots_loading_chat_user()
+{
+    //上一轮加载未完成
+    if(_isLoading){
+        return;
+    }
+
+    _isLoading=true;
 }

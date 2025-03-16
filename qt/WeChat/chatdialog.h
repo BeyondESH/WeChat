@@ -22,19 +22,20 @@ private slots:
     void on_topPB_toggled(bool checked);
     void on_maxPB_toggled(bool checked);
     void on_searchLE_textChanged(const QString &arg1);
-
     void on_chatCB_clicked();
-
     void on_usersCB_clicked();
-
     void on_quitPB_clicked();
-
     void on_minPB_clicked();
+    void slots_loading_chat_user();
 private:
     Ui::ChatDialog *ui;
     void uiInit();
     bool _isDragging = false;
     QPoint _dragPosition;
+    bool _isLoading = false;
+
+signals:
+    void signal_loading_chat_user();
 };
 
 #endif // CHATDIALOG_H
