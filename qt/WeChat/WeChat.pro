@@ -14,6 +14,7 @@ SOURCES += \
     chatuserwidget.cpp \
     global.cpp \
     httpmgr.cpp \
+    listitembase.cpp \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     chatuserwidget.h \
     global.h \
     httpmgr.h \
+    listitembase.h \
     logindialog.h \
     mainwindow.h \
     registerdialog.h \

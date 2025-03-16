@@ -84,6 +84,16 @@ struct ServerInfo{
 };
 
 
+//列表项类型
+enum ListItemType{
+    CHAT_USER_ITEM,//聊天用户
+    CONTACT_USER_ITEM,//联系人
+    SEARCH_USER_ITEM,//搜索用户
+    ADD_FRIEND_ITEM,//添加好友
+    INVALID_ITEM,//无效项
+    GROUP_ITEM,//群组
+};
+
 extern QString gate_url_prefix;//网关url前缀
 
 #endif // GLOBAL_H
