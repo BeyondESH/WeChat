@@ -92,6 +92,7 @@ enum ListItemType{
     ADD_FRIEND_ITEM,//添加好友
     INVALID_ITEM,//无效项
     GROUP_ITEM,//群组
+    MSG_ITEM,//消息
 };
 
 extern QString gate_url_prefix;//网关url前缀

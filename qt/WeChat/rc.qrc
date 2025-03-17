@@ -43,6 +43,10 @@
         <file>img/avatar/SY.jpg</file>
         <file>img/avatar/wz.jpg</file>
         <file>img/avatar/YZ.jpg</file>
+        <file>img/bubble_left_hover.svg</file>
+        <file>img/bubble_left.svg</file>
+        <file>img/bubble_right_hover.svg</file>
+        <file>img/bubble_right.svg</file>
     </qresource>
     <qresource prefix="/">
         <file>style/stylesheet.qss</file>

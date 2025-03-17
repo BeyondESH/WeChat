@@ -12,6 +12,7 @@ SOURCES += \
     chatdialog.cpp \
     chatpagewidget.cpp \
     chatuserwidget.cpp \
+    chatview.cpp \
     global.cpp \
     httpmgr.cpp \
     listitembase.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     chatdialog.h \
     chatpagewidget.h \
     chatuserwidget.h \
+    chatview.h \
     global.h \
     httpmgr.h \
     listitembase.h \
