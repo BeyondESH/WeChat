@@ -19,6 +19,7 @@ SOURCES += \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
+    messagebase.cpp \
     registerdialog.cpp \
     resetdialog.cpp \
     tcpmgr.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
     listitembase.h \
     logindialog.h \
     mainwindow.h \
+    messagebase.h \
     registerdialog.h \
     resetdialog.h \
     singleton.hpp \

@@ -10,7 +10,7 @@ public:
     explicit ListItemBase(QWidget *parent=nullptr);
     void setItemTye(ListItemType type);
     ListItemType getItemType();
-private:
+protected:
     ListItemType _itemType;
 
 public slots:
