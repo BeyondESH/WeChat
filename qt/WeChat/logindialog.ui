@@ -243,7 +243,9 @@ font: 9pt &quot;等线&quot;;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">#accountLineEdit{
+
+}</string>
        </property>
        <property name="text">
         <string/>
@@ -340,7 +342,9 @@ font: 9pt &quot;等线&quot;;</string>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">#passwordLineEdit{
+	border-style:none;
+}</string>
        </property>
        <property name="text">
         <string/>
