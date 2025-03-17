@@ -30,9 +30,9 @@ private slots:
 private:
     Ui::ChatDialog *ui;
     void uiInit();
-    bool _isDragging = false;
+    bool _isDragging;
     QPoint _dragPosition;
-    bool _isLoading = false;
+    bool _isLoading;
 
 signals:
     void signal_loading_chat_user();

@@ -5,7 +5,7 @@
 #include "chatuserwidget.h"
 #include <QRandomGenerator>
 ChatDialog::ChatDialog(QWidget *parent)
-    : QDialog(parent), ui(new Ui::ChatDialog)
+    : QDialog(parent), ui(new Ui::ChatDialog),_isDragging(false),_isLoading(false)
 {
     ui->setupUi(this);
     uiInit();
@@ -260,5 +260,6 @@ void ChatDialog::slots_loading_chat_user()
         return;
     }
 
+    addChatUserList();
     _isLoading=true;
 }
