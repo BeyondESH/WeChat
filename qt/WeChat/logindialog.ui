@@ -343,7 +343,7 @@ font: 9pt &quot;等线&quot;;</string>
        </property>
        <property name="styleSheet">
         <string notr="true">#passwordLineEdit{
-	border-style:none;
+	
 }</string>
        </property>
        <property name="text">

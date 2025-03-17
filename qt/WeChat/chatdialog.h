@@ -3,12 +3,15 @@
 
 #include <QDialog>
 
+class ChatPageWidget;
+
 namespace Ui {
 class ChatDialog;
 }
 
 class ChatDialog : public QDialog
 {
+    friend class ChatPageWidget;
     Q_OBJECT
 public:
     explicit ChatDialog(QWidget *parent = nullptr);
@@ -19,13 +22,9 @@ protected:
 private slots:
     void on_searchLE_textEdited(const QString &arg1);
     void on_clearPB_clicked();
-    void on_topPB_toggled(bool checked);
-    void on_maxPB_toggled(bool checked);
     void on_searchLE_textChanged(const QString &arg1);
     void on_chatCB_clicked();
     void on_usersCB_clicked();
-    void on_quitPB_clicked();
-    void on_minPB_clicked();
     void slots_loading_chat_user();
 private:
     Ui::ChatDialog *ui;

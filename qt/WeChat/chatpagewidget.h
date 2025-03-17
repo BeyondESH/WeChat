@@ -7,13 +7,22 @@ namespace Ui {
 class chatPageWidget;
 }
 
-class chatPageWidget : public QWidget
+class ChatPageWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit chatPageWidget(QWidget *parent = nullptr);
-    ~chatPageWidget();
+    explicit ChatPageWidget(QWidget *parent = nullptr);
+    ~ChatPageWidget();
+    QWidget* getTitleWidget() const;
+private slots:
+    void on_quitPB_clicked();
+
+    void on_minPB_clicked();
+
+    void on_maxPB_toggled(bool checked);
+
+    void on_topPB_toggled(bool checked);
 
 private:
     Ui::chatPageWidget *ui;

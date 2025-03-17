@@ -4,6 +4,7 @@
 #include <QMouseEvent>
 #include "chatuserwidget.h"
 #include <QRandomGenerator>
+#include "chatpagewidget.h"
 ChatDialog::ChatDialog(QWidget *parent)
     : QDialog(parent), ui(new Ui::ChatDialog),_isDragging(false),_isLoading(false)
 {
@@ -12,8 +13,9 @@ ChatDialog::ChatDialog(QWidget *parent)
     connect(this,&ChatDialog::signal_loading_chat_user,this,&ChatDialog::slots_loading_chat_user);
     ui->searchWidget->installEventFilter(this);
     ui->sidebarWD->installEventFilter(this);
-    ui->titleWD->installEventFilter(this);
+    ui->chatPageSW->installEventFilter(this);
     ui->chatUserList->installEventFilter(this);
+    static_cast<ChatPageWidget *>(ui->chatPageSW->currentWidget())->getTitleWidget()->installEventFilter(this);
     addChatUserList();
     ui->chatUserList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
@@ -100,7 +102,8 @@ void ChatDialog::addChatUserList()
 bool ChatDialog::eventFilter(QObject *obj, QEvent *event)
 {
     //窗口拖动
-    if(obj==ui->searchWidget||obj==ui->sidebarWD||obj==ui->titleWD){
+    ChatPageWidget *chatPageWidget=static_cast<ChatPageWidget *>(ui->chatPageSW->currentWidget());
+    if(obj==ui->searchWidget||obj==ui->sidebarWD||obj==chatPageWidget->getTitleWidget()){
         if(event->type()==QEvent::MouseButtonPress){
             QMouseEvent* mouseEvent=static_cast<QMouseEvent*>(event);
             if(mouseEvent->button()==Qt::LeftButton){
@@ -119,7 +122,7 @@ bool ChatDialog::eventFilter(QObject *obj, QEvent *event)
         if(event->type()==QEvent::MouseMove){
             QMouseEvent* mouseEvent=static_cast<QMouseEvent*>(event);
             if(_isDragging){
-                this->parentWidget()->move(mouseEvent->globalPos()-_dragPosition);
+                this->parentWidget()->move(mouseEvent->globalPosition().toPoint()-_dragPosition);
                 return true;
             }
         }
@@ -152,7 +155,7 @@ bool ChatDialog::eventFilter(QObject *obj, QEvent *event)
     }
 
     //双击缩放
-    if(obj==ui->searchWidget||obj==ui->titleWD){
+    if(obj==ui->searchWidget||obj==chatPageWidget->getTitleWidget()){
         if(event->type()==QEvent::MouseButtonDblClick){
             if(this->parentWidget()->isMaximized()){
                 this->parentWidget()->showNormal();
@@ -179,34 +182,6 @@ void ChatDialog::on_clearPB_clicked()
     ui->chatUserList->show();
     ui->conUserList->close();
     ui->searchList->close();
-}
-
-void ChatDialog::on_topPB_toggled(bool checked)
-{
-    auto pb = ui->topPB;
-    if (checked)
-    {
-        pb->setIcon(QIcon(":/img/loginDialog/img/top_clicked.svg"));
-    }
-    else
-    {
-        pb->setIcon(QIcon(":/img/loginDialog/img/top.svg"));
-    }
-}
-
-void ChatDialog::on_maxPB_toggled(bool checked)
-{
-    auto pb = ui->maxPB;
-    if (checked)
-    {
-        pb->setIcon(QIcon(":/img/loginDialog/img/max_clicked.svg"));
-        this->parentWidget()->showMaximized();
-    }
-    else
-    {
-        pb->setIcon(QIcon(":/img/loginDialog/img/max.svg"));
-        this->parentWidget()->showNormal();
-    }
 }
 
 void ChatDialog::on_searchLE_textChanged(const QString &arg1)
@@ -241,16 +216,6 @@ void ChatDialog::on_usersCB_clicked()
     ui->chatUserList->close();
     ui->conUserList->show();
     ui->searchList->close();
-}
-
-void ChatDialog::on_quitPB_clicked()
-{
-    QApplication::quit();
-}
-
-void ChatDialog::on_minPB_clicked()
-{
-    this->parentWidget()->showMinimized();
 }
 
 void ChatDialog::slots_loading_chat_user()

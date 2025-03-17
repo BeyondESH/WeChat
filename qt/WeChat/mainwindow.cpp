@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(_loginDialog, &LoginDialog::registerPBClicked, this, &MainWindow::openRegisterDialog);
     connect(_loginDialog,&LoginDialog::resetPasswordPBClicked,this,&MainWindow::openResetDialog);
     connect(TCPMgr::getInstance().get(),&TCPMgr::signal_switch_chatDialog,this,&MainWindow::slot_switch_chatDialog);
-    //emit TCPMgr::getInstance()->signal_switch_chatDialog();
+    emit TCPMgr::getInstance()->signal_switch_chatDialog();
 }
 
 MainWindow::~MainWindow()
