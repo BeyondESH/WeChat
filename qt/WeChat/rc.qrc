@@ -47,6 +47,13 @@
         <file>img/bubble_left.svg</file>
         <file>img/bubble_right_hover.svg</file>
         <file>img/bubble_right.svg</file>
+        <file>img/bubble_body_white.svg</file>
+        <file>img/left.svg</file>
+        <file>img/right.svg</file>
+        <file>img/left_hover.svg</file>
+        <file>img/right_hover.svg</file>
+        <file>img/bubble_body_hover.svg</file>
+        <file>img/bubble_body.svg</file>
     </qresource>
     <qresource prefix="/">
         <file>style/stylesheet.qss</file>

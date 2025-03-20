@@ -95,6 +95,30 @@ enum ListItemType{
     MSG_ITEM,//消息
 };
 
+//消息类型
+enum MessageType {
+    Receive,  // 收到的消息
+    Send       // 发送的消息
+};
+
+//消息内容类型
+enum MessageContentType {
+    Text,      // 文本消息
+    Image,     // 图片消息
+    File,      // 文件消息
+    Voice,     // 语音消息
+    Video      // 视频消息
+};
+
+//消息状态类型
+enum MessageStatus {
+    Sending,   // 发送中
+    Sent,      // 已发送
+    Delivered, // 已送达
+    Read,      // 已读
+    Failed     // 发送失败
+};
+
 extern QString gate_url_prefix;//网关url前缀
 
 #endif // GLOBAL_H

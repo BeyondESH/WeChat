@@ -24,6 +24,8 @@ public:
     static void chatdialog(MainWindow &w);
     //测试用户列表
     static void chatuserlist(MainWindow &w);
+
+    static void messageWidget(MainWindow &w);
 };
 
 #endif // TESTWINDOW_H

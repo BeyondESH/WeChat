@@ -20,6 +20,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     messagebase.cpp \
+    messagewidget.cpp \
     registerdialog.cpp \
     resetdialog.cpp \
     tcpmgr.cpp \
@@ -37,6 +38,7 @@ HEADERS += \
     logindialog.h \
     mainwindow.h \
     messagebase.h \
+    messagewidget.h \
     registerdialog.h \
     resetdialog.h \
     singleton.hpp \
@@ -50,6 +52,7 @@ FORMS += \
     chatuserwidget.ui \
     logindialog.ui \
     mainwindow.ui \
+    messagewidget.ui \
     registerdialog.ui \
     resetdialog.ui
 
