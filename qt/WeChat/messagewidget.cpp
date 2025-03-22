@@ -66,18 +66,21 @@ void MessageWidget::setInfo(const MessageType& msgType,const QString &headPath, 
     _msgBody = msg;
     _msgStatus==MessageStatus::Sending;
     QLabel *bubbleLB=nullptr;
+    QLabel *headLB=nullptr;
     if(msgType==MessageType::Receive){
         ui->sendWD->close();
         _contentWidget=ui->receiveWD;
         bubbleLB=ui->receiveBubbleLB;
+        headLB=ui->receiveHeadLB;
     }else{
         ui->receiveWD->close();
         _contentWidget=ui->sendWD;
         bubbleLB=ui->sendBubbleLB;
+        headLB=ui->sendHeadLB;
     }
 
     // 设置头像
-    QString styleSheet = QString("#%1{image: url(%2);}").arg(_contentWidget->objectName()).arg(headPath);
+    QString styleSheet = QString("#%1{image: url(%2);}").arg(headLB->objectName()).arg(headPath);
     _contentWidget->setStyleSheet(styleSheet);
 
     // 处理时间
@@ -102,18 +105,21 @@ void MessageWidget::setInfo(const MessageType &msgType, const QString &headPath,
     _msgBody = msg;
     _msgStatus==MessageStatus::Sending;
     QLabel *bubbleLB=nullptr;
+    QLabel *headLB=nullptr;
     if(msgType==MessageType::Receive){
         ui->sendWD->close();
         _contentWidget=ui->receiveWD;
         bubbleLB=ui->receiveBubbleLB;
+        headLB=ui->receiveHeadLB;
     }else{
         ui->receiveWD->close();
         _contentWidget=ui->sendWD;
         bubbleLB=ui->sendBubbleLB;
+        headLB=ui->sendHeadLB;
     }
 
     // 设置头像
-    QString styleSheet = QString("#%1{image: url(%2);}").arg(_contentWidget->objectName()).arg(headPath);
+    QString styleSheet = QString("#%1{image: url(%2);}").arg(headLB->objectName()).arg(headPath);
     _contentWidget->setStyleSheet(styleSheet);
 
 

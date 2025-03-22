@@ -68,3 +68,8 @@ void UserMgr::setAccount(const QString &newAccount)
 {
     _account = newAccount;
 }
+
+QString UserMgr::getHeadPath() const
+{
+    return QString(":/img/loginDialog/img/avatar/me.jpg");
+}

@@ -638,9 +638,20 @@
           <widget class="QListWidget" name="msgList">
            <property name="styleSheet">
             <string notr="true">#msgList{
-	outline: none;
-	border-style:none;
-}</string>
+	outline: 0px;
+border:none;
+}
+
+#msgList::item:hover{
+	border:none;
+	outline :none;
+}	
+
+#msgList::item:selected{
+	border:none;
+	outline :none;
+}
+</string>
            </property>
           </widget>
          </item>

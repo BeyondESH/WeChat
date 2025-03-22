@@ -34,6 +34,6 @@ int main(int argc, char *argv[])
     // testWindow::registerdialog(w);
     // testWindow::logindialog(w);
     // testWindow::chatdialog(w);
-    testWindow::messageWidget(w);
+    //testWindow::messageWidget(w);
     return a.exec();
 }

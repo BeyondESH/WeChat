@@ -14,16 +14,6 @@ class MessageWidget : public MessageBase
 public:
     explicit MessageWidget(QWidget *parent = nullptr);
     ~MessageWidget();
-
-private:
-    Ui::MessageWidget *ui;
-    MessageType _msgType;
-    QString _msgBody;
-    QDateTime _msgTime;
-    MessageStatus _msgStatus;
-    QString _headPath;
-    QWidget *_contentWidget;
-protected:
     void setMsgType(const MessageType &type);
     MessageType getMsgType();
     void setMsgBody(const QString &body);
@@ -35,6 +25,14 @@ protected:
     void setInfo(const MessageType& msgType,const QString& headPath,const QDateTime& time,const QString& msg);//时间
     void setInfo(const MessageType& msgType,const QString& headPath,const QString& msg);//不显时间
     void closeTime();
+private:
+    Ui::MessageWidget *ui;
+    MessageType _msgType;
+    QString _msgBody;
+    QDateTime _msgTime;
+    MessageStatus _msgStatus;
+    QString _headPath;
+    QWidget *_contentWidget;
 };
 
 #endif // MESSAGEWIDGET_H

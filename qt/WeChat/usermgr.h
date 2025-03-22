@@ -28,6 +28,7 @@ public:
     void setPassword(const QString &newPassword);
     QString getAccount() const;
     void setAccount(const QString &newAccount);
+    QString getHeadPath() const;
 private:
     UserMgr();
     UserMgr(const UserMgr&)=delete;

@@ -23,6 +23,8 @@ private slots:
     void on_maxPB_toggled(bool checked);
 
     void on_topPB_toggled(bool checked);
+    void on_sendPB_clicked();
+
 private:
     Ui::chatPageWidget *ui;
 

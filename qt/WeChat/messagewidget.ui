@@ -248,7 +248,7 @@ background-color: rgb(218, 218, 218);
              <number>0</number>
             </property>
             <item>
-             <widget class="QLabel" name="headLB_left">
+             <widget class="QLabel" name="receiveHeadLB">
               <property name="minimumSize">
                <size>
                 <width>34</width>
@@ -262,10 +262,7 @@ background-color: rgb(218, 218, 218);
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">#headLB_left{
-	
-	image: url(:/img/loginDialog/img/avatar/AL.jpg);
-}</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string/>
@@ -289,7 +286,7 @@ background-color: rgb(218, 218, 218);
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="bubbleRightLB_left">
+          <widget class="QLabel" name="receiveBubbleLB">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -309,7 +306,7 @@ background-color: rgb(218, 218, 218);
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">#bubbleRightLB_left{
+            <string notr="true">#receiveBubbleLB{
 	color: rgb(0, 0, 0);
 	padding-left:10px;
 	padding-top:12px;
@@ -320,7 +317,7 @@ background-color: rgb(218, 218, 218);
 	background-color: rgb(255, 255, 255);
 }
 
-#bubbleRightLB_left:hover{
+#receiveBubbleLB:hover{
 	border-radius: 5px;
 	
 	background-color: rgb(226, 226, 226);
@@ -390,7 +387,7 @@ background-color: rgb(218, 218, 218);
           <number>0</number>
          </property>
          <item>
-          <widget class="QLabel" name="bubbleRightLB">
+          <widget class="QLabel" name="sendBubbleLB">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -410,7 +407,7 @@ background-color: rgb(218, 218, 218);
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">#bubbleRightLB{
+            <string notr="true">#sendBubbleLB{
 	color: rgb(0, 0, 0);
 	padding-left:10px;
 	padding-top:12px;
@@ -420,7 +417,7 @@ background-color: rgb(218, 218, 218);
 	background-color: rgb(149, 236, 105);
 }
 
-#bubbleRightLB:hover{
+#sendBubbleLB:hover{
 	border-radius: 5px;
 	background-color: rgb(137, 217, 97);
 }</string>
@@ -473,7 +470,7 @@ background-color: rgb(218, 218, 218);
              <number>0</number>
             </property>
             <item>
-             <widget class="QLabel" name="headLB">
+             <widget class="QLabel" name="sendHeadLB">
               <property name="minimumSize">
                <size>
                 <width>34</width>
@@ -487,7 +484,7 @@ background-color: rgb(218, 218, 218);
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">#headLB{
+               <string notr="true">#sendHeadLB{
 	
 	image: url(:/img/loginDialog/img/avatar/me.jpg);
 }</string>

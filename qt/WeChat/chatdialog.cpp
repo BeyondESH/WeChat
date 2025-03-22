@@ -5,6 +5,7 @@
 #include "chatuserwidget.h"
 #include <QRandomGenerator>
 #include "chatpagewidget.h"
+#include "testwindow.h"
 ChatDialog::ChatDialog(QWidget *parent)
     : QDialog(parent), ui(new Ui::ChatDialog),_isDragging(false),_isLoading(false)
 {
@@ -25,63 +26,11 @@ ChatDialog::~ChatDialog()
     delete ui;
 }
 
-std::vector<QString>  strs ={"你好",
-                             "This is the way",
-                             "I love you",
-                             "I miss you",
-                             "My love is written in the wind ever since the whole world is you",
-                             "这些数据只是测试数据"};
-std::vector<QString> heads = {
-    ":/img/loginDialog/img/avatar/AL.jpg",
-    ":/img/loginDialog/img/avatar/BS.jpg",
-    ":/img/loginDialog/img/avatar/DB.jpg",
-    ":/img/loginDialog/img/avatar/JZ.jpg",
-    ":/img/loginDialog/img/avatar/LM.jpg",
-    ":/img/loginDialog/img/avatar/MAO.jpg",
-    ":/img/loginDialog/img/avatar/RK.jpg",
-    ":/img/loginDialog/img/avatar/SY.jpg",
-    ":/img/loginDialog/img/avatar/wz.jpg",
-    ":/img/loginDialog/img/avatar/YZ.jpg"
-};
-std::vector<QString> names = {
-    "阿柳",
-    "Boyer Shaw",
-    "阿杜",
-    "JZ",
-    "老梅",
-    "毛",
-    "软壳",
-    "盛誉",
-    "吴征",
-    "余卓狗"
-};
-
-// 生成一个随机的 QDate
-QDate generateRandomDate(const QDate& minDate, const QDate& maxDate) {
-    int minJulianDay = minDate.toJulianDay();
-    int maxJulianDay = maxDate.toJulianDay();
-    int randomJulianDay = QRandomGenerator::global()->bounded(minJulianDay, maxJulianDay + 1);
-    return QDate::fromJulianDay(randomJulianDay);
-}
-
-// 生成一个随机的 QTime
-QTime generateRandomTime() {
-    int hour = QRandomGenerator::global()->bounded(0, 24);     // 0到23小时
-    int minute = QRandomGenerator::global()->bounded(0, 60);    // 0到59分钟
-    int second = QRandomGenerator::global()->bounded(0, 60);    // 0到59秒
-    int msec = QRandomGenerator::global()->bounded(0, 1000);    // 0到999毫秒
-    return QTime(hour, minute, second, msec);
-}
-
-// 生成一个随机的 QDateTime
-QDateTime generateRandomDateTime(const QDate& minDate, const QDate& maxDate) {
-    QDate randomDate = generateRandomDate(minDate, maxDate);
-    QTime randomTime = generateRandomTime();
-    return QDateTime(randomDate, randomTime);
-}
-
 void ChatDialog::addChatUserList()
 {
+    std::vector<QString>strs=testWindow::generateMsg();
+    std::vector<QString>heads=testWindow::generateHeads();
+    std::vector<QString>names=testWindow::generateName();
     for (int i = 0; i < 100; i++)
     {
         QDate minDate(2025, 3, 13);  // 最小日期
@@ -91,7 +40,7 @@ void ChatDialog::addChatUserList()
         int head_i = rand%heads.size();
         int name_i = rand%names.size();
         ChatUserWidget* itemWidget=new ChatUserWidget(ui->chatUserList);
-        itemWidget->setInfo(names[name_i],heads[head_i],generateRandomDateTime(minDate,maxDate),strs[str_i]);
+        itemWidget->setInfo(names[name_i],heads[head_i],testWindow::generateRandomDateTime(minDate,maxDate),strs[str_i]);
         QListWidgetItem* item=new QListWidgetItem(ui->chatUserList);
         item->setSizeHint(itemWidget->sizeHint());
         ui->chatUserList->addItem(item);
@@ -224,7 +173,7 @@ void ChatDialog::slots_loading_chat_user()
     if(_isLoading){
         return;
     }
-
-    addChatUserList();
     _isLoading=true;
+    addChatUserList();
+    _isLoading=false;
 }

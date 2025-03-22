@@ -26,6 +26,18 @@ public:
     static void chatuserlist(MainWindow &w);
 
     static void messageWidget(MainWindow &w);
+
+    static std::vector<QString> generateMsg();
+
+    static std::vector<QString> generateHeads();
+
+    static std::vector<QString> generateName();
+
+    static QDate generateRandomDate(const QDate& minDate, const QDate& maxDate);
+
+    static QTime generateRandomTime();
+
+    static QDateTime generateRandomDateTime(const QDate& minDate, const QDate& maxDate);
 };
 
 #endif // TESTWINDOW_H
