@@ -23,9 +23,11 @@ private slots:
     void on_maxPB_toggled(bool checked);
 
     void on_topPB_toggled(bool checked);
-
 private:
     Ui::chatPageWidget *ui;
+
+protected:
+    void addListItem();
 };
 
 #endif // CHATPAGEWIDGET_H

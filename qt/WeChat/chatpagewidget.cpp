@@ -57,3 +57,8 @@ void ChatPageWidget::on_topPB_toggled(bool checked)
         pb->setIcon(QIcon(":/img/loginDialog/img/top.svg"));
     }
 }
+
+void ChatPageWidget::addListItem()
+{
+
+}
