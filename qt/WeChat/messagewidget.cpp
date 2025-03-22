@@ -1,11 +1,21 @@
 #include "messagewidget.h"
 #include "ui_messagewidget.h"
-
+#include <QTimer>
 MessageWidget::MessageWidget(QWidget *parent)
     : MessageBase(parent)
     , ui(new Ui::MessageWidget)
 {
     ui->setupUi(this);
+    ui->sendTE->setReadOnly(true);
+    ui->receviceTE->setReadOnly(true);
+    ui->sendTE->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->receviceTE->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->sendTE->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->receviceTE->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->sendTE->setFrameShape(QFrame::NoFrame);
+    ui->receviceTE->setFrameShape(QFrame::NoFrame);
+    ui->sendTE->setFocusPolicy(Qt::NoFocus);
+    ui->receviceTE->setFocusPolicy(Qt::NoFocus);
 }
 
 MessageWidget::~MessageWidget()
@@ -17,6 +27,13 @@ void MessageWidget::closeTime()
 {
     ui->timeWD->close();
 }
+
+QSize MessageWidget::sizeHint() const
+{
+    return QSize(width(), height());
+}
+
+
 
 void MessageWidget::setMsgType(const MessageType &type)
 {
@@ -64,24 +81,24 @@ void MessageWidget::setInfo(const MessageType& msgType,const QString &headPath, 
     _headPath = headPath;
     _msgTime = time;
     _msgBody = msg;
-    _msgStatus==MessageStatus::Sending;
-    QLabel *bubbleLB=nullptr;
+    _msgStatus=MessageStatus::Sending;
+    QTextEdit *textEdit=nullptr;
     QLabel *headLB=nullptr;
     if(msgType==MessageType::Receive){
-        ui->sendWD->close();
-        _contentWidget=ui->receiveWD;
-        bubbleLB=ui->receiveBubbleLB;
+        ui->sendHeadLB->close();
+        ui->sendTE->close();
+        textEdit=ui->receviceTE;
         headLB=ui->receiveHeadLB;
     }else{
-        ui->receiveWD->close();
-        _contentWidget=ui->sendWD;
-        bubbleLB=ui->sendBubbleLB;
+        ui->receiveHeadLB->close();
+        ui->receviceTE->close();
+        textEdit=ui->sendTE;
         headLB=ui->sendHeadLB;
     }
 
     // 设置头像
     QString styleSheet = QString("#%1{image: url(%2);}").arg(headLB->objectName()).arg(headPath);
-    _contentWidget->setStyleSheet(styleSheet);
+    headLB->setStyleSheet(styleSheet);
 
     // 处理时间
     QDateTime now = QDateTime::currentDateTime();
@@ -90,39 +107,38 @@ void MessageWidget::setInfo(const MessageType& msgType,const QString &headPath, 
     if(messageDate==today){
         ui->timeLB->setText(_msgTime.toString("h:mm"));
     }else{
-        ui->timeLB->setText(_msgTime.toString("yy/M/d h:mm"));
+        ui->timeLB->setText(_msgTime.toString("yy年M月d日 h:mm"));
+    }
+    // 设置消息
+    textEdit->setText(msg);
+    int parentWidth = this->width();//父容器宽度
+    int maxTextWidth = parentWidth * 0.7; // 最大宽度为窗口的70%
+    int minTextWidth = 60; // 最小宽度
+    int horizontalPadding = 20; 
+    // 使用QFontMetrics计算文本宽度
+    QFontMetrics fm(textEdit->font());
+    QStringList lines = msg.split('\n');
+    int textWidth = 0;
+
+    // 查找最长的一行
+    for (const QString& line : lines) {
+        int lineWidth = fm.horizontalAdvance(line);
+        textWidth = qMax(textWidth, lineWidth);
     }
 
-    // 设置消息
-    bubbleLB->setText(msg);
-
-}
-
-void MessageWidget::setInfo(const MessageType &msgType, const QString &headPath, const QString &msg)
-{
-    _msgType = msgType;
-    _headPath = headPath;
-    _msgBody = msg;
-    _msgStatus==MessageStatus::Sending;
-    QLabel *bubbleLB=nullptr;
-    QLabel *headLB=nullptr;
-    if(msgType==MessageType::Receive){
-        ui->sendWD->close();
-        _contentWidget=ui->receiveWD;
-        bubbleLB=ui->receiveBubbleLB;
-        headLB=ui->receiveHeadLB;
-    }else{
-        ui->receiveWD->close();
-        _contentWidget=ui->sendWD;
-        bubbleLB=ui->sendBubbleLB;
-        headLB=ui->sendHeadLB;
-    }
-
-    // 设置头像
-    QString styleSheet = QString("#%1{image: url(%2);}").arg(headLB->objectName()).arg(headPath);
-    _contentWidget->setStyleSheet(styleSheet);
-
-
-    // 设置消息
-    bubbleLB->setText(msg);
+    textWidth += horizontalPadding;
+    textWidth = qMax(minTextWidth, qMin(textWidth, maxTextWidth));
+    // 设置文档宽度以便自动换行
+    textEdit->document()->setTextWidth(textWidth-horizontalPadding);
+    // 计算适当的高度
+    int contentHeight = textEdit->document()->size().height();
+    int verticalPadding = 24;
+    int minHeight = 36;
+    textEdit->setMinimumWidth(textWidth);
+    textEdit->setMaximumWidth(textWidth);
+    int calculatedHeight = contentHeight + verticalPadding;
+    textEdit->setMinimumHeight(qMax(minHeight, calculatedHeight));
+    // 移除最大高度限制，允许文本框根据内容扩展
+    textEdit->setMaximumHeight(QWIDGETSIZE_MAX);
+    adjustSize();
 }

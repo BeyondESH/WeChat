@@ -23,8 +23,8 @@ public:
     void setMsgStatus(const MessageStatus &status);
     MessageStatus getMsgStatus();
     void setInfo(const MessageType& msgType,const QString& headPath,const QDateTime& time,const QString& msg);//时间
-    void setInfo(const MessageType& msgType,const QString& headPath,const QString& msg);//不显时间
     void closeTime();
+    QSize sizeHint() const override;
 private:
     Ui::MessageWidget *ui;
     MessageType _msgType;
@@ -32,7 +32,7 @@ private:
     QDateTime _msgTime;
     MessageStatus _msgStatus;
     QString _headPath;
-    QWidget *_contentWidget;
+signals:
 };
 
 #endif // MESSAGEWIDGET_H

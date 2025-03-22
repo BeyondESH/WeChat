@@ -8,12 +8,13 @@
 #include "messagewidget.h"
 #include "testwindow.h"
 #include "usermgr.h"
-
+#include <QTimer>
 ChatPageWidget::ChatPageWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::chatPageWidget)
 {
     ui->setupUi(this);
+    ui->chatTE->installEventFilter(this);
     ui->msgList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->msgList->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     addListItem();
@@ -75,7 +76,7 @@ void ChatPageWidget::addListItem()
     std::vector<QString>names=testWindow::generateName();
     for (int i = 0; i < 10; i++)
     {
-        QDate minDate(2025, 3, 13);  // 最小日期
+        QDate minDate(2025, 3, 20);  // 最小日期
         QDate maxDate=QDate::currentDate();  // 最大日期
         int rand = QRandomGenerator::global()->bounded(0, 100);
         int str_i = rand%strs.size();
@@ -103,6 +104,23 @@ void ChatPageWidget::on_sendPB_clicked()
     item->setSizeHint(messageWidget->sizeHint());
     ui->msgList->addItem(item);
     ui->msgList->setItemWidget(item,messageWidget);
+    // 连接布局变化信号以更新列表项高度
     ui->chatTE->clear();
+    ui->msgList->scrollToBottom();
+}
+
+bool ChatPageWidget::eventFilter(QObject *obj, QEvent *event)
+{
+    if(obj==ui->chatTE){
+        if(event->type()==QEvent::KeyPress){
+            QKeyEvent* keyEvent=static_cast<QKeyEvent*>(event);
+            if(keyEvent->key()==Qt::Key_Return ||keyEvent->key()==Qt::Key_Enter){
+                on_sendPB_clicked();
+                return true;
+            }
+        }
+    }
+
+    return QWidget::eventFilter(obj,event);
 }
 
