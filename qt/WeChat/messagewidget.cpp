@@ -1,6 +1,9 @@
 #include "messagewidget.h"
 #include "ui_messagewidget.h"
 #include <QTimer>
+#include <QPainter>
+#include <QTextBlock>
+#include <QFontMetricsF>
 MessageWidget::MessageWidget(QWidget *parent)
     : MessageBase(parent)
     , ui(new Ui::MessageWidget)
@@ -32,8 +35,6 @@ QSize MessageWidget::sizeHint() const
 {
     return QSize(width(), height());
 }
-
-
 
 void MessageWidget::setMsgType(const MessageType &type)
 {
@@ -111,34 +112,25 @@ void MessageWidget::setInfo(const MessageType& msgType,const QString &headPath, 
     }
     // 设置消息
     textEdit->setText(msg);
-    int parentWidth = this->width();//父容器宽度
-    int maxTextWidth = parentWidth * 0.7; // 最大宽度为窗口的70%
-    int minTextWidth = 60; // 最小宽度
-    int horizontalPadding = 20; 
-    // 使用QFontMetrics计算文本宽度
-    QFontMetrics fm(textEdit->font());
-    QStringList lines = msg.split('\n');
-    int textWidth = 0;
-
-    // 查找最长的一行
-    for (const QString& line : lines) {
-        int lineWidth = fm.horizontalAdvance(line);
-        textWidth = qMax(textWidth, lineWidth);
+    // 设置文本框大小
+    qreal doc_margin = textEdit->document()->documentMargin();
+    int margin_left = textEdit->contentsMargins().left();
+    int margin_right = textEdit->contentsMargins().right();
+    qDebug()<<doc_margin<<margin_left<<margin_right;
+    QFontMetricsF fm(textEdit->font());
+    QTextDocument *doc = textEdit->document();
+    int max_width = 0;
+    for (QTextBlock it = doc->begin(); it != doc->end(); it = it.next())    //字体总长
+    {
+        int txtW = int(fm.horizontalAdvance(it.text()));
+        max_width = max_width < txtW ? txtW : max_width;                 //找到最长的那段
     }
-
-    textWidth += horizontalPadding;
-    textWidth = qMax(minTextWidth, qMin(textWidth, maxTextWidth));
-    // 设置文档宽度以便自动换行
-    textEdit->document()->setTextWidth(textWidth-horizontalPadding);
-    // 计算适当的高度
-    int contentHeight = textEdit->document()->size().height();
-    int verticalPadding = 24;
-    int minHeight = 36;
-    textEdit->setMinimumWidth(textWidth);
-    textEdit->setMaximumWidth(textWidth);
-    int calculatedHeight = contentHeight + verticalPadding;
-    textEdit->setMinimumHeight(qMax(minHeight, calculatedHeight));
-    // 移除最大高度限制，允许文本框根据内容扩展
-    textEdit->setMaximumHeight(QWIDGETSIZE_MAX);
-    adjustSize();
+    textEdit->setMaximumWidth(max_width + doc_margin * 2 + (margin_left + margin_right));
+    // 设置高度
+    textEdit->document()->adjustSize();
+    textEdit->document()->setTextWidth(textEdit->viewport()->width());
+    qreal text_height = textEdit->document()->size().height();
+    qDebug()<<"text_height:"<<text_height;
+    textEdit->setFixedHeight(text_height + 20);
+    qDebug()<<"textEdit height:"<<textEdit->height();
 }
