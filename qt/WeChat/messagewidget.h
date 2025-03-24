@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "messagebase.h"
+#include <QTextEdit>
 namespace Ui {
 class MessageWidget;
 }
