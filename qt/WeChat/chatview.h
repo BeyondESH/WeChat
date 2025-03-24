@@ -22,7 +22,7 @@ private:
 
     QVBoxLayout* _layout;
     QScrollArea* _scrollArea;
-    bool isLoading;
+    bool _isLoading;
 };
 
 #endif // CHATVIEW_H
