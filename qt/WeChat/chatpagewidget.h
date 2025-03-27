@@ -29,7 +29,7 @@ private:
 
     bool eventFilter(QObject *obj,QEvent *event) override;
 protected:
-    void addListItem();
+    // void addListItem();
 };
 
 #endif // CHATPAGEWIDGET_H

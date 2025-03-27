@@ -119,6 +119,12 @@ enum MessageStatus {
     Failed     // 发送失败
 };
 
+struct MsgInfo{
+    QString msgFlag;
+    QString context;
+    QPixmap pixmap;
+};
+
 extern QString gate_url_prefix;//网关url前缀
 
 #endif // GLOBAL_H

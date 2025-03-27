@@ -599,7 +599,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="chatDataWD" native="true">
+       <widget class="ChatView" name="chatDataWD" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -618,44 +618,12 @@
           <height>16777215</height>
          </size>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QListWidget" name="msgList">
-           <property name="styleSheet">
-            <string notr="true">#msgList{
-	outline: 0px;
-border:none;
-}
-
-#msgList::item:hover{
-	border:none;
-	outline :none;
-}	
-
-#msgList::item:selected{
-	border:none;
-	outline :none;
-}
-</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <property name="styleSheet">
+         <string notr="true">#chatDataWD{
+	
+	background-color: rgb(245, 245, 245);
+}</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -1026,6 +994,14 @@ border-top-style: solid;
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ChatView</class>
+   <extends>QWidget</extends>
+   <header>chatview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
