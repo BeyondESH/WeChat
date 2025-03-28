@@ -1,161 +1,191 @@
-# WeChat C++项目说明
+# WeChat 聊天系统
 
-## 一、系统架构设计
+## 项目介绍
+
+WeChat 聊天系统是一个基于分布式架构的即时通讯应用，包含服务器集群和跨平台客户端。该系统模仿了微信的核心功能，采用现代C++技术栈构建，支持用户注册、登录、好友管理、即时消息通信等功能。项目采用微服务架构设计，确保系统的高可用性、可扩展性和可维护性。
+
+## 项目结构图
 
 ```mermaid
 graph TD
-    A[客户端] -->|HTTP/WebSocket| B[GateServer]
-    B -->|gRPC| C[VerifyServer]
-    B -->|Redis| D[缓存]
-    B -->|MySQL| E[数据库]
+    WeChat["WeChat系统架构"]
+
+    %% 主要组件
+    Server["服务器集群"]
+    Storage["数据存储"]
+    Client["客户端应用"]
+
+    %% 服务器集群子组件
+    GateServer["GateServer (网关服务器)"]
+    VerifyServer["VerifyServer (验证服务器)"]
+    StatusServer["StatusServer (状态服务器)"]
+    ChatServer["ChatServer (聊天服务器)"]
+
+    %% 数据存储子组件
+    MySQL["MySQL"]
+    Redis["Redis"]
+
+    %% 客户端子组件
+    QtClient["Qt客户端"]
+    Login["登录/注册模块"]
+    ChatUI["聊天界面"]
+    FriendManage["好友管理"]
+    MessageHistory["消息历史查询"]
+
+    %% 服务器功能
+    GateServerFunc["处理HTTP请求，验证码生成，用户注册登录"]
+    VerifyServerFunc["提供身份验证服务，验证码校验"]
+    StatusServerFunc["管理用户状态，ChatServer分配"]
+    ChatServerFunc["处理实时消息，好友管理，聊天历史"]
+
+    %% 数据存储功能
+    MySQLFunc["用户信息，好友关系，消息历史"]
+    RedisFunc["令牌存储，验证码缓存，临时状态"]
+
+    %% 连接关系
+    WeChat --> Server
+    WeChat --> Storage
+    WeChat --> Client
+
+    %% 服务器连接
+    Server --> GateServer
+    Server --> VerifyServer
+    Server --> StatusServer
+    Server --> ChatServer
+
+    GateServer --> GateServerFunc
+    VerifyServer --> VerifyServerFunc
+    StatusServer --> StatusServerFunc
+    ChatServer --> ChatServerFunc
+
+    %% 数据存储连接
+    Storage --> MySQL
+    Storage --> Redis
+    MySQL --> MySQLFunc
+    Redis --> RedisFunc
+
+    %% 客户端连接
+    Client --> QtClient
+    QtClient --> Login
+    QtClient --> ChatUI
+    QtClient --> FriendManage
+    QtClient --> MessageHistory
 ```
 
-## 二、功能模块规划
+## 项目架构
 
-### 1. GateServer (C++)
-- 登录验证模块
-- 数据库操作模块
-- 缓存管理模块
-- WebSocket服务模块
+### 服务器架构
 
-### 2. VerifyServer (Node.js)
-- 验证码生成模块
-- 邮件发送模块
-- gRPC服务模块
+WeChat 系统采用微服务架构，将不同功能拆分为独立的服务，通过gRPC和HTTP进行通信：
 
-### 3. Client (Qt)
-- 登录界面模块
-- 主窗口模块
-- 网络通信模块
+1. **GateServer** - 网关服务器
+   - 处理HTTP请求
+   - 用户注册与登录
+   - 验证码生成与发送
+   - 使用Boost.Beast实现HTTP服务器
 
-## 三、接口定义
+2. **VerifyServer** - 验证服务器
+   - 验证码验证
+   - 提供gRPC接口供其他服务调用
+   - Redis缓存验证码
 
-### HTTP接口
-```typescript
+3. **StatusServer** - 状态服务器
+   - 用户状态管理
+   - ChatServer负载均衡
+   - Token认证与验证
+   - gRPC服务提供
 
+4. **ChatServer** - 聊天服务器
+   - 实时消息处理
+   - 好友关系管理
+   - 消息历史记录存储
+   - 使用Boost.Asio实现TCP长连接
 
-interface LoginRequest {
-    username: string;
-    password: string;
-    captcha: string;
-}
+### 通信协议
 
-interface RegisterRequest {
-    username: string;
-    password: string;
-    email: string;
-    captcha: string;
-}
+- 服务间通信：gRPC (Protobuf)
+- 客户端与网关通信：HTTP
+- 客户端与聊天服务器通信：自定义TCP协议
 
-interface ApiResponse<T> {
-    code: number;
-    message: string;
-    data: T;
-}
-```
+### 数据存储
 
-### gRPC接口
-```protobuf
+- **MySQL**：存储用户信息、好友关系、消息历史等持久化数据
+- **Redis**：存储验证码、Token、临时会话信息等需要高速访问的数据
 
+### 客户端架构
 
-service VerifyService {
-    rpc GenerateCaptcha (CaptchaRequest) returns (CaptchaResponse);
-    rpc VerifyCaptcha (VerifyRequest) returns (VerifyResponse);
-    rpc SendEmail (EmailRequest) returns (EmailResponse);
-}
-```
+客户端采用Qt框架开发，实现跨平台支持：
 
-## 四、数据库设计
+- 使用Qt的信号槽机制实现异步通信
+- 采用单例模式管理全局资源
+- 基于TCP长连接实现消息的实时收发
+- HTTP请求处理用户认证和注册
 
-```sql
+## 项目功能
 
+### 用户管理
+- 账号注册（用户名、密码、邮箱）
+- 邮箱验证码验证
+- 账号/邮箱登录
+- 密码重置功能
 
-CREATE TABLE users (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(256) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+### 好友管理
+- 搜索用户
+- 发送好友请求
+- 接受/拒绝好友申请
+- 好友列表显示
 
-CREATE TABLE messages (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    sender_id BIGINT NOT NULL,
-    receiver_id BIGINT NOT NULL,
-    content TEXT NOT NULL,
-    send_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
+### 即时通讯
+- 实时文本消息收发
+- 消息历史记录查询
+- 好友在线状态显示
+- 未读消息提醒
 
-## 五、项目结构
+### 系统功能
+- 聊天服务器负载均衡
+- 用户身份验证与授权
+- 数据安全性保障
+- 分布式服务自动发现与恢复
 
-```
-WeChat/
-├── GateServer/
-│   ├── src/
-│   ├── include/
-│   └── CMakeLists.txt
-├── VerifyServer/
-│   ├── src/
-│   └── package.json
-├── Client/
-│   ├── src/
-│   └── WeChat.pro
-├── proto/
-├── docs/
-└── README.md
-```
+## 项目优势
 
-## 六、开发环境需求
+### 技术优势
+1. **高性能架构**：采用C++开发，结合Boost.Asio实现高并发处理能力
+2. **分布式设计**：服务解耦，单个服务故障不影响整体系统运行
+3. **可扩展性**：各服务可独立扩展，根据负载动态调整
+4. **数据安全**：密码加密存储，通信加密，令牌验证
+5. **代码优化**：使用现代C++特性，设计模式应用，提高代码质量
 
-### 开发工具
-- Visual Studio 2022
-- Visual Studio Code
-- Qt Creator
-- Redis Desktop Manager
-- MySQL Workbench
+### 功能优势
+1. **实时通信**：基于TCP长连接，保证消息实时性和可靠性
+2. **跨平台支持**：Qt客户端支持Windows、Linux、MacOS
+3. **用户体验**：简洁直观的界面设计，操作流程优化
+4. **功能完整**：覆盖即时通讯系统的核心功能
+5. **鲁棒性**：完善的错误处理和异常机制
 
-### 依赖项
-```powershell
-# Windows依赖安装命令
-vcpkg install boost:x64-windows
-vcpkg install grpc:x64-windows
-vcpkg install openssl:x64-windows
-vcpkg install mysql-connector-cpp:x64-windows
-vcpkg install redis-plus-plus:x64-windows
-```
+## 技术栈
 
-## 七、构建与部署
+### 后端
+- C++ 17
+- Boost (Beast, Asio)
+- gRPC & Protobuf
+- MySQL Connector/C++
+- Redis (hiredis)
+- nlohmann/json
 
-### 编译命令
-```bash
-# GateServer
-mkdir build && cd build
-cmake -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]/scripts/buildsystems/vcpkg.cmake ..
-cmake --build . --config Release
+### 前端
+- Qt 6
+- C++
+- QSS样式表
+- Qt网络模块
 
-# VerifyServer
-cd VerifyServer
-npm install
-npm run build
+### 构建工具
+- CMake
+- Ninja
+- vcpkg (依赖管理)
 
-# Client
-cd Client
-qmake
-nmake
-```
+## 联系方式
 
-## 八、测试计划
+如有任何问题或建议，欢迎提交 Issue 或通过以下方式联系我：
 
-- 单元测试：使用Google Test
-- 接口测试：使用Postman
-- 压力测试：使用Apache JMeter
-- 端到端测试：自动化UI测试
-
-## 九、时间规划
-
-1. 架构设计与环境搭建 (1周)
-2. 基础功能开发 (2周)
-3. 核心功能实现 (2周)
-4. 测试与优化 (1周)
-5. 部署上线 (1周)
+- Email: 1989601704@qq.com

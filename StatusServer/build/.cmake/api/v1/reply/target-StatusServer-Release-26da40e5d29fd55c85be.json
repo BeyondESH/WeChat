@@ -1,0 +1,749 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "D:/Gitee/wechat/StatusServer/bin/Release/StatusServer.exe"
+		},
+		{
+			"path" : "D:/Gitee/wechat/StatusServer/bin/Release/StatusServer.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"set_target_properties",
+			"include",
+			"find_package",
+			"add_definitions"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt",
+			"D:/C++library/vcpkg/installed/x64-windows/share/grpc/gRPCTargets.cmake",
+			"D:/C++library/vcpkg/installed/x64-windows/share/grpc/gRPCConfig.cmake",
+			"D:/C++library/vcpkg/installed/x64-windows/share/absl/abslTargets.cmake",
+			"D:/C++library/vcpkg/installed/x64-windows/share/absl/abslConfig.cmake",
+			"D:/C++library/vcpkg/installed/x64-windows/share/c-ares/c-ares-targets.cmake",
+			"D:/C++library/vcpkg/installed/x64-windows/share/c-ares/c-ares-config.cmake",
+			"D:/C++library/vcpkg/installed/x64-windows/share/grpc/modules/Findc-ares.cmake",
+			"D:/C++library/vcpkg/installed/x64-windows/share/redis++/redis++-targets.cmake",
+			"D:/C++library/vcpkg/installed/x64-windows/share/redis++/redis++-config.cmake"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 15,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 42,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 46,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 50,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 54,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 57,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 65,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 69,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 49,
+				"parent" : 0
+			},
+			{
+				"file" : 2,
+				"parent" : 9
+			},
+			{
+				"command" : 3,
+				"file" : 2,
+				"line" : 26,
+				"parent" : 10
+			},
+			{
+				"file" : 1,
+				"parent" : 11
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 78,
+				"parent" : 12
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 105,
+				"parent" : 12
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 150,
+				"parent" : 12
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 132,
+				"parent" : 12
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 36,
+				"parent" : 0
+			},
+			{
+				"file" : 4,
+				"parent" : 17
+			},
+			{
+				"command" : 3,
+				"file" : 4,
+				"line" : 32,
+				"parent" : 18
+			},
+			{
+				"file" : 3,
+				"parent" : 19
+			},
+			{
+				"command" : 2,
+				"file" : 3,
+				"line" : 748,
+				"parent" : 20
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 69,
+				"parent" : 12
+			},
+			{
+				"command" : 2,
+				"file" : 3,
+				"line" : 678,
+				"parent" : 20
+			},
+			{
+				"command" : 2,
+				"file" : 3,
+				"line" : 728,
+				"parent" : 20
+			},
+			{
+				"command" : 2,
+				"file" : 3,
+				"line" : 708,
+				"parent" : 20
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 14,
+				"parent" : 10
+			},
+			{
+				"file" : 7,
+				"parent" : 26
+			},
+			{
+				"command" : 4,
+				"file" : 7,
+				"line" : 18,
+				"parent" : 27
+			},
+			{
+				"file" : 6,
+				"parent" : 28
+			},
+			{
+				"command" : 3,
+				"file" : 6,
+				"line" : 23,
+				"parent" : 29
+			},
+			{
+				"file" : 5,
+				"parent" : 30
+			},
+			{
+				"command" : 2,
+				"file" : 5,
+				"line" : 60,
+				"parent" : 31
+			},
+			{
+				"command" : 2,
+				"file" : 3,
+				"line" : 1708,
+				"parent" : 20
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 64,
+				"parent" : 0
+			},
+			{
+				"file" : 9,
+				"parent" : 34
+			},
+			{
+				"command" : 3,
+				"file" : 9,
+				"line" : 34,
+				"parent" : 35
+			},
+			{
+				"file" : 8,
+				"parent" : 36
+			},
+			{
+				"command" : 2,
+				"file" : 8,
+				"line" : 60,
+				"parent" : 37
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 37,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 61,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -std:c++20 -MD"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 39,
+					"define" : "ABSL_CONSUME_DLL"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "BOOST_FILESYSTEM_DYN_LINK=1"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "BOOST_FILESYSTEM_NO_LIB"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "PROTOBUF_USE_DLLS"
+				},
+				{
+					"backtrace" : 40,
+					"define" : "_WIN32_WINNT=0x0601"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 39,
+					"isSystem" : true,
+					"path" : "D:/C++library/vcpkg/installed/x64-windows/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					39,
+					4,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				2,
+				6,
+				9,
+				11,
+				13,
+				16,
+				18
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"id" : "ZERO_CHECK::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "StatusServer::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /EHsc /O2 /Ob2 /DNDEBUG -MD",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /INCREMENTAL:NO /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\libprotoc.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\libprotobuf.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\libprotobuf-lite.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\libssl.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\libcrypto.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\gpr.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\grpc.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\grpc++.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\grpc++_alts.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\boost_system-vc143-mt-x64-1_86.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\boost_filesystem-vc143-mt-x64-1_86.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "ws2_32.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 6,
+				"fragment" : "Mswsock.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 7,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\redis++.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 8,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\mysqlcppconnx.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\upb_json_lib.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\upb_textformat_lib.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\upb_mini_descriptor_lib.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 14,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\upb_wire_lib.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 15,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\utf8_range.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 15,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\upb_message_lib.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\upb_base_lib.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 16,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\upb_mem_lib.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\re2.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 21,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\absl_flags_internal.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 22,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\absl_flags_marshalling.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 21,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\absl_flags_reflection.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 21,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\absl_flags_config.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 23,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\absl_flags_program_name.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 24,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\absl_flags_private_handle_accessor.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 21,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\absl_flags_commandlineflag.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 25,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\absl_flags_commandlineflag_internal.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\zlib.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\cares.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 32,
+				"fragment" : "advapi32.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 32,
+				"fragment" : "iphlpapi.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 13,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\address_sorting.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 33,
+				"fragment" : "-ignore:4221",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 22,
+				"fragment" : "wsock32.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 22,
+				"fragment" : "gdi32.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 38,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\hiredis.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 22,
+				"fragment" : "crypt32.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 33,
+				"fragment" : "D:\\C++library\\vcpkg\\installed\\x64-windows\\lib\\abseil_dll.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "StatusServer",
+	"nameOnDisk" : "StatusServer.exe",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				2,
+				6,
+				9,
+				11,
+				13,
+				16,
+				18
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				1,
+				3,
+				4,
+				5,
+				7,
+				8,
+				10,
+				12,
+				14,
+				15,
+				17
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				19
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "AsioIOcontextPool.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "AsioIOcontextPool.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ConfigMgr.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "const.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Crypto.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Crypto.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Defer.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "MySQLMgr.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "MySQLMgr.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "RedisMgr.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "RedisMgr.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "singleton.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "StatusServiceImpl.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "StatusServiceImpl.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "message.grpc.pb.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "message.grpc.pb.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "message.pb.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "message.pb.cc",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 41,
+			"path" : "D:/C++library/vcpkg/installed/x64-windows/share/nlohmann_json/nlohmann_json.natvis",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "EXECUTABLE"
+}

@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/loginDialog/img/max_clicked.svg</file>
+        <file>img/loginDialog/img/smile_clicked.svg</file>
+        <file>img/loginDialog/img/min.svg</file>
+        <file>img/loginDialog/img/min_clicked.svg</file>
+        <file>img/loginDialog/img/smile.svg</file>
+        <file>img/loginDialog/img/max.svg</file>
+        <file>img/loginDialog/img/document.svg</file>
+        <file>img/loginDialog/img/document_clicked.svg</file>
+        <file>img/loginDialog/img/top_clicked.svg</file>
+        <file>img/loginDialog/img/top.svg</file>
+        <file>img/loginDialog/img/more_clicked.svg</file>
+        <file>img/loginDialog/img/more.svg</file>
+        <file>img/loginDialog/img/document_hover.svg</file>
+        <file>img/loginDialog/img/smile_hover.svg</file>
+        <file>img/loginDialog/img/disturb.svg</file>
+        <file>img/loginDialog/img/avatar/default.jpg</file>
+        <file>img/loginDialog/img/avatar/AL.jpg</file>
+        <file>img/loginDialog/img/avatar/me.jpg</file>
+        <file>img/loginDialog/img/avatar/BS.jpg</file>
+        <file>img/loginDialog/img/avatar/DB.jpg</file>
+        <file>img/loginDialog/img/avatar/JZ.jpg</file>
+        <file>img/loginDialog/img/avatar/LM.jpg</file>
+        <file>img/loginDialog/img/avatar/MAO.jpg</file>
+        <file>img/loginDialog/img/chat_bg.jpg</file>
+    </qresource>
+</RCC>

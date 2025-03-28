@@ -525,3 +525,334 @@ std::shared_ptr<mysqlx::Session> SessionGuard::operator->() const
 {
     return _session;
 }
+
+// 辅助函数：获取当前时间字符串
+std::string getCurrentTimeString() {
+    auto now = std::chrono::system_clock::now();
+    auto in_time_t = std::chrono::system_clock::to_time_t(now);
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %H:%M:%S");
+    return ss.str();
+}
+
+std::vector<UserInfo> MySQLMgr::searchUserByName(const std::string &name) {
+    std::vector<UserInfo> results;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return results;
+        }
+        
+        auto searchLike = "%" + name + "%";
+        auto result = session->sql("SELECT uid, name, email, avatar, status FROM users WHERE name LIKE ?")
+                             .bind(searchLike)
+                             .execute();
+        
+        for (auto row : result.fetchAll()) {
+            UserInfo user;
+            user.uid = row[0].get<int>();
+            user.name = row[1].get<std::string>();
+            user.email = row[2].get<std::string>();
+            user.avatar = row[3].isNull() ? "" : row[3].get<std::string>();
+            user.status = row[4].isNull() ? "" : row[4].get<std::string>();
+            results.push_back(user);
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "searchUserByName error: " << e.what() << std::endl;
+    }
+    return results;
+}
+
+UserInfo MySQLMgr::getUserById(int uid) {
+    UserInfo user;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return user;
+        }
+        
+        auto result = session->sql("SELECT uid, name, email, avatar, status FROM users WHERE uid = ?")
+                             .bind(uid)
+                             .execute();
+        
+        auto row = result.fetchOne();
+        if (row) {
+            user.uid = row[0].get<int>();
+            user.name = row[1].get<std::string>();
+            user.email = row[2].get<std::string>();
+            user.avatar = row[3].isNull() ? "" : row[3].get<std::string>();
+            user.status = row[4].isNull() ? "" : row[4].get<std::string>();
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "getUserById error: " << e.what() << std::endl;
+    }
+    return user;
+}
+
+bool MySQLMgr::addFriendRequest(int fromUid, int toUid, const std::string &message) {
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return false;
+        }
+        
+        // 先检查是否已经是好友
+        auto checkResult = session->sql("SELECT 1 FROM friendships WHERE (user1_id = ? AND user2_id = ?) OR (user1_id = ? AND user2_id = ?)")
+                                    .bind(fromUid).bind(toUid).bind(toUid).bind(fromUid)
+                                    .execute();
+        
+        if (checkResult.count() > 0) {
+            std::cerr << "Already friends" << std::endl;
+            return false;
+        }
+        
+        // 检查是否已有未处理的好友请求
+        auto reqCheckResult = session->sql("SELECT 1 FROM friend_requests WHERE from_uid = ? AND to_uid = ? AND status = 'pending'")
+                                     .bind(fromUid).bind(toUid)
+                                     .execute();
+        
+        if (reqCheckResult.count() > 0) {
+            std::cerr << "Friend request already sent" << std::endl;
+            return false;
+        }
+        
+        // 插入新的好友请求
+        session->sql("INSERT INTO friend_requests (from_uid, to_uid, message, request_time, status) VALUES (?, ?, ?, NOW(), 'pending')")
+               .bind(fromUid).bind(toUid).bind(message)
+               .execute();
+               
+        return true;
+    } catch (const std::exception &e) {
+        std::cerr << "addFriendRequest error: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+bool MySQLMgr::updateFriendRequestStatus(int requestId, bool accepted) {
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return false;
+        }
+        
+        std::string status = accepted ? "accepted" : "rejected";
+        session->sql("UPDATE friend_requests SET status = ?, response_time = NOW() WHERE id = ?")
+               .bind(status).bind(requestId)
+               .execute();
+               
+        return true;
+    } catch (const std::exception &e) {
+        std::cerr << "updateFriendRequestStatus error: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+bool MySQLMgr::addFriendRelation(int uid1, int uid2) {
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return false;
+        }
+        
+        // 确保低ID为user1_id，高ID为user2_id，保持一致性
+        int user1 = std::min(uid1, uid2);
+        int user2 = std::max(uid1, uid2);
+        
+        // 先检查是否已经是好友
+        auto checkResult = session->sql("SELECT 1 FROM friendships WHERE user1_id = ? AND user2_id = ?")
+                                    .bind(user1).bind(user2)
+                                    .execute();
+        
+        if (checkResult.count() > 0) {
+            return true; // 已经是好友
+        }
+        
+        // 添加好友关系
+        session->sql("INSERT INTO friendships (user1_id, user2_id, friendship_date) VALUES (?, ?, NOW())")
+               .bind(user1).bind(user2)
+               .execute();
+               
+        return true;
+    } catch (const std::exception &e) {
+        std::cerr << "addFriendRelation error: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+std::vector<UserInfo> MySQLMgr::getFriendList(int uid) {
+    std::vector<UserInfo> friends;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return friends;
+        }
+        
+        // 查询所有好友
+        auto result = session->sql("SELECT u.uid, u.name, u.email, u.avatar, u.status FROM users u "
+                                 "JOIN friendships f ON (u.uid = f.user1_id OR u.uid = f.user2_id) "
+                                 "WHERE (f.user1_id = ? OR f.user2_id = ?) AND u.uid != ?")
+                             .bind(uid).bind(uid).bind(uid)
+                             .execute();
+        
+        for (auto row : result.fetchAll()) {
+            UserInfo user;
+            user.uid = row[0].get<int>();
+            user.name = row[1].get<std::string>();
+            user.email = row[2].get<std::string>();
+            user.avatar = row[3].isNull() ? "" : row[3].get<std::string>();
+            user.status = row[4].isNull() ? "" : row[4].get<std::string>();
+            friends.push_back(user);
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "getFriendList error: " << e.what() << std::endl;
+    }
+    return friends;
+}
+
+std::vector<std::pair<int, UserInfo>> MySQLMgr::getFriendRequests(int uid) {
+    std::vector<std::pair<int, UserInfo>> requests;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return requests;
+        }
+        
+        // 查询所有待处理的好友请求
+        auto result = session->sql("SELECT fr.id, u.uid, u.name, u.email, u.avatar, fr.message, fr.request_time "
+                                 "FROM friend_requests fr "
+                                 "JOIN users u ON fr.from_uid = u.uid "
+                                 "WHERE fr.to_uid = ? AND fr.status = 'pending'")
+                             .bind(uid)
+                             .execute();
+        
+        for (auto row : result.fetchAll()) {
+            int requestId = row[0].get<int>();
+            UserInfo user;
+            user.uid = row[1].get<int>();
+            user.name = row[2].get<std::string>();
+            user.email = row[3].get<std::string>();
+            user.avatar = row[4].isNull() ? "" : row[4].get<std::string>();
+            requests.push_back({requestId, user});
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "getFriendRequests error: " << e.what() << std::endl;
+    }
+    return requests;
+}
+
+int MySQLMgr::saveMessage(int fromUid, int toUid, const std::string &content, const std::string &time, int msgType) {
+    int messageId = 0;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return 0;
+        }
+        
+        auto result = session->sql("INSERT INTO messages (from_uid, to_uid, content, send_time, msg_type, status) "
+                                 "VALUES (?, ?, ?, ?, ?, 0)")
+                             .bind(fromUid).bind(toUid).bind(content).bind(time).bind(msgType)
+                             .execute();
+                             
+        messageId = result.getAutoIncrementValue();
+    } catch (const std::exception &e) {
+        std::cerr << "saveMessage error: " << e.what() << std::endl;
+    }
+    return messageId;
+}
+
+std::vector<std::map<std::string, std::string>> MySQLMgr::getChatHistory(int uid1, int uid2, int count, int offset) {
+    std::vector<std::map<std::string, std::string>> messages;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return messages;
+        }
+        
+        // 获取两个用户之间的聊天记录
+        auto result = session->sql("SELECT id, from_uid, to_uid, content, send_time, msg_type, status "
+                                 "FROM messages "
+                                 "WHERE (from_uid = ? AND to_uid = ?) OR (from_uid = ? AND to_uid = ?) "
+                                 "ORDER BY send_time DESC LIMIT ? OFFSET ?")
+                             .bind(uid1).bind(uid2).bind(uid2).bind(uid1)
+                             .bind(count).bind(offset)
+                             .execute();
+        
+        for (auto row : result.fetchAll()) {
+            std::map<std::string, std::string> message;
+            message["id"] = std::to_string(row[0].get<int>());
+            message["from_uid"] = std::to_string(row[1].get<int>());
+            message["to_uid"] = std::to_string(row[2].get<int>());
+            message["content"] = row[3].get<std::string>();
+            message["send_time"] = row[4].get<std::string>();
+            message["msg_type"] = std::to_string(row[5].get<int>());
+            message["status"] = std::to_string(row[6].get<int>());
+            messages.push_back(message);
+        }
+        
+        // 反转消息列表，使其按时间正序
+        std::reverse(messages.begin(), messages.end());
+    } catch (const std::exception &e) {
+        std::cerr << "getChatHistory error: " << e.what() << std::endl;
+    }
+    return messages;
+}
+
+std::vector<std::map<std::string, std::string>> MySQLMgr::getLastMessages(int uid, int count) {
+    std::vector<std::map<std::string, std::string>> messages;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return messages;
+        }
+        
+        // 查询获取每个对话的最后一条消息
+        auto result = session->sql(
+            "SELECT m.* FROM messages m "
+            "INNER JOIN ( "
+            "    SELECT "
+            "        CASE "
+            "            WHEN from_uid = ? THEN to_uid "
+            "            WHEN to_uid = ? THEN from_uid "
+            "        END AS contact_id, "
+            "        MAX(id) as max_id "
+            "    FROM messages "
+            "    WHERE from_uid = ? OR to_uid = ? "
+            "    GROUP BY contact_id "
+            ") as latest ON m.id = latest.max_id "
+            "ORDER BY m.send_time DESC "
+            "LIMIT ?")
+            .bind(uid).bind(uid).bind(uid).bind(uid).bind(count)
+            .execute();
+        
+        for (auto row : result.fetchAll()) {
+            std::map<std::string, std::string> message;
+            message["id"] = std::to_string(row[0].get<int>());
+            message["from_uid"] = std::to_string(row[1].get<int>());
+            message["to_uid"] = std::to_string(row[2].get<int>());
+            message["content"] = row[3].get<std::string>();
+            message["send_time"] = row[4].get<std::string>();
+            message["msg_type"] = std::to_string(row[5].get<int>());
+            message["status"] = std::to_string(row[6].get<int>());
+            
+            // 确定对话对象ID
+            int contactId = (std::stoi(message["from_uid"]) == uid) ? 
+                           std::stoi(message["to_uid"]) : std::stoi(message["from_uid"]);
+            message["contact_id"] = std::to_string(contactId);
+            
+            messages.push_back(message);
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "getLastMessages error: " << e.what() << std::endl;
+    }
+    return messages;
+}

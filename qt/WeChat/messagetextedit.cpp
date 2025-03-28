@@ -1,3 +1,5 @@
 #include "messagetextedit.h"
 
-MessageTextEdit::MessageTextEdit() {}
+MessageTextEdit::MessageTextEdit(QWidget *w):QTextEdit(w) {
+
+}
