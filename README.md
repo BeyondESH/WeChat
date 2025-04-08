@@ -189,3 +189,6 @@ WeChat 系统采用微服务架构，将不同功能拆分为独立的服务，�
 如有任何问题或建议，欢迎提交 Issue 或通过以下方式联系我：
 
 - Email: 1989601704@qq.com
+
+<img src="https://img.beyondesh.top/821bbed517b894164d494cbe9fa731d.jpg" style="zoom:25%;" />,<img src="https://img.beyondesh.top/79975c223324b5df82be97947dacbad.jpg" style="zoom: 40%;" />
+

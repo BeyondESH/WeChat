@@ -1,3 +1,0 @@
-D:/Gitee/wechat/GateServer/build/CMakeFiles/GateServer.dir
-D:/Gitee/wechat/GateServer/build/CMakeFiles/ALL_BUILD.dir
-D:/Gitee/wechat/GateServer/build/CMakeFiles/ZERO_CHECK.dir
