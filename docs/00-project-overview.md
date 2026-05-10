@@ -43,7 +43,7 @@
 
 ## 端到端流程（高频面试口径）
 1. **注册**：
-   - Client → GateServer `/get_varifycode` 获取验证码（接口名拼写沿用代码中的 `varify`）。
+   - Client → GateServer `/get_varifycode` 获取验证码（接口名与 verify 拼写不同，沿用代码实现）。
    - Client → GateServer `/user_register` 提交验证码与账号信息，写入 MySQL。
 2. **找回密码**：
    - `/get_varifycode` 获取验证码；`/reset_password` 更新密码。

@@ -37,7 +37,7 @@
 - **作用**：连通性测试
 - **响应**：纯文本 `receive get_test request`
 
-### 2) `POST /get_varifycode`（接口名拼写沿用代码中的 `varify`）
+### 2) `POST /get_varifycode`（接口名与 verify 拼写不同，沿用代码实现）
 - **作用**：申请邮箱验证码（调用 VerifyServer gRPC）
 - **请求 JSON**：`{ "email": "xxx@example.com" }`
 - **响应 JSON**：`{ "error": int, "email": string, "code": string }`
