@@ -1,4 +1,4 @@
-﻿//
+//
 // Created by Beyond on 2024/11/3.
 //
 
@@ -66,10 +66,41 @@ enum MSG_IDS
     ID_NOTIFY_ADD_FRIEND_REQ = 1011,    // 好友请求通知
     ID_AUTH_FRIEND_REQ = 1013,          // 好友请求授权
     ID_AUTH_FRIEND_RSP = 1014,          // 好友请求授权响应
-    ID_NOTIFY_AUTH_FRIEND_REQ = 1015,   // 好友授权通知
+    ID_NOTIFY_AUTH_FRIEND_RSP = 1015,   // 好友授权通知
     ID_TEXT_CHAT_MSG_REQ = 1017,        // 文本消息请求
     ID_TEXT_CHAT_MSG_RSP = 1018,        // 文本消息响应
     ID_NOTIFY_TEXT_CHAT_MSG_REQ = 1019, // 文本消息通知
+    ID_IMAGE_CHAT_MSG_REQ = 1028,       // 图片消息请求
+    ID_IMAGE_CHAT_MSG_RSP = 1029,       // 图片消息响应
+    ID_NOTIFY_IMAGE_CHAT_MSG_REQ = 1030,// 图片消息通知
+    ID_HEARTBEAT_PING = 1020,           // 客户端心跳请求
+    ID_HEARTBEAT_PONG = 1021,           // 服务器心跳响应
+    ID_FRIEND_LIST_REQ = 1022,          // 获取好友列表请求
+    ID_FRIEND_LIST_RSP = 1023,          // 获取好友列表响应
+    ID_GET_CHAT_HISTORY_REQ = 1024,     // 获取聊天历史请求
+    ID_GET_CHAT_HISTORY_RSP = 1025,     // 获取聊天历史响应
+    ID_RECENT_MESSAGES_RSP = 1026,      // 最近消息响应
+    ID_FRIEND_REQUEST_LIST_RSP = 1027,  // 好友请求列表响应
+    
+    // 群聊相关消息ID
+    ID_CREATE_GROUP_REQ = 2001,         // 创建群组请求
+    ID_CREATE_GROUP_RSP = 2002,         // 创建群组响应
+    ID_ADD_GROUP_MEMBER_REQ = 2003,     // 添加群成员请求
+    ID_ADD_GROUP_MEMBER_RSP = 2004,     // 添加群成员响应
+    ID_REMOVE_GROUP_MEMBER_REQ = 2005,  // 移除群成员请求
+    ID_REMOVE_GROUP_MEMBER_RSP = 2006,  // 移除群成员响应
+    ID_GROUP_CHAT_MSG_REQ = 2007,       // 群消息请求
+    ID_GROUP_CHAT_MSG_RSP = 2008,       // 群消息响应
+    ID_NOTIFY_GROUP_CHAT_MSG_REQ = 2009,// 群消息通知
+    ID_GROUP_IMAGE_CHAT_MSG_REQ = 2016, // 群图片消息请求
+    ID_GROUP_IMAGE_CHAT_MSG_RSP = 2017, // 群图片消息响应
+    ID_NOTIFY_GROUP_IMAGE_CHAT_MSG_REQ = 2018,// 群图片消息通知
+    ID_GET_GROUP_LIST_REQ = 2010,       // 获取群列表请求
+    ID_GET_GROUP_LIST_RSP = 2011,       // 获取群列表响应
+    ID_GET_GROUP_MEMBERS_REQ = 2012,    // 获取群成员请求
+    ID_GET_GROUP_MEMBERS_RSP = 2013,    // 获取群成员响应
+    ID_GET_GROUP_CHAT_HISTORY_REQ = 2014,// 获取群聊天历史请求
+    ID_GET_GROUP_CHAT_HISTORY_RSP = 2015,// 获取群聊天历史响应
 };
 
 // Redis键前缀和消息大小的常量

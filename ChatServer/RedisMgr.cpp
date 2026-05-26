@@ -1,11 +1,11 @@
-﻿//
+//
 // Created by Beyond on 2024/11/26.
 //
 
 #include "RedisMgr.h"
 #include "ConfigMgr.hpp"
 
-RedisMgr::RedisMgr() {
+RedisMgr::RedisMgr() : _subscriberContext(nullptr), _subscriberRunning(false) {
     auto configMgr = ConfigMgr::getInstance();
     _host = configMgr["Redis"]["host"];
     _port = std::stoi(configMgr["Redis"]["port"]);
@@ -249,7 +249,162 @@ bool RedisMgr::hSet(const char *key, const char *field, const char *value, size_
     return true;
 }
 
+bool RedisMgr::publish(const std::string &channel, const std::string &message) {
+    auto connect = _pool->getConnection();
+    if (connect == nullptr) {
+        return false;
+    }
+    auto reply = (redisReply *) redisCommand(connect, "PUBLISH %s %s", channel.c_str(), message.c_str());
+    if (reply == nullptr || reply->type != REDIS_REPLY_INTEGER) {
+        std::cout << "Failed to execute command [ PUBLISH " << channel << " " << message << " ]" << std::endl;
+        freeReplyObject(reply);
+        _pool->returnConnection(connect);
+        return false;
+    }
+    freeReplyObject(reply);
+    _pool->returnConnection(connect);
+    return true;
+}
+
+bool RedisMgr::hIncrBy(const std::string &key, const std::string &field, long long increment) {
+    auto connect = _pool->getConnection();
+    if (connect == nullptr) {
+        return false;
+    }
+    auto reply = (redisReply *) redisCommand(connect, "HINCRBY %s %s %lld", key.c_str(), field.c_str(), increment);
+    if (reply == nullptr || reply->type != REDIS_REPLY_INTEGER) {
+        std::cout << "Failed to execute command [ HINCRBY " << key << " " << field << " " << increment << " ]" << std::endl;
+        freeReplyObject(reply);
+        _pool->returnConnection(connect);
+        return false;
+    }
+    freeReplyObject(reply);
+    _pool->returnConnection(connect);
+    return true;
+}
+
+bool RedisMgr::hDecrBy(const std::string &key, const std::string &field, long long decrement) {
+    auto connect = _pool->getConnection();
+    if (connect == nullptr) {
+        return false;
+    }
+    auto reply = (redisReply *) redisCommand(connect, "HDECRBY %s %s %lld", key.c_str(), field.c_str(), decrement);
+    if (reply == nullptr || reply->type != REDIS_REPLY_INTEGER) {
+        std::cout << "Failed to execute command [ HDECRBY " << key << " " << field << " " << decrement << " ]" << std::endl;
+        freeReplyObject(reply);
+        _pool->returnConnection(connect);
+        return false;
+    }
+    freeReplyObject(reply);
+    _pool->returnConnection(connect);
+    return true;
+}
+
+bool RedisMgr::hDel(const std::string &key, const std::string &field) {
+    auto connect = _pool->getConnection();
+    if (connect == nullptr) {
+        return false;
+    }
+    auto reply = (redisReply *) redisCommand(connect, "HDEL %s %s", key.c_str(), field.c_str());
+    if (reply == nullptr || reply->type != REDIS_REPLY_INTEGER) {
+        std::cout << "Failed to execute command [ HDEL " << key << " " << field << " ]" << std::endl;
+        freeReplyObject(reply);
+        _pool->returnConnection(connect);
+        return false;
+    }
+    freeReplyObject(reply);
+    _pool->returnConnection(connect);
+    return true;
+}
+
+void RedisMgr::startSubscriber(const MessageCallback& callback) {
+    if (_subscriberRunning) {
+        return;
+    }
+    
+    _subscriberContext = redisConnect(_host.c_str(), _port);
+    if (_subscriberContext == nullptr || _subscriberContext->err != 0) {
+        std::cerr << "Failed to connect Redis for subscriber" << std::endl;
+        if (_subscriberContext != nullptr) {
+            redisFree(_subscriberContext);
+            _subscriberContext = nullptr;
+        }
+        return;
+    }
+    
+    auto reply = (redisReply *) redisCommand(_subscriberContext, "AUTH %s", _password.c_str());
+    if (reply == nullptr || reply->type == REDIS_REPLY_ERROR) {
+        std::cerr << "Redis subscriber auth failure" << std::endl;
+        freeReplyObject(reply);
+        redisFree(_subscriberContext);
+        _subscriberContext = nullptr;
+        return;
+    }
+    freeReplyObject(reply);
+    
+    _messageCallback = callback;
+    _subscriberRunning = true;
+    _subscriberThread = std::thread(&RedisMgr::subscriberLoop, this);
+}
+
+void RedisMgr::subscribe(const std::string &channel) {
+    std::lock_guard<std::mutex> lock(_subscribeMutex);
+    if (_subscriberContext == nullptr) {
+        return;
+    }
+    auto reply = (redisReply *) redisCommand(_subscriberContext, "SUBSCRIBE %s", channel.c_str());
+    if (reply != nullptr) {
+        freeReplyObject(reply);
+    }
+}
+
+void RedisMgr::unsubscribe(const std::string &channel) {
+    std::lock_guard<std::mutex> lock(_subscribeMutex);
+    if (_subscriberContext == nullptr) {
+        return;
+    }
+    auto reply = (redisReply *) redisCommand(_subscriberContext, "UNSUBSCRIBE %s", channel.c_str());
+    if (reply != nullptr) {
+        freeReplyObject(reply);
+    }
+}
+
+void RedisMgr::subscriberLoop() {
+    while (_subscriberRunning) {
+        void *reply = nullptr;
+        if (redisGetReply(_subscriberContext, &reply) != REDIS_OK) {
+            std::cerr << "Redis subscriber error" << std::endl;
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            continue;
+        }
+        
+        redisReply *r = (redisReply *)reply;
+        if (r->type == REDIS_REPLY_ARRAY && r->elements == 3) {
+            std::string type = r->element[0]->str;
+            if (type == "message") {
+                std::string channel = r->element[1]->str;
+                std::string message = r->element[2]->str;
+                if (_messageCallback) {
+                    _messageCallback(channel, message);
+                }
+            }
+        }
+        freeReplyObject(reply);
+    }
+}
+
 void RedisMgr::close() {
+    _subscriberRunning = false;
+    
+    if (_subscriberContext != nullptr) {
+        redisFree(_subscriberContext);
+        _subscriberContext = nullptr;
+    }
+    
+    if (_subscriberThread.joinable()) {
+        _subscriberThread.join();
+    }
+    
     _pool->close();
     std::cout << "Close redis connection" << std::endl;
 }

@@ -28,6 +28,8 @@ private:
     void reconnect();
 };
 
+typedef std::function<void(const std::string& channel, const std::string& message)> MessageCallback;
+
 class RedisMgr:public Singleton<RedisMgr> {
     friend class Singleton<RedisMgr>;
 public:
@@ -44,6 +46,16 @@ public:
     bool rPop(const std::string &key,std::string &value);
     bool del(const std::string &key);
     bool existsKey(const std::string &key);
+    
+    bool publish(const std::string &channel, const std::string &message);
+    bool hIncrBy(const std::string &key, const std::string &field, long long increment);
+    bool hDecrBy(const std::string &key, const std::string &field, long long decrement);
+    bool hDel(const std::string &key, const std::string &field);
+    
+    void startSubscriber(const MessageCallback& callback);
+    void subscribe(const std::string &channel);
+    void unsubscribe(const std::string &channel);
+    
     void close();
     int connectCount();
 private:
@@ -54,6 +66,14 @@ private:
     std::string _host;
     int _port;
     std::string _password;
+    
+    redisContext* _subscriberContext;
+    std::thread _subscriberThread;
+    std::atomic<bool> _subscriberRunning;
+    MessageCallback _messageCallback;
+    std::mutex _subscribeMutex;
+    
+    void subscriberLoop();
 };
 
 

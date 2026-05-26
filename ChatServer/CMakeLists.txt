@@ -35,8 +35,6 @@ add_executable(ChatServer main.cpp
         Test.hpp
         VerifyGrpcClient.cpp
         VerifyGrpcClient.h
-        MsgNode.cpp
-        MsgNode.h
         LogicNode.cpp
         LogicNode.h
         SendNode.cpp

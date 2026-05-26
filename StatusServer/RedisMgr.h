@@ -35,8 +35,10 @@ public:
     bool get(const std::string &key,std::string &value);
     bool hGet(const std::string &key,std::string &field,std::string &value);
     bool set(const std::string &key,const std::string &value);
+    bool set(const std::string &key,const std::string &value, int ttl);
     bool hSet(const std::string &key,const std::string &field,const std::string &value);
     bool hSet(const char * key,const char *field,const char *value,size_t valueLen);
+    bool hIncrBy(const std::string &key, const std::string &field, long long increment);
     bool auth(const std::string & password);
     bool lPush(const std::string &key,const std::string &value);
     bool rPush(const std::string &key,const std::string &value);

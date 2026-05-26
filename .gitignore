@@ -1,18 +1,57 @@
+# 排除文档文件
+架构.md
+tcp_and_db_architecture_analysis.md
+system_design_analysis.md
+Optimizing.md
+GateServer.code-workspace
+
 # Build and Release Folders
 bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
+build/
+cmake-build-debug/
+cmake-build-*/
 
 # Other files and folders
 .settings/
+.idea/
+.vscode/
 
 # Executables
 *.swf
 *.air
 *.ipa
 *.apk
+*.exe
+*.out
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Temporary files
+*.log
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# CMake cache files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+build.ninja
+.ninja_deps
+.ninja_log
+
+# Protocol buffer generated files
+*.pb.cc
+*.pb.h
+*.grpc.pb.cc
+*.grpc.pb.h

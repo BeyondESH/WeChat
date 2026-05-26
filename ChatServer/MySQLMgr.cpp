@@ -1,4 +1,4 @@
-﻿//
+//
 // Created by Beyond on 2024/12/14.
 //
 
@@ -853,6 +853,269 @@ std::vector<std::map<std::string, std::string>> MySQLMgr::getLastMessages(int ui
         }
     } catch (const std::exception &e) {
         std::cerr << "getLastMessages error: " << e.what() << std::endl;
+    }
+    return messages;
+}
+
+// 群聊相关实现
+int MySQLMgr::createGroup(int ownerUid, const std::string &name, const std::string &avatar) {
+    int groupId = 0;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return groupId;
+        }
+        
+        auto result = session->sql("INSERT INTO groups (name, owner_uid, avatar, created_at) VALUES (?, ?, ?, NOW())")
+                             .bind(name).bind(ownerUid).bind(avatar)
+                             .execute();
+        
+        groupId = result.getAutoIncrementValue();
+        
+        if (groupId > 0) {
+            addGroupMember(groupId, ownerUid, "owner");
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "createGroup error: " << e.what() << std::endl;
+    }
+    return groupId;
+}
+
+bool MySQLMgr::addGroupMember(int groupId, int uid, const std::string &role) {
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return false;
+        }
+        
+        session->sql("INSERT INTO group_members (group_id, uid, role, joined_at) VALUES (?, ?, ?, NOW())")
+               .bind(groupId).bind(uid).bind(role)
+               .execute();
+        
+        return true;
+    } catch (const std::exception &e) {
+        std::cerr << "addGroupMember error: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+bool MySQLMgr::removeGroupMember(int groupId, int uid) {
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return false;
+        }
+        
+        session->sql("DELETE FROM group_members WHERE group_id = ? AND uid = ?")
+               .bind(groupId).bind(uid)
+               .execute();
+        
+        return true;
+    } catch (const std::exception &e) {
+        std::cerr << "removeGroupMember error: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+bool MySQLMgr::updateGroupMemberRole(int groupId, int uid, const std::string &role) {
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return false;
+        }
+        
+        session->sql("UPDATE group_members SET role = ? WHERE group_id = ? AND uid = ?")
+               .bind(role).bind(groupId).bind(uid)
+               .execute();
+        
+        return true;
+    } catch (const std::exception &e) {
+        std::cerr << "updateGroupMemberRole error: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+std::vector<UserInfo> MySQLMgr::getGroupMembers(int groupId) {
+    std::vector<UserInfo> members;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return members;
+        }
+        
+        auto result = session->sql("SELECT u.uid, u.name, u.email, u.avatar, u.status FROM users u "
+                                 "JOIN group_members gm ON u.uid = gm.uid "
+                                 "WHERE gm.group_id = ?")
+                             .bind(groupId)
+                             .execute();
+        
+        for (auto row : result.fetchAll()) {
+            UserInfo user;
+            user.uid = row[0].get<int>();
+            user.name = row[1].get<std::string>();
+            user.email = row[2].get<std::string>();
+            user.avatar = row[3].isNull() ? "" : row[3].get<std::string>();
+            user.status = row[4].isNull() ? "" : row[4].get<std::string>();
+            members.push_back(user);
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "getGroupMembers error: " << e.what() << std::endl;
+    }
+    return members;
+}
+
+std::vector<GroupInfo> MySQLMgr::getUserGroups(int uid) {
+    std::vector<GroupInfo> groups;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return groups;
+        }
+        
+        auto result = session->sql("SELECT g.group_id, g.name, g.owner_uid, g.avatar, g.created_at FROM groups g "
+                                 "JOIN group_members gm ON g.group_id = gm.group_id "
+                                 "WHERE gm.uid = ?")
+                             .bind(uid)
+                             .execute();
+        
+        for (auto row : result.fetchAll()) {
+            GroupInfo group;
+            group.groupId = row[0].get<int>();
+            group.name = row[1].get<std::string>();
+            group.ownerUid = row[2].get<int>();
+            group.avatar = row[3].isNull() ? "" : row[3].get<std::string>();
+            group.createdAt = row[4].get<std::string>();
+            groups.push_back(group);
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "getUserGroups error: " << e.what() << std::endl;
+    }
+    return groups;
+}
+
+GroupInfo MySQLMgr::getGroupInfo(int groupId) {
+    GroupInfo group;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return group;
+        }
+        
+        auto result = session->sql("SELECT group_id, name, owner_uid, avatar, created_at FROM groups WHERE group_id = ?")
+                             .bind(groupId)
+                             .execute();
+        
+        auto row = result.fetchOne();
+        if (row) {
+            group.groupId = row[0].get<int>();
+            group.name = row[1].get<std::string>();
+            group.ownerUid = row[2].get<int>();
+            group.avatar = row[3].isNull() ? "" : row[3].get<std::string>();
+            group.createdAt = row[4].get<std::string>();
+        }
+    } catch (const std::exception &e) {
+        std::cerr << "getGroupInfo error: " << e.what() << std::endl;
+    }
+    return group;
+}
+
+bool MySQLMgr::updateGroupName(int groupId, const std::string &newName) {
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return false;
+        }
+        
+        session->sql("UPDATE groups SET name = ? WHERE group_id = ?")
+               .bind(newName).bind(groupId)
+               .execute();
+        
+        return true;
+    } catch (const std::exception &e) {
+        std::cerr << "updateGroupName error: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+bool MySQLMgr::updateGroupAvatar(int groupId, const std::string &avatar) {
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return false;
+        }
+        
+        session->sql("UPDATE groups SET avatar = ? WHERE group_id = ?")
+               .bind(avatar).bind(groupId)
+               .execute();
+        
+        return true;
+    } catch (const std::exception &e) {
+        std::cerr << "updateGroupAvatar error: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+int MySQLMgr::saveGroupMessage(int fromUid, int groupId, const std::string &content, const std::string &time, int msgType) {
+    int messageId = 0;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return messageId;
+        }
+        
+        auto result = session->sql("INSERT INTO messages (from_uid, to_uid, content, send_time, msg_type, status, chat_type) "
+                                 "VALUES (?, ?, ?, ?, ?, 0, 1)")
+                             .bind(fromUid).bind(groupId).bind(content).bind(time).bind(msgType)
+                             .execute();
+        
+        messageId = result.getAutoIncrementValue();
+    } catch (const std::exception &e) {
+        std::cerr << "saveGroupMessage error: " << e.what() << std::endl;
+    }
+    return messageId;
+}
+
+std::vector<std::map<std::string, std::string>> MySQLMgr::getGroupChatHistory(int groupId, int count, int offset) {
+    std::vector<std::map<std::string, std::string>> messages;
+    try {
+        auto session = _pool->getSessionGuard();
+        if (!session) {
+            std::cerr << "Failed to get MySQL session" << std::endl;
+            return messages;
+        }
+        
+        auto result = session->sql("SELECT id, from_uid, to_uid, content, send_time, msg_type, status "
+                                 "FROM messages "
+                                 "WHERE to_uid = ? AND chat_type = 1 "
+                                 "ORDER BY send_time DESC LIMIT ? OFFSET ?")
+                             .bind(groupId).bind(count).bind(offset)
+                             .execute();
+        
+        for (auto row : result.fetchAll()) {
+            std::map<std::string, std::string> message;
+            message["id"] = std::to_string(row[0].get<int>());
+            message["from_uid"] = std::to_string(row[1].get<int>());
+            message["to_uid"] = std::to_string(row[2].get<int>());
+            message["content"] = row[3].get<std::string>();
+            message["send_time"] = row[4].get<std::string>();
+            message["msg_type"] = std::to_string(row[5].get<int>());
+            message["status"] = std::to_string(row[6].get<int>());
+            messages.push_back(message);
+        }
+        
+        std::reverse(messages.begin(), messages.end());
+    } catch (const std::exception &e) {
+        std::cerr << "getGroupChatHistory error: " << e.what() << std::endl;
     }
     return messages;
 }

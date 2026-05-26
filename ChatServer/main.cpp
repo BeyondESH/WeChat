@@ -30,6 +30,9 @@ int main(int argc, char *argv[]) {
         MySQLMgr::getInstance();
         std::cout << "MySQL管理器初始化完成" << std::endl;
         
+        RedisMgr::getInstance();
+        std::cout << "Redis管理器初始化完成" << std::endl;
+        
         StatusGrpcClient::getInstance()->init();
         std::cout << "状态服务客户端初始化完成" << std::endl;
         

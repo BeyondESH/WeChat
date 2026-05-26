@@ -72,8 +72,30 @@ CREATE TABLE IF NOT EXISTS messages (
     send_time DATETIME NOT NULL,
     msg_type TINYINT NOT NULL DEFAULT 0,  -- 0=文本, 1=图片, 2=文件, 3=语音, 4=视频
     status TINYINT NOT NULL DEFAULT 0,     -- 0=发送中, 1=已发送, 2=已送达, 3=已读, 4=发送失败
+    chat_type TINYINT NOT NULL DEFAULT 0,  -- 0=单聊, 1=群聊
     CONSTRAINT fk_message_from FOREIGN KEY (from_uid) REFERENCES users(id),
-    CONSTRAINT fk_message_to FOREIGN KEY (to_uid) REFERENCES users(id),
     INDEX idx_conversation (from_uid, to_uid, send_time),
-    INDEX idx_receiver_time (to_uid, send_time)
+    INDEX idx_receiver_time (to_uid, send_time),
+    INDEX idx_chat_type (chat_type)
+);
+
+-- 群组表
+CREATE TABLE IF NOT EXISTS groups (
+    group_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(64) NOT NULL,
+    owner_uid INT NOT NULL,
+    avatar VARCHAR(255) NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_group_owner FOREIGN KEY (owner_uid) REFERENCES users(id)
+);
+
+-- 群成员表
+CREATE TABLE IF NOT EXISTS group_members (
+    group_id INT NOT NULL,
+    uid INT NOT NULL,
+    role ENUM('owner','admin','member') NOT NULL DEFAULT 'member',
+    joined_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (group_id, uid),
+    CONSTRAINT fk_member_group FOREIGN KEY (group_id) REFERENCES groups(group_id),
+    CONSTRAINT fk_member_user FOREIGN KEY (uid) REFERENCES users(id)
 );

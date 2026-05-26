@@ -1,4 +1,4 @@
-﻿//
+//
 // Created by Beyond on 2024/11/26.
 //
 
@@ -51,6 +51,24 @@ bool RedisMgr::set(const std::string &key, const std::string &value) {
     }
     freeReplyObject(reply);
     std::cout << "Succeed to execute command [ set " << key << " " << value << " ]" << std::endl;
+    _pool->returnConnection(connect);
+    return true;
+}
+
+bool RedisMgr::set(const std::string &key, const std::string &value, int ttl) {
+    auto connect = _pool->getConnection();
+    if (connect == nullptr) {
+        return false;
+    }
+    auto reply = (redisReply *) redisCommand(connect, "set %s %s EX %d", key.c_str(), value.c_str(), ttl);
+    if (reply == nullptr || reply->type != REDIS_REPLY_STATUS || strcmp(reply->str, "OK") != 0) {
+        std::cout << "Failed to execute command [ set " << key << " " << value << " EX " << ttl << " ] " << std::endl;
+        freeReplyObject(reply);
+        _pool->returnConnection(connect);
+        return false;
+    }
+    freeReplyObject(reply);
+    std::cout << "Succeed to execute command [ set " << key << " " << value << " EX " << ttl << " ]" << std::endl;
     _pool->returnConnection(connect);
     return true;
 }
@@ -244,6 +262,23 @@ bool RedisMgr::hSet(const char *key, const char *field, const char *value, size_
         return false;
     }
     std::cout << "Succeed to execute command [ hset " << key << " " << field << " " << value << " ]" << std::endl;
+    freeReplyObject(reply);
+    _pool->returnConnection(connect);
+    return true;
+}
+
+bool RedisMgr::hIncrBy(const std::string &key, const std::string &field, long long increment) {
+    auto connect = _pool->getConnection();
+    if (connect == nullptr) {
+        return false;
+    }
+    auto reply = (redisReply *) redisCommand(connect, "HINCRBY %s %s %lld", key.c_str(), field.c_str(), increment);
+    if (reply == nullptr || reply->type != REDIS_REPLY_INTEGER) {
+        std::cout << "Failed to execute command [ HINCRBY " << key << " " << field << " " << increment << " ]" << std::endl;
+        freeReplyObject(reply);
+        _pool->returnConnection(connect);
+        return false;
+    }
     freeReplyObject(reply);
     _pool->returnConnection(connect);
     return true;
