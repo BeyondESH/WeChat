@@ -1,6 +1,6 @@
 # 分布式聊天系统
 
-基于 C++、Boost.asio、gRPC、Redis、MySQL 构建的高性能分布式即时通讯系统，支持百万级并发连接。
+基于 C++、Boost.asio、gRPC、Redis、MySQL 构建的高性能分布式即时通讯系统。
 
 [License]: https://opensource.org/licenses/MIT
 [Language]: https://isocpp.org/
