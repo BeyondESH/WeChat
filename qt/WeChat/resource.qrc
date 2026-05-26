@@ -25,4 +25,7 @@
         <file>img/loginDialog/img/avatar/MAO.jpg</file>
         <file>img/loginDialog/img/chat_bg.jpg</file>
     </qresource>
+    <qresource prefix="/qss">
+        <file>qss/default.qss</file>
+    </qresource>
 </RCC>

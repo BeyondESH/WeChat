@@ -1,0 +1,118 @@
+QMainWindow {
+    background-color: #f5f5f5;
+}
+
+QWidget {
+    font-family: "Microsoft YaHei";
+    font-size: 10pt;
+}
+
+QPushButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    min-width: 80px;
+}
+
+QPushButton:hover {
+    background-color: #45a049;
+}
+
+QPushButton:pressed {
+    background-color: #3d8b40;
+}
+
+QPushButton:disabled {
+    background-color: #cccccc;
+    color: #666666;
+}
+
+QLineEdit, QTextEdit {
+    padding: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+QLineEdit:focus, QTextEdit:focus {
+    border: 1px solid #4CAF50;
+}
+
+QListWidget {
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    border-radius: 4px;
+}
+
+QListWidget::item {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+QListWidget::item:selected {
+    background-color: #e8f5e9;
+}
+
+QListWidget::item:hover {
+    background-color: #f5f5f5;
+}
+
+QLabel {
+    color: #333333;
+}
+
+QScrollBar:vertical {
+    width: 8px;
+    background-color: #f5f5f5;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #c0c0c0;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #a0a0a0;
+}
+
+QScrollBar:horizontal {
+    height: 8px;
+    background-color: #f5f5f5;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #c0c0c0;
+    border-radius: 4px;
+    min-width: 20px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #a0a0a0;
+}
+
+QTabWidget::pane {
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    border-radius: 4px;
+}
+
+QTabBar::tab {
+    background-color: #f5f5f5;
+    padding: 10px 20px;
+    border: 1px solid #e0e0e0;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background-color: white;
+    border-bottom: 2px solid #4CAF50;
+}
+
+QTabBar::tab:hover {
+    background-color: #e8f5e9;
+}

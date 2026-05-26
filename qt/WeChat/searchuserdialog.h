@@ -2,12 +2,14 @@
 #define SEARCHUSERDIALOG_H
 
 #include <QDialog>
-#include <QListWidgetItem>
-#include "global.h"
-
-namespace Ui {
-class SearchUserDialog;
-}
+#include <QLineEdit>
+#include <QPushButton>
+#include <QListWidget>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFormLayout>
+#include <QMessageBox>
+#include <QInputDialog>
 
 class SearchUserDialog : public QDialog
 {
@@ -16,26 +18,23 @@ class SearchUserDialog : public QDialog
 public:
     explicit SearchUserDialog(QWidget *parent = nullptr);
     ~SearchUserDialog();
-    
-    // 显示对话框
-    void showDialog();
 
 private slots:
-    void on_searchPB_clicked();
-    void on_cancelPB_clicked();
-    void onSearchSuccess(const QVector<UserInfo>& users);
-    void onSearchFailed(int error);
-    void onUserItemClicked(QListWidgetItem* item);
-    void onAddFriendSuccess();
-    void onAddFriendFailed(int error);
+    void onSearchByName();
+    void onSearchById();
+    void onAddFriendClicked();
+    void onSearchResultsReady(const QJsonArray &users);
 
 private:
-    Ui::SearchUserDialog *ui;
-    void clearResults();
-    QVector<UserInfo> _searchResults;
+    void setupUi();
 
-signals:
-    void friendSelected(const UserInfo& userInfo);
+    QLineEdit *m_searchInput;
+    QPushButton *m_searchByNameBtn;
+    QPushButton *m_searchByIdBtn;
+    QListWidget *m_resultList;
+    QPushButton *m_addFriendBtn;
+    QPushButton *m_closeBtn;
+    QJsonArray m_searchResults;
 };
 
 #endif // SEARCHUSERDIALOG_H
