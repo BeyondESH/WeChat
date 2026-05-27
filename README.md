@@ -17,7 +17,8 @@
 
 - **高并发**: 基于 Boost.Asio 异步IO模型，支持百万级并发连接
 - **分布式**: 多ChatServer节点部署，Redis Pub/Sub实现跨节点消息路由
-- **高可用**: 基于Redis的负载均衡和状态管理
+- **动态扩展**: 支持ChatServer节点动态注册和下线，自动负载均衡
+- **高可用**: 基于Redis的负载均衡和状态管理，心跳检测机制自动发现下线节点
 - **实时性**: 毫秒级消息延迟，支持心跳保活机制
 - **可扩展**: 模块化设计，易于扩展新功能
 
@@ -75,9 +76,42 @@ graph TB
 | 组件 | 语言 | 端口 | 核心职责 |
 |------|------|------|----------|
 | **GateServer** | C++ | 8888 | HTTP网关，处理注册、登录、验证码请求 |
-| **StatusServer** | C++ | 50053 | gRPC服务，管理ChatServer负载均衡和Token验证 |
-| **ChatServer** | C++ | 8090/8091 | TCP聊天服务器，处理消息路由和业务逻辑 |
+| **StatusServer** | C++ | 50053 | gRPC服务，管理ChatServer负载均衡和Token验证，支持ChatServer动态注册和心跳检测 |
+| **ChatServer** | C++ | 8090/8091 | TCP聊天服务器，处理消息路由和业务逻辑，启动时自动注册到StatusServer并定期发送心跳 |
 | **VerifyServer** | Node.js | 50051 | gRPC服务，发送邮箱验证码 |
+
+### 动态扩展机制
+
+#### ChatServer注册流程
+```mermaid
+sequenceDiagram
+    participant CS as ChatServer
+    participant SS as StatusServer
+    
+    CS-&gt;&gt;SS: RegisterChatServer(name, host, port)
+    SS-&gt;&gt;SS: 保存服务器信息到内存
+    SS-&gt;&gt;CS: RegisterChatServerRsp(success)
+    CS-&gt;&gt;CS: 启动心跳线程
+    loop 每5秒
+        CS-&gt;&gt;SS: Heartbeat(name)
+        SS-&gt;&gt;SS: 更新missedHeartbeats=0
+    end
+```
+
+#### 心跳检测与下线机制
+- ChatServer每5秒发送一次心跳到StatusServer
+- StatusServer每5秒检查一次服务器健康状态
+- 连续5个心跳未收到视为服务器下线
+- 下线服务器会被自动从可用列表移除
+- Redis中的连接计数也会被清理
+
+#### 负载均衡
+- 用户登录时，StatusServer从Redis读取所有可用ChatServer的连接数
+- 选择连接数最小的ChatServer分配给用户
+- 分配后递增该服务器的连接计数
+- 用户退出时递减连接计数
+
+
 
 ### 用户注册登录流程
 
@@ -383,6 +417,8 @@ StatusService:
 service StatusService {
     rpc GetChatServer(GetChatServerReq) returns (GetChatServerRsp);
     rpc CheckToken(CheckTokenReq) returns (CheckTokenRsp);
+    rpc RegisterChatServer(RegisterChatServerReq) returns (RegisterChatServerRsp);
+    rpc Heartbeat(HeartbeatReq) returns (HeartbeatRsp);
 }
 
 message GetChatServerReq {
@@ -405,6 +441,24 @@ message CheckTokenRsp {
     int32 error = 1;
     int32 uid = 2;
     string token = 3;
+}
+
+message RegisterChatServerReq {
+    string name = 1;
+    string host = 2;
+    string port = 3;
+}
+
+message RegisterChatServerRsp {
+    int32 error = 1;
+}
+
+message HeartbeatReq {
+    string name = 1;
+}
+
+message HeartbeatRsp {
+    int32 error = 1;
 }
 ```
 

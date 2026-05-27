@@ -1,4 +1,4 @@
-﻿//
+//
 // Created by Beyond on 2024/11/3.
 //
 
@@ -40,6 +40,7 @@ enum ErrorCodes{
     ERR_MYSQL=1011,//mysql连接错误
     PasswordSame=1012,//新旧密码相同
     Token_Invalid=1013,//token无效
+    SERVER_NOT_FOUND=1014,//服务器未找到
 };
 
 #define CODE_PREFIX "verifycode_"

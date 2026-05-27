@@ -38,9 +38,29 @@ message CheckTokenRsp {
     string token = 3;
 }
 
+message RegisterChatServerReq {
+    string name = 1;
+    string host = 2;
+    string port = 3;
+}
+
+message RegisterChatServerRsp {
+    int32 error = 1;
+}
+
+message HeartbeatReq {
+    string name = 1;
+}
+
+message HeartbeatRsp {
+    int32 error = 1;
+}
+
 service StatusService {
     rpc GetChatServer (GetChatServerReq) returns (GetChatServerRsp) {}
     rpc CheckToken (CheckTokenReq) returns (CheckTokenRsp) {}
+    rpc RegisterChatServer (RegisterChatServerReq) returns (RegisterChatServerRsp) {}
+    rpc Heartbeat (HeartbeatReq) returns (HeartbeatRsp) {}
 }
 
 

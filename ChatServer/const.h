@@ -47,6 +47,7 @@ enum ErrorCodes
     ERR_MYSQL = 1011,         // MySQL数据库连接错误
     PasswordSame = 1012,      // 新密码与旧密码相同
     Token_Invalid = 1013,     // 无效或已过期的认证令牌
+    SERVER_NOT_FOUND = 1014,  // 服务器未找到
 };
 
 /**
