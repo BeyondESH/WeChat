@@ -43,7 +43,6 @@ cmake-build-*/
 Thumbs.db
 
 # CMake cache files
-CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 build.ninja
