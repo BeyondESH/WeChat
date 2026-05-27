@@ -88,13 +88,13 @@ sequenceDiagram
     participant CS as ChatServer
     participant SS as StatusServer
     
-    CS-&gt;&gt;SS: RegisterChatServer(name, host, port)
-    SS-&gt;&gt;SS: 保存服务器信息到内存
-    SS-&gt;&gt;CS: RegisterChatServerRsp(success)
-    CS-&gt;&gt;CS: 启动心跳线程
+    CS->>SS: RegisterChatServer(name, host, port)
+    SS->>SS: 保存服务器信息到内存
+    SS->>CS: RegisterChatServerRsp(success)
+    CS->>CS: 启动心跳线程
     loop 每5秒
-        CS-&gt;&gt;SS: Heartbeat(name)
-        SS-&gt;&gt;SS: 更新missedHeartbeats=0
+        CS->>SS: Heartbeat(name)
+        SS->>SS: 更新missedHeartbeats=0
     end
 ```
 
